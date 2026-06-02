@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>40K 10th → 11th Edition: Complete Transition Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+  :root {
+    --blood: #8B1A1A;
+    --blood-dark: #5c0f0f;
+    --blood-glow: #c42424;
+    --gold: #C9A84C;
+    --gold-light: #e8c96e;
+    --gold-dim: #7a6430;
+    --parchment: #F5EDD8;
+    --parchment-dark: #e8d9b8;
+    --stone: #2a2a2a;
+    --stone-mid: #1a1a1a;
+    --stone-dark: #111111;
+    --ink: #0e0e0e;
+    --text-main: #e8dcc8;
+    --text-dim: #9a9080;
+    --text-bright: #f5edd8;
+    --tier1: #8B1A1A;
+    --tier2: #7a4f15;
+    --tier3: #1a4a2a;
+    --new: #1a2a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--stone-dark);
+    color: var(--text-main);
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(180deg, #0a0505 0%, #1a0808 40%, #0e0e0e 100%);
+    border-bottom: 2px solid var(--gold-dim);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(139,26,26,0.03) 40px, rgba(139,26,26,0.03) 41px
+    );
+  }
+  .hero-eyebrow {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .hero-rule {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    margin: 24px auto;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .section-num {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--blood);
+    min-width: 32px;
+  }
+
+  /* TIER LABELS */
+  .tier-marker {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .tier1-label { background: var(--tier1); color: #ffcccc; }
+  .tier2-label { background: var(--tier2); color: #ffe5b4; }
+  .tier3-label { background: var(--tier3); color: #b4ffcc; }
+  .new-label   { background: var(--new);   color: #b4ccff; }
+
+  /* CHANGE CARDS */
+  .change-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid var(--blood-dark);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .change-card.tier1 { border-left-color: var(--blood); }
+  .change-card.tier2 { border-left-color: #c47a20; }
+  .change-card.tier3 { border-left-color: #2a7a4a; }
+  .change-card.new-mechanic { border-left-color: #2a4a8a; }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    cursor: default;
+  }
+  .card-rank {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 900;
+    min-width: 32px;
+    padding-top: 2px;
+    opacity: 0.6;
+  }
+  .card-title-block { flex: 1; }
+  .card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+  }
+  .card-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .card-body {
+    padding: 0 18px 16px 64px;
+    font-size: 14px;
+    color: #c8bfaa;
+    line-height: 1.75;
+  }
+  .card-body p { margin-bottom: 8px; }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 4px;
+    font-size: 13px;
+  }
+  .compare-table th {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    text-align: left;
+  }
+  .compare-table th:first-child { color: #888; background: rgba(0,0,0,0.2); }
+  .compare-table th:last-child  { color: var(--gold-dim); background: rgba(201,168,76,0.07); }
+  .compare-table td {
+    padding: 7px 12px;
+    vertical-align: top;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .compare-table td:first-child { color: #888; background: rgba(0,0,0,0.12); font-style: italic; }
+  .compare-table td:last-child  { color: var(--text-bright); background: rgba(201,168,76,0.04); }
+
+  /* TRANSITION PLAN */
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .step-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .step-num-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .step-circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.04em;
+  }
+  .step-body {
+    font-size: 13px;
+    color: #b0a898;
+    line-height: 1.7;
+  }
+
+  /* COMMUNITY SECTION */
+  .community-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    padding: 20px 22px;
+    margin-bottom: 12px;
+  }
+  .community-card h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .community-card p {
+    font-size: 13.5px;
+    color: #b8b0a0;
+    line-height: 1.75;
+  }
+
+  /* QUICK REF TABLE */
+  .quick-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .quick-table thead tr {
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .quick-table th {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    color: var(--gold-dim);
+    text-align: left;
+  }
+  .quick-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .quick-table td:first-child { color: var(--text-bright); font-weight: 500; width: 30%; }
+  .quick-table td:nth-child(2) { color: #888; font-style: italic; }
+  .quick-table td:nth-child(3) { color: #b8ddb8; }
+  .quick-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* VERDICT BADGES */
+  .verdict { display: inline-block; font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-left: 8px; vertical-align: middle; }
+  .verdict-melee   { background: rgba(139,26,26,0.4); color: #ffaaaa; }
+  .verdict-shoot   { background: rgba(26,60,139,0.4); color: #aaccff; }
+  .verdict-both    { background: rgba(100,80,20,0.4); color: #ffddaa; }
+  .verdict-build   { background: rgba(30,80,30,0.4); color: #aaffcc; }
+  .verdict-defense { background: rgba(80,30,80,0.4); color: #ddaaff; }
+
+  /* FOOTER */
+  .doc-footer {
+    margin-top: 60px;
+    padding: 30px 0 40px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    text-align: center;
+  }
+  .doc-footer p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* UTILITY */
+  .gold { color: var(--gold); }
+  .dim  { color: var(--text-dim); }
+  .rule-ref { font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--gold-dim); font-weight: 600; letter-spacing: 0.1em; }
+  .separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent); margin: 40px 0; }
+  .intro-block { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.12); border-radius: 4px; padding: 20px 24px; margin-bottom: 32px; font-size: 14px; color: #c8bfaa; line-height: 1.8; }
+  strong { color: var(--text-bright); font-weight: 600; }
+  em { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Verified Against Both Core Rules PDFs</div>
+  <h1>Warhammer 40,000<br>10th → 11th Edition</h1>
+  <div class="hero-sub">Complete Transition Guide · All Deltas Ranked by Impact</div>
+  <div class="hero-rule"></div>
+  <div style="font-size:13px; color: var(--text-dim); font-family: 'Rajdhani', sans-serif; letter-spacing:0.1em;">
+    Sources: 10th Ed Core Rules PDF · New40K Core Rules PDF (Jun 2026) · Goonhammer Deep Dives · Spikey Bits · Bell of Lost Souls · HiveCity
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- EDITION CONTEXT -->
+  <div class="section-header">
+    <div class="section-num">00</div>
+    <h2>What Kind of Edition Shift Is This</h2>
+  </div>
+  <div class="intro-block">
+    <strong>Not a hard reset.</strong> 10th edition codexes remain valid at launch. GW is issuing faction packs (lightweight errata documents) that bridge any codex rules incompatible with the new core. New 11th edition codexes will roll out over time, starting with Space Marines and Orks. Think of this as a precision surgery on 10th's skeleton: the same five-phase turn structure, the same keywords framework, the same attack sequence flow — but with every major subsystem either tuned or replaced. <strong>The core rules went from loosely structured prose to a numbered reference system</strong> (e.g. rule 05.03 for save rolls), which alone makes adjudication at the table significantly cleaner. The edition was formally announced at Adepticon 2026 and launches in the Armageddon box on <strong>June 20, 2026</strong>.
+  </div>
+
+  <!-- ALL DELTAS RANKED -->
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <h2>All Deltas — Ranked by Fundamental Impact</h2>
+  </div>
+
+  <!-- TIER 1 -->
+  <div class="tier-marker tier1-label">Tier 1 — Game-Defining Shifts</div>
+
+  <!-- 1 -->
+  <div class="change-card tier1">
+    <div class="card-head">
+      <div class="card-rank gold">1</div>
+      <div class="card-title-block">
+        <div class="card-title">Detachment Points — Multi-Detachment Army Building <span class="verdict verdict-build">Army Building</span></div>
+        <div class="card-subtitle">New System · No 10th Equivalent · Rule: Muster Armies</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>One detachment per army. Army identity locked to that single detachment's rule, stratagems, and enhancements.</td><td>Detachment Points pool: 2 DP at 1,000 pts, 3 DP at 2,000 pts. Each detachment costs 1–3 DP. Multiple detachments can be combined. 70+ new and updated detachments at launch. Stratagem access is now detachment-specific — most armies finish with only 6–9 stratagems total at 2,000 pts.</td></tr>
+      </table>
+      <p>The single biggest structural shift in list building since 9th edition. A 2 DP core identity detachment can now be paired with a 1 DP specialist detachment, enabling cross-theme combinations previously impossible. The stratagem pool shrinking is equally significant — bloated stratagem libraries are gone, replaced by a tighter, more legible tactical toolkit per list.</p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="change-card tier1">
+    <div class="card-head">
+      <div class="card-rank gold">2</div>
+      <div class="card-title-block">
+        <div class="card-title">Save Roll Overhaul — Allocation Groups + Lowest-Roll-First + Mandatory Invulns <span class="verdict verdict-defense">Defense</span></div>
+        <div class="card-subtitle">Rule 05.03 · PDF-Verified Against 10th p.22</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Wound → allocate to one model (wounded models first, then any) → that model makes one save roll → damage. Invulnerable save is <em>optional</em> — player chooses armour or invuln. Can deliberately fail invuln to force damage routing.</td><td>Defender creates allocation groups (each Character isolated; other models grouped by matching W/Sv/InSv). Declares allocation order (Characters last; wounded models' groups first). All save rolls made simultaneously. Resolved lowest-to-highest against groups in order. Invuln saves are now <strong>mandatory</strong> — checked before armour save. No longer optional.</td></tr>
+      </table>
+      <p>The optional invuln exploit — deliberately failing an invuln to route damage away from a priority model — is explicitly eliminated. Characters behind bodyguards are also significantly safer: lower save rolls get spent on bodyguard groups before they reach a Character group, meaning a Leader with a 4+ invuln benefits much more from their bodyguard's presence than in 10th.</p>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="change-card tier1">
+    <div class="card-head">
+      <div class="card-rank gold">3</div>
+      <div class="card-title-block">
+        <div class="card-title">Terrain-as-Objectives — Terrain Areas Replace 40mm Tokens <span class="verdict verdict-both">Both</span></div>
+        <div class="card-subtitle">Rule 14.01 · PDF-Verified · Major Positioning Shift</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Objective markers: 40mm circular tokens. Within range = within 3" horizontally and 5" vertically of the token centre. Objectives separate from terrain.</td><td>Objectives are terrain areas. A model is within range of a terrain objective while it is within that terrain area. Physical footprint of the terrain feature defines the objective zone. No tokens for standard play.</td></tr>
+      </table>
+      <p>A ruin that previously sat <em>next to</em> an objective now <em>is</em> the objective. The interior of a large ruin is entirely "within range." Vertical positioning matters — being on the second floor of a terrain area with a 15-model unit is now directly relevant to objective control. Controlling terrain is no longer just tactical cover management; it is the primary scoring engine.</p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="change-card tier1">
+    <div class="card-head">
+      <div class="card-rank gold">4</div>
+      <div class="card-title-block">
+        <div class="card-title">Engagement Range — 1" → 2" Horizontally <span class="verdict verdict-melee">Melee</span></div>
+        <div class="card-subtitle">Rule 03.04 · PDF-Verified Against 10th p.7 · Under-Covered Change</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>"Within 1" horizontally and 5" vertically." The 1.1" ruin wall gap exploit: positioning a unit just inside a ruin wall kept it effectively safe from all but large-based charging models.</td><td>"Within 2" horizontally and 5" vertically." Units can move through engagement ranges during a move (but still cannot end within them). The ruin wall gap exploit is eliminated for nearly all base sizes.</td></tr>
+      </table>
+      <p>Goonhammer called this "an incredibly impactful change" — the doubled engagement range has cascading effects throughout every phase. Melee range is effectively longer. Charge completions are more achievable. Pile-in and consolidation reach is greater. The 1.1" hiding trick is dead. Models positioned just inside ruin walls are no longer trivially safe from engagement.</p>
+    </div>
+  </div>
+
+  <!-- TIER 2 -->
+  <div class="separator"></div>
+  <div class="tier-marker tier2-label">Tier 2 — Significant Ruleset Changes</div>
+
+  <!-- 5 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">5</div>
+      <div class="card-title-block">
+        <div class="card-title">Benefit of Cover — +1 Save → −1 Attacker BS <span class="verdict verdict-defense">Defense</span></div>
+        <div class="card-subtitle">Rule 13.08 · PDF-Verified Against 10th p.44</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>"Add 1 to the saving throw." Models with Sv 3+ or better cannot benefit from cover against AP 0 attacks. Invulnerable saves excluded. Each terrain type had bespoke cover conditions.</td><td>"Worsen the BS characteristic of that attack by 1." No Sv exemption. Applies when every model in the unit is within a terrain area (Infantry/Beasts/Swarms) or not fully visible due to terrain. Three unified terrain categories replace per-feature cover rules.</td></tr>
+      </table>
+      <p>Cover now affects the hit roll rather than the save, which means it cannot be bypassed by high-AP weapons — a weapon with AP -3 still faces the -1 BS when shooting into cover. This makes <strong>AP-1 and mid-AP weapons with Sustained Hits significantly stronger</strong> (the cover penalty now matters against them, too). Elite units that previously ignored cover via invuln saves are now affected. The Sv 3+ vs AP 0 exception is gone entirely.</p>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">6</div>
+      <div class="card-title-block">
+        <div class="card-title">Hidden — New Stealth Mechanic for Infantry/Beasts/Swarms <span class="verdict verdict-defense">New in 11th</span></div>
+        <div class="card-subtitle">Rule 13.09 · No 10th Equivalent · Major Infantry Buff</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Entirely new. Infantry, Beasts, and Swarms within a terrain area containing dense terrain features can become Hidden — meaning they cannot be targeted by enemies beyond 15" detection range, provided they haven't fired ranged attacks this turn or the previous turn. A "Gone to Ground" sub-rule (app-only) extends this by an additional -3" detection range when every model is obscured by terrain.</p>
+      <p>This creates a genuine <strong>shoot-or-hide decision each turn</strong> for infantry. Using Overwatch breaks Hidden status. A unit holding a central ruin objective that hasn't shot becomes nearly invisible to mid-range shooting armies. Hidden fundamentally changes how shooting armies must approach infantry holding cover.</p>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">7</div>
+      <div class="card-title-block">
+        <div class="card-title">Battle-Shock — Persistent, Earlier Trigger, OC → "−" <span class="verdict verdict-both">Both</span></div>
+        <div class="card-subtitle">Rules 01.07 + 08.03 · PDF-Verified Against 10th p.11</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Test only when <em>below</em> half-strength. OC drops to <em>0</em> (can tie for objective). Clears automatically at start of your next Command phase.</td><td>Test when <em>at or below</em> half-strength, AND when already battle-shocked. OC drops to <em>"−"</em> (completely nullified, cannot contest objectives at all). Does NOT auto-clear — must pass a test in Command phase to recover. Cannot start or complete actions.</td></tr>
+      </table>
+      <p>The "0" vs "−" distinction matters in tied objective contests: a 10th-shocked unit could tie the objective; an 11th-shocked unit contributes nothing. The earlier trigger (at half, not below) means testing with 5 of 10 models remaining — one more model than before. Combined with persistent shock, morale-pressure armies (Tyranids, Night Lords, Chaos Daemons) gain a substantial indirect buff.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">8</div>
+      <div class="card-title-block">
+        <div class="card-title">Fight Phase — All Pile-Ins First, All Consolidations Last <span class="verdict verdict-melee">Melee</span></div>
+        <div class="card-subtitle">Rules 12.02–12.07 · PDF-Verified Against 10th p.33–35</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Per-unit: each unit selected to fight does Pile In → Attacks → Consolidate as a single integrated sequence, interleaved with other unit selections. Consolidation mid-fight toward objectives was a key tactical tool.</td><td>Three discrete global steps: all pile-in moves (both players, active first) → all fights → all consolidation moves. Consolidation has three mandatory modes: Ongoing (stay engaged), Engaging (move to nearby enemy), Objective (move toward nearby objective — only if not engaged and no nearby enemies).</td></tr>
+      </table>
+      <p>The ability to tactically use a mid-fight consolidation to scoot onto an objective before other units fought is gone. Overrun fights (for unengaged units that were engaged at fight step start) are now a formally defined fight type. Consolidation onto objectives is now the third-priority option rather than a first-choice move.</p>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">9</div>
+      <div class="card-title-block">
+        <div class="card-title">Charge Sequence — Roll First, Then Declare Targets <span class="verdict verdict-melee">Melee</span></div>
+        <div class="card-subtitle">Rule 11.02 · PDF-Verified Against 10th p.29</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Select targets → roll 2D6 → make charge move. Committing to targets on a bad roll stranded units and wasted the turn.</td><td>Declare charge → roll 2D6 → select targets within range and within the rolled distance → make charge move. Targets must be within the maximum distance rolled.</td></tr>
+      </table>
+      <p>Risk profile of charging is fundamentally improved. You can't declare a distant target and hope for a high roll — targets must be reachable by the rolled result — but you no longer strand a unit on a bad roll against an unchargeable target. Aggressive melee lists benefit significantly from reduced variance.</p>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">10</div>
+      <div class="card-title-block">
+        <div class="card-title">Unit Coherency — Hard 9" Global Cap Added <span class="verdict verdict-both">Both</span></div>
+        <div class="card-subtitle">Rule 03.03 · PDF-Verified Against 10th p.6</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Within 2" of at least one model (2–6 models); within 2" of at least two models (7+ models). No maximum span. Conga lines extending 30"+ were legal and frequently exploited for screening.</td><td>Within 2" of at least one model AND within 9" of every other model in the unit. 9" is the hard maximum span. Conga lines impossible for any unit size.</td></tr>
+      </table>
+      <p>One of the most tactically impactful QoL changes. Large horde units can no longer create 30"+ screening lines. Deployment and movement of 20+ model units must be rethought entirely. The maximum unit footprint is now roughly 11" across (2" adjacency + 9" global), forcing tighter, more manageable unit positioning.</p>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">11</div>
+      <div class="card-title-block">
+        <div class="card-title">Heroic Intervention — Counter-Charge With Roll, Expanded Range <span class="verdict verdict-melee">Melee</span></div>
+        <div class="card-subtitle">Rule 15.11 · PDF-Verified Against 10th p.42</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>2CP. Trigger at end of opponent's Charge phase just after an enemy unit ends a Charge move. Target must be within 6" of that specific enemy. Declare charge targeting only that enemy unit. No charge roll. No Fights First bonus.</td><td>1CP base. Full charge roll made. Mode 1 (1CP): can only target units that charged this phase, within rolled distance. Mode 2 (Into the Fray, +1CP): caps roll at 6" but can target anything within 6" of your unit.</td></tr>
+      </table>
+      <p>Cost dropped from 2CP to 1CP (or 2CP for the expanded mode). Now functions as a genuine counter-charge with tactical flexibility. This is the primary reactive tool in the Charge phase now that Overwatch was removed from that phase. Makes move-blocking and objective-stealing via movement significantly more risky for your opponent.</p>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">12</div>
+      <div class="card-title-block">
+        <div class="card-title">Fire Overwatch — Charge Phase Trigger Removed <span class="verdict verdict-shoot">Shooting</span></div>
+        <div class="card-subtitle">Rule 15.08 · PDF-Verified Against 10th p.42</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>Triggered in opponent's Movement phase OR Charge phase. Could fire snap shots in reaction to charges.</td><td>Triggered at end of opponent's Movement phase only. No Charge phase trigger. Using Overwatch also breaks Hidden status for the target unit.</td></tr>
+      </table>
+      <p>Reactive shooting during the Charge phase is completely removed. Heroic Intervention is now the sole reactive tool in that phase. This is a direct melee buff — charging units no longer risk eating snap-shot fire before they arrive. The asymmetry between Overwatch (movement phase) and HI (charge phase) creates a cleaner decision structure than 10th's overlapping reactive options.</p>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">13</div>
+      <div class="card-title-block">
+        <div class="card-title">Leader Abilities Persist After Bodyguard Destroyed + Support Slot Added <span class="verdict verdict-build">Army Building</span></div>
+        <div class="card-subtitle">Rule 19.04 · PDF-Verified Against 10th p.39</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>One Leader per bodyguard unit. Leader buffs end implicitly when bodyguard is destroyed (no explicit persistence). Rules triggered when a unit is destroyed fired when either component died.</td><td>One Leader + one Support per bodyguard unit. Leader abilities explicitly persist until that Leader model itself is destroyed. Destroyed-unit rules only trigger when the last model of the entire attached unit is destroyed.</td></tr>
+      </table>
+      <p>Character investment is more resilient. A Leader that buffs its attached unit continues providing value as a solo piece after the bodyguard is wiped — which previously represented a complete waste of that part of the character's points cost. The Support slot is entirely new, enabling two attached heroes per squad.</p>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="change-card tier2">
+    <div class="card-head">
+      <div class="card-rank">14</div>
+      <div class="card-title-block">
+        <div class="card-title">Rules Sequencing — Opposing Player Gets Last Say <span class="verdict verdict-both">Both</span></div>
+        <div class="card-subtitle">App-Extended · PDF-Verified Direction · 10th p.9</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="compare-table">
+        <tr><th>10th</th><th>11th</th></tr>
+        <tr><td>"If this occurs during the battle, the player whose turn it is chooses the order." Active player controlled all simultaneous trigger ordering.</td><td>The opposing player generally gets the last say on trigger sequencing. Turns and phases now have formally defined Start and End steps with a scoring sub-step.</td></tr>
+      </table>
+      <p>Closes a class of exploits where the active player neutralised powerful opponent combos by declaring resolution order. This levels the playing field for reactive abilities and interaction-based play. The numbered rule system (each rule has a reference code) also significantly simplifies dispute resolution at the table.</p>
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="separator"></div>
+  <div class="tier-marker tier3-label">Tier 3 — Targeted but Important Changes</div>
+
+  <!-- Quick reference table for tier 3 -->
+  <table class="quick-table">
+    <thead>
+      <tr><th>Change</th><th>10th</th><th>11th</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Flying</strong> <span class="verdict verdict-melee" style="font-size:9px">Movement</span></td>
+        <td>FLY models measure distance "through the air" when starting/ending on terrain. No movement penalty.</td>
+        <td>Declaring "take to the skies" subtracts 2" from max move distance. Full terrain/model bypass retained. HOVER units (some vehicles) exempt from penalty.</td>
+      </tr>
+      <tr>
+        <td><strong>Disembark Modes</strong> <span class="verdict verdict-both" style="font-size:9px">Transports</span></td>
+        <td>Three informal states based on transport's prior action. Complex rules for when disembarkers could act.</td>
+        <td>Three explicit named modes: Tactical (stationary transport → full normal/advance move after), Rapid (transport moved → can't charge), Combat (forced/emergency → Hazard rolls + battle-shocked).</td>
+      </tr>
+      <tr>
+        <td><strong>Strategic Reserves Limit</strong> <span class="verdict verdict-build" style="font-size:9px">Army Building</span></td>
+        <td>25% of total points max in Strategic Reserves.</td>
+        <td>50% of total points max. Significantly more flexibility to hold forces back.</td>
+      </tr>
+      <tr>
+        <td><strong>Deep Strike Distance</strong> <span class="verdict verdict-shoot" style="font-size:9px">Deployment</span></td>
+        <td>More than 9" horizontally from all enemy models.</td>
+        <td>More than 8" horizontally from all enemy units. Rule 24.09.</td>
+      </tr>
+      <tr>
+        <td><strong>Scouts Distance</strong> <span class="verdict verdict-shoot" style="font-size:9px">Deployment</span></td>
+        <td>Must end more than 9" from all enemy models.</td>
+        <td>Must end more than 8" from all enemy units. Rule 24.32.</td>
+      </tr>
+      <tr>
+        <td><strong>[PISTOL] Deprecated</strong> <span class="verdict verdict-shoot" style="font-size:9px">Weapons</span></td>
+        <td>[PISTOL] — unique mechanic: fire in melee but cannot combine with other ranged weapons.</td>
+        <td>[CLOSE-QUARTERS] replaces [PISTOL] semantically. [PISTOL] remains valid for now and is explicitly identical to [CLOSE-QUARTERS] for all rules purposes. Rule 24.27.</td>
+      </tr>
+      <tr>
+        <td><strong>Aircraft Cycle</strong> <span class="verdict verdict-shoot" style="font-size:9px">Aircraft</span></td>
+        <td>Aircraft make minimum 20" moves each turn, looping round or entering Strategic Reserves if they leave the table. Return next turn.</td>
+        <td>Aircraft can only make Ingress moves. At end of opponent's turn, all your aircraft on the battlefield must return to Strategic Reserves automatically. Cycle in each turn actively.</td>
+      </tr>
+      <tr>
+        <td><strong>Plunging Fire</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
+        <td>Ruins-specific: 6"+ height, every model in target unit at ground level → improve AP by 1.</td>
+        <td>Universal rule (22.05): 3"+ height → +1 BS. Also applies to TOWERING models within 12". Threshold lowered from 6" to 3".</td>
+      </tr>
+      <tr>
+        <td><strong>Indirect Fire Restriction</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
+        <td>Subtract 1 hit roll if target not visible. Cover applies if not visible.</td>
+        <td>Hit roll of 1-5 fails (unmodified) unless stationary AND target visible to a friendly unit (then 1-3 fails). Cover always applies. Cannot re-roll hit rolls. Rule 10.07.</td>
+      </tr>
+      <tr>
+        <td><strong>MOBILE Keyword</strong> <span class="verdict verdict-melee" style="font-size:9px">New</span></td>
+        <td>No equivalent.</td>
+        <td>Super-Heavy Walker ability can grant MOBILE keyword during a move, enabling horizontal movement through dense terrain sections up to 4" high. Rule 24.35.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NEW MECHANICS -->
+  <div class="separator"></div>
+  <div class="tier-marker new-label">New Mechanics — No 10th Equivalent</div>
+
+  <div class="change-card new-mechanic" style="margin-bottom:10px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">Surge Move (Rule 21.02)</div>
+      </div>
+    </div>
+    <div class="card-body"><p>A reactive movement type — certain rules allow a unit to make a surge move toward the closest enemy after a triggering event (e.g. a friendly unit being shot at). Must be unengaged, not battle-shocked, not yet moved this phase. Each model must end as close as possible to the surge target. Cannot become engaged with non-target units.</p></div>
+  </div>
+  <div class="change-card new-mechanic" style="margin-bottom:10px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">Obscuring Terrain Areas (Rule 13.10)</div>
+      </div>
+    </div>
+    <div class="card-body"><p>Terrain areas containing light or dense features are obscuring. If every line of sight between two models crosses one or more obscuring areas (not including areas one or both models are within), those models are not visible to each other. This is a mutual invisibility rule — cleaner and more decisive than 10th's per-terrain-type visibility rules.</p></div>
+  </div>
+  <div class="change-card new-mechanic" style="margin-bottom:10px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">Overrun Fight Type (Rule 12.06)</div>
+      </div>
+    </div>
+    <div class="card-body"><p>A formally defined fight type for units that are unengaged (or were engaged at the start of the Fight step but became unengaged). They can make one additional pile-in move and then fight. Explicitly covers scenarios where a unit destroys its charge target and wants to fight on. Codifies previously ambiguous edge cases from 10th.</p></div>
+  </div>
+  <div class="change-card new-mechanic" style="margin-bottom:10px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">[CLEAVE X] Weapon Ability (Rule 24.06)</div>
+      </div>
+    </div>
+    <div class="card-body"><p>For each 5 models in the target unit (rounding down), add X additional attack dice — but only if you targeted a single unit with all attacks. Rewards committing a cleave weapon to one big target. Anti-horde melee complement to [BLAST] for ranged weapons.</p></div>
+  </div>
+  <div class="change-card new-mechanic" style="margin-bottom:10px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">Hazard Roll as Unified Mechanic (Rule 06.03)</div>
+      </div>
+    </div>
+    <div class="card-body"><p>A single D6 roll: on 1-2, that unit suffers 1 mortal wound (or 3 if every model is MONSTER/VEHICLE). Replaces the patchwork of per-situation self-damage rolls from 10th (Desperate Escape tests, destroyed transport casualties, etc.) under one unified system. Consistency across all self-harm triggers.</p></div>
+  </div>
+  <div class="change-card new-mechanic" style="margin-bottom:14px">
+    <div class="card-head">
+      <div class="card-title-block">
+        <div class="card-title">Solid Terrain Rule (Rule 13.11) + Shooting Types Formalised (Rules 10.04–10.07)</div>
+      </div>
+    </div>
+    <div class="card-body"><p><strong>Solid:</strong> Dense terrain features prevent LoS through any enclosed gap 3" or less from ground level (doors, windows, bullet holes). Models in ground-level ruins are invisible to models outside, regardless of small openings. <br><strong>Shooting Types:</strong> Four formally defined shooting types with explicit eligibility — Normal Shooting, Assault Shooting (advance + [ASSAULT] weapons), Close-Quarters Shooting (engaged with [CQ] weapons or Monster/Vehicle), Indirect Shooting. Each has distinct "After Shooting" restrictions on actions.</p></div>
+  </div>
+
+  <!-- TRANSITION PLAN -->
+  <div class="separator"></div>
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <h2>Transition Plan — 10th to 11th</h2>
+  </div>
+  <div class="intro-block" style="margin-bottom:20px;">
+    Your 10th edition codex works at launch with the faction pack errata applied. New 11th edition codexes roll out progressively. Below is a structured path from your current game to fluency in the new system.
+  </div>
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">1</div><div class="step-title">Download & Reference Both PDFs</div></div>
+      <div class="step-body">The 11th edition core rules (New40K PDF) are free. Keep both the 10th and 11th PDFs handy for your first 3–4 games. The numbered rule system in 11th (e.g. "rule 05.03") means disputes are faster to resolve — every rule has a unique address. Also download your faction's GW faction pack errata before playing.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">2</div><div class="step-title">Internalize Save Rolls Before Game 1</div></div>
+      <div class="step-body">The save roll overhaul (Change #2) will cause mid-game confusion more than any other single rule. Walk through it manually before sitting across the table: defender groups models → declares allocation order → all saves rolled simultaneously → resolved lowest-to-highest against groups in order. Run two or three test scenarios on paper first.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">3</div><div class="step-title">Relearn Engagement Range Muscle Memory</div></div>
+      <div class="step-body">Engagement range is now 2" not 1". Everything built around the 1.1" gap trick is dead. Measure your charge targets with 2" in mind during movement planning. Pile-in and consolidation also benefit from the larger range — models that couldn't reach enemy in 10th often can now.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">4</div><div class="step-title">Rethink Terrain as Objective + Cover</div></div>
+      <div class="step-body">Map out your terrain pieces and identify which are terrain areas (objectives). Understand that cover now imposes -1 BS on the attacker, not +1 Sv on you. Identify which of your Infantry/Beasts/Swarms can go Hidden — flag these at the start of each turn so both players know their status. Using any ranged attack breaks Hidden, including Overwatch.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">5</div><div class="step-title">Rebuild Lists Around Detachment Points</div></div>
+      <div class="step-body">Don't immediately try to stack two detachments — run your first two or three games with a single detachment to understand how your army plays in 11th. Then assess whether a 1 DP specialist add-on strengthens your core strategy. Wait for full points to drop with the faction pack before committing to a tournament list.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">6</div><div class="step-title">Adjust Unit Deployment for 9" Coherency Cap</div></div>
+      <div class="step-body">Large horde units (10+, 20+) need new deployment habits. Sketch your unit footprints before placing: maximum span is now ~11" across. Screen lines must be denser and shorter. Units that relied on conga-line screening — especially Guardsmen, Termagants, Tactical Squads — need repositioning strategies.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">7</div><div class="step-title">Update Charge Phase Mental Model</div></div>
+      <div class="step-body">Roll first, then declare targets. Heroic Intervention is now your reactive tool in the Charge phase — not Overwatch. Fire Overwatch remains valid in the Movement phase. Plan for the enemy using HI against your charges. If you play a melee army, practice the Overrun Fight type — it covers the previously-ambiguous "I killed my target, what now?" scenario.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">8</div><div class="step-title">Update Fight Phase Sequence</div></div>
+      <div class="step-body">All pile-ins happen before any fights. All consolidations happen after all fights. You can no longer tactically use a mid-fight consolidation to grab an objective. Plan consolidation mode selection in advance: Ongoing, Engaging, or Objective — and know which order they're checked (Ongoing first, then Engaging, then Objective).</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">9</div><div class="step-title">Battle-Shock Awareness Every Command Phase</div></div>
+      <div class="step-body">Battle-shock now requires active management. It doesn't clear automatically. At the start of your Command phase, know which units need to test (at or below half-strength, or currently shocked). Track it visually — a token or marker helps. A shocked unit at an objective contributes zero OC, cannot use stratagems, and cannot complete actions.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-row"><div class="step-circle">10</div><div class="step-title">Download the 40K App</div></div>
+      <div class="step-body">A meaningful portion of the extended rules — including the full Hidden rule, Gone to Ground, the sequencing rules, FAQ entries, and further definitions — live in the app rather than the PDF. The app also contains your faction's updated rules, army builder, and errata. It is not optional for staying current with 11th.</div>
+    </div>
+  </div>
+
+  <!-- COMMUNITY CONVERSATIONS -->
+  <div class="separator"></div>
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <h2>Community Conversations — Broader Context</h2>
+  </div>
+  <div class="intro-block">
+    As of June 1, 2026 — the day the core rules PDF dropped — the community response is broadly positive with specific contested areas. Here are the major conversations happening across Goonhammer, Spikey Bits, Bell of Lost Souls, and community forums.
+  </div>
+
+  <div class="community-card">
+    <h3>1 — Melee's Edition? The Shooting Nerf Conversation</h3>
+    <p>The combination of the 2" engagement range, cover shifting to -1 BS (bypassing AP), Hidden for infantry, Overwatch removed from the Charge phase, and charge targets declared after rolling has prompted significant discussion about whether 11th tilts the game toward melee armies. Goonhammer is cautiously optimistic, noting that shooting armies gain from persistent battle-shock and stronger Plunging Fire. The community consensus is directionally: <strong>melee got buffed, but the question is whether the magnitude breaks competitive balance or simply corrects 10th's shooting dominance.</strong> Points values for fast melee units are expected to rise accordingly.</p>
+  </div>
+
+  <div class="community-card">
+    <h3>2 — Detachment Points: Creative Freedom vs. Balance Nightmare</h3>
+    <p>The Detachment Points system is simultaneously the most praised and most feared change. Praise: it enables genuine cross-theme list building, reduces list homogeneity, and makes the meta more varied from week one. Fear: <strong>70+ detachments at launch creates a combinatorial balance problem GW has never had to manage before.</strong> Spikey Bits notes "every competitive player with a spreadsheet is about to become completely insufferable for a month." The deeper concern from Goonhammer's analysis is that 1 DP detachments that buff single characters could be systematically underpriced, enabling low-cost additions that punch well above their DP weight.</p>
+  </div>
+
+  <div class="community-card">
+    <h3>3 — The App Dependency Problem</h3>
+    <p>A genuine fracture point. Multiple community voices — including Goonhammer — have flagged that placing core rules content (sequencing rules, Hidden rule updates, FAQ entries) exclusively in the app rather than the free PDF creates a two-tier player base: those who are app-connected and those who are not. Goonhammer's review explicitly noted "having rules just not be complete feels a bit off." GW's counter-position (implied by their design) is that app-only content gives them freedom to iterate and update rules without reprinting. <strong>This is likely to remain a tension point throughout the edition.</strong></p>
+  </div>
+
+  <div class="community-card">
+    <h3>4 — The Hidden Rule's Competitive Ceiling</h3>
+    <p>Hidden is broadly loved at the casual level — giving infantry a reason to hold terrain and a genuine shoot-or-hide decision adds meaningful gameplay depth. The competitive concern is that a 15" detection range combined with the Gone to Ground -3" extension creates scenarios where very fast armies can completely avoid shooting windows against well-positioned infantry objectives. <strong>The rule's balance depends heavily on terrain density norms at events</strong>, which are still being established. Goonhammer noted the app-version of Hidden has some differences from the printed PDF version, meaning the "live" rule is slightly different from what's in the free download.</p>
+  </div>
+
+  <div class="community-card">
+    <h3>5 — Save Roll Overhaul: Skill Floor Raised</h3>
+    <p>The new save roll system (allocation groups + lowest-roll-first resolution) is receiving strong praise from experienced players for closing exploits and making Character protection more intuitive. The concern is that it significantly raises the <strong>skill floor at the casual level</strong> — the number of simultaneous judgments required during a save roll (group composition, allocation order declaration, simultaneous rolling, resolution order) is substantially higher than 10th's sequential flow. Tournament play will adapt; pickup games may see more friction during the learning period.</p>
+  </div>
+
+  <div class="community-card">
+    <h3>6 — Codex Compatibility Window Anxiety</h3>
+    <p>GW's promise that 10th codexes carry over with faction packs has been received positively, but the community is watching carefully for how long that window lasts. In 10th, the index-to-codex transition period lasted ~18 months for some factions. If the same pace applies to 11th edition codexes, players could be running hybrid 10th/11th rulesets for an extended period. <strong>The first faction codexes (Space Marines, Orks) will be closely watched to see whether the faction packs are truly lightweight errata or effectively full rebuilds.</strong> The answer will determine how smoothly the rest of the transition proceeds.</p>
+  </div>
+
+  <div class="community-card">
+    <h3>7 — Mission System: The Biggest Change Nobody's Talking About</h3>
+    <p>Several commentators — including Yahoo/Wargamer coverage — flagged that the mission system overhaul may be the highest-impact change that isn't receiving proportionate attention. Force Dispositions (five army archetypes: Take and Hold, Purge the Foe, Disruption, Reconnaissance, Priority Assets) now shape primary mission generation, meaning <strong>both players may be scoring against different primary objectives based on their army type</strong>. This is a conceptual shift from the symmetric VP races of 10th toward asymmetric, thematic play — even in matched play. The competitive implications of Force Disposition matching/mismatching are still being worked out.</p>
+  </div>
+
+  <div class="doc-footer">
+    <div style="margin-bottom: 12px;">
+      <span style="color: var(--gold-dim); font-size:13px; font-family:'Cinzel',serif; font-weight:600;">FOR THE EMPEROR</span>
+    </div>
+    <p>Compiled June 1, 2026 · Sources: 10th Ed Core Rules PDF, New40K Core Rules PDF, Goonhammer, Spikey Bits, Bell of Lost Souls, HiveCity, Wargamer</p>
+    <p style="margin-top:6px;">All rules references verified against source PDFs. App-extended rules noted where applicable.</p>
+  </div>
+
+</div><!-- /container -->
+</body>
+</html>
