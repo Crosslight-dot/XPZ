@@ -584,9 +584,9 @@
     <div class="card-body">
       <table class="compare-table">
         <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>2CP. Trigger at end of opponent's Charge phase just after an enemy unit ends a Charge move. Target must be within 6" of that specific enemy. Declare charge targeting only that enemy unit. No charge roll. No Fights First bonus.</td><td>1CP base. Full charge roll made. Mode 1 (1CP): can only target units that charged this phase, within rolled distance. Mode 2 (Into the Fray, +1CP): caps roll at 6" but can target anything within 6" of your unit.</td></tr>
+        <tr><td>1CP. Trigger at end of opponent's Charge phase just after an enemy unit ends a Charge move. Your unit must be within 6" of that enemy unit and eligible to declare a charge against it. Declare charge targeting only that enemy unit. No charge roll — move directly into engagement. No Fights First bonus.</td><td>1CP base. Full charge roll made. Target range expanded to 12". Mode 1 — Leap to Defend (1CP): can only target units that charged this phase, within the rolled distance. Mode 2 — Into the Fray (+1CP): caps roll at 6" but can target any enemy units within 6" of your unit.</td></tr>
       </table>
-      <p>Cost dropped from 2CP to 1CP (or 2CP for the expanded mode). Now functions as a genuine counter-charge with tactical flexibility. This is the primary reactive tool in the Charge phase now that Overwatch was removed from that phase. Makes move-blocking and objective-stealing via movement significantly more risky for your opponent.</p>
+      <p>Now functions as a genuine counter-charge with tactical flexibility — a full charge roll replaces the old no-roll move, the target range expands from 6" to 12", and two named modes give the intervening player a meaningful decision. This is the primary reactive tool in the Charge phase now that Overwatch was removed from that phase. Makes move-blocking and objective-stealing via movement significantly more risky for your opponent.</p>
     </div>
   </div>
 
@@ -602,7 +602,7 @@
     <div class="card-body">
       <table class="compare-table">
         <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Triggered in opponent's Movement phase OR Charge phase. Could fire snap shots in reaction to charges.</td><td>Triggered at end of opponent's Movement phase only. No Charge phase trigger. Using Overwatch also breaks Hidden status for the target unit.</td></tr>
+        <tr><td>Triggered in opponent's Movement or Charge phase — at the start of a Normal, Advance, or Fall Back move, or when a charge was declared. Snap shots could fire in reaction to an incoming charge before it resolved.</td><td>Triggered at end of opponent's Movement phase only. No Charge phase trigger. Using Overwatch also breaks Hidden status for the firing unit.</td></tr>
       </table>
       <p>Reactive shooting during the Charge phase is completely removed. Heroic Intervention is now the sole reactive tool in that phase. This is a direct melee buff — charging units no longer risk eating snap-shot fire before they arrive. The asymmetry between Overwatch (movement phase) and HI (charge phase) creates a cleaner decision structure than 10th's overlapping reactive options.</p>
     </div>
@@ -696,18 +696,13 @@
       </tr>
       <tr>
         <td><strong>Indirect Fire Restriction</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
-        <td>Subtract 1 hit roll if target not visible. Cover applies if not visible.</td>
+        <td>Subtract 1 from hit roll AND unmodified hit roll of 1-3 always fails when target is not visible. Cover always applies to indirect attacks.</td>
         <td>Hit roll of 1-5 fails (unmodified) unless stationary AND target visible to a friendly unit (then 1-3 fails). Cover always applies. Cannot re-roll hit rolls. Rule 10.07.</td>
       </tr>
       <tr>
         <td><strong>MOBILE Keyword</strong> <span class="verdict verdict-melee" style="font-size:9px">New</span></td>
         <td>No equivalent.</td>
         <td>Super-Heavy Walker ability can grant MOBILE keyword during a move, enabling horizontal movement through dense terrain sections up to 4" high. Rule 24.35.</td>
-      </tr>
-      <tr>
-        <td><strong>Insane Bravery Timing</strong> <span class="verdict verdict-both" style="font-size:9px">Stratagems</span></td>
-        <td>Triggered after a battle-shock test was failed — a reactive spend to reverse a bad result.</td>
-        <td>Now triggers before making the roll (rule 15.04: "just before you make a battle-shock roll"). Proactive rather than reactive — you commit the CP knowing the roll will succeed, eliminating the 10th-edition gamble of failing first then spending. Still once per battle.</td>
       </tr>
     </tbody>
   </table>
@@ -716,14 +711,6 @@
   <div class="separator"></div>
   <div class="tier-marker new-label">New Mechanics — No 10th Equivalent</div>
 
-  <div class="change-card new-mechanic" style="margin-bottom:10px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">Surge Move (Rule 21.02)</div>
-      </div>
-    </div>
-    <div class="card-body"><p>A reactive movement type — certain rules allow a unit to make a surge move toward the closest enemy after a triggering event (e.g. a friendly unit being shot at). Must be unengaged, not battle-shocked, not yet moved this phase. Each model must end as close as possible to the surge target. Cannot become engaged with non-target units.</p></div>
-  </div>
   <div class="change-card new-mechanic" style="margin-bottom:10px">
     <div class="card-head">
       <div class="card-title-block">
@@ -754,7 +741,7 @@
         <div class="card-title">Hazard Roll as Unified Mechanic (Rule 06.03)</div>
       </div>
     </div>
-    <div class="card-body"><p>A single D6 roll: on 1-2, that unit suffers 1 mortal wound (or 3 if every model is MONSTER/VEHICLE). Unifies the self-damage triggers from 10th under one consistent mechanic — fall-back Desperate Escape mode, destroyed transport casualties, and combat disembark all now use this same roll. Note: "Desperate Escape" survives as the name of the battle-shocked fall-back mode in 11th (rule 09.07); what changed is the dice mechanic it uses, not the mode name itself.</p></div>
+    <div class="card-body"><p>A single D6 roll: on 1-2, that unit suffers 1 mortal wound (or 3 if every model is MONSTER/VEHICLE). Unifies the self-damage triggers from 10th under one consistent mechanic — fall-back Desperate Escape mode, destroyed transport casualties, and combat disembark all now resolve against the same table. "Desperate Escape" itself survives in 11th as the name of the battle-shocked fall-back mode (rule 09.07); what changed is the underlying dice mechanic, not the mode name.</p></div>
   </div>
   <div class="change-card new-mechanic" style="margin-bottom:14px">
     <div class="card-head">
@@ -762,7 +749,7 @@
         <div class="card-title">Solid Terrain Rule (Rule 13.11) + Shooting Types Formalised (Rules 10.04–10.07)</div>
       </div>
     </div>
-    <div class="card-body"><p><strong>Solid:</strong> Dense terrain features prevent LoS through any enclosed gap 3" or less from ground level (doors, windows, bullet holes). Models in ground-level ruins are invisible to models outside, regardless of small openings. <br><strong>Shooting Types:</strong> Four formally defined shooting types with explicit eligibility — Normal Shooting, Assault Shooting (advance + [ASSAULT] weapons), Close-Quarters Shooting (engaged with [CQ] weapons or Monster/Vehicle), Indirect Shooting. Each has distinct "After Shooting" restrictions on actions.</p></div>
+    <div class="card-body"><p><strong>Solid:</strong> Dense terrain features prevent LoS through any enclosed gap 3" or less from ground level (doors, windows, bullet holes). Models in ground-level ruins are invisible to models outside, regardless of small openings. <br><strong>Shooting Types:</strong> Four formally defined shooting types with explicit eligibility — Normal Shooting, Assault Shooting (advance + [ASSAULT] weapons), Close-Quarters Shooting (available to any unit within Engagement Range of one or more enemy units, using [CLOSE-QUARTERS] weapons — and to Monster/Vehicle units per Big Guns Never Tire), Indirect Shooting. Each has distinct "After Shooting" restrictions on actions.</p></div>
   </div>
 
   <!-- TRANSITION PLAN -->
@@ -793,11 +780,11 @@
     </div>
     <div class="step-card">
       <div class="step-num-row"><div class="step-circle">5</div><div class="step-title">Rebuild Lists Around Detachment Points</div></div>
-      <div class="step-body">Don't immediately try to stack two detachments — run your first two or three games with a single detachment to understand how your army plays in 11th. Then assess whether a 1 DP specialist add-on strengthens your core strategy. Wait for full points to drop with the faction pack before committing to a tournament list.</div>
+      <div class="step-body">Don't immediately try to stack two detachments — run your first two or three games with a single detachment to understand how your army plays in 11th. Then assess whether a 1 DP specialist add-on strengthens your core strategy. Points values are maintained in the 40K app and matched play documents — check both are current before committing to a tournament list.</div>
     </div>
     <div class="step-card">
       <div class="step-num-row"><div class="step-circle">6</div><div class="step-title">Adjust Unit Deployment for 9" Coherency Cap</div></div>
-      <div class="step-body">Large horde units (10+, 20+) need new deployment habits. Sketch your unit footprints before placing: maximum span is now ~11" across. Screen lines must be denser and shorter. Units that relied on conga-line screening — especially Guardsmen, Termagants, Tactical Squads — need repositioning strategies.</div>
+      <div class="step-body">Large horde units (10+, 20+) need new deployment habits. Sketch your unit footprints before placing: maximum span between any two models is now ~9" — the global cap is the hard limit, not something you add the 2" adjacency on top of. Screen lines must be denser and shorter. Units that relied on conga-line screening — especially Guardsmen, Termagants, Tactical Squads — need repositioning strategies.</div>
     </div>
     <div class="step-card">
       <div class="step-num-row"><div class="step-circle">7</div><div class="step-title">Update Charge Phase Mental Model</div></div>
