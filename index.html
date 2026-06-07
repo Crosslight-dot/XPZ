@@ -354,7 +354,7 @@
 
 <div style="position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,5,5,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--gold-dim); padding:7px 24px; display:flex; align-items:center; justify-content:space-between;">
   <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">WH40K 10→11 Transition Guide</span>
-  <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim);">v1.2 — Core Rules Only · Matched Play &amp; Points Update Pending</span>
+  <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim);">v1.3 — Core Rules Only · Matched Play &amp; Points Update Pending</span>
   <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--blood-glow);">LIVE DOC</span>
 </div>
 
@@ -388,8 +388,29 @@
     <h2>All Deltas — Ranked by Fundamental Impact</h2>
   </div>
 
+  <style>
+    .tier-accordion { margin-bottom: 0; }
+    .tier-accordion-header {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none; padding: 10px 16px;
+      border-radius: 3px; margin-bottom: 10px;
+      transition: opacity 0.15s;
+    }
+    .tier-accordion-header:hover { opacity: 0.85; }
+    .tier-accordion-header .tier-marker { margin-bottom: 0; }
+    .tier-chevron { font-size: 13px; opacity: 0.7; transition: transform 0.2s; flex-shrink: 0; margin-left: 12px; }
+    .tier-accordion-header.tier-open .tier-chevron { transform: rotate(180deg); }
+    .tier-accordion-body { display: none; }
+    .tier-accordion-body.tier-open { display: block; }
+  </style>
+
   <!-- TIER 1 -->
-  <div class="tier-marker tier1-label">Tier 1 — Game-Defining Shifts</div>
+  <div class="tier-accordion">
+    <div class="tier-accordion-header tier1-label tier-open" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
+      <span>Tier 1 — Game-Defining Shifts</span>
+      <span class="tier-chevron">▼</span>
+    </div>
+    <div class="tier-accordion-body tier-open">
 
   <!-- 1 -->
   <div class="change-card tier1">
@@ -463,9 +484,17 @@
     </div>
   </div>
 
+    </div><!-- /tier1 accordion body -->
+  </div><!-- /tier1 accordion -->
+
   <!-- TIER 2 -->
   <div class="separator"></div>
-  <div class="tier-marker tier2-label">Tier 2 — Significant Ruleset Changes</div>
+  <div class="tier-accordion">
+    <div class="tier-accordion-header tier2-label" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
+      <span>Tier 2 — Significant Ruleset Changes</span>
+      <span class="tier-chevron">▼</span>
+    </div>
+    <div class="tier-accordion-body">
 
   <!-- 5 -->
   <div class="change-card tier2">
@@ -644,9 +673,17 @@
     </div>
   </div>
 
+    </div><!-- /tier2 accordion body -->
+  </div><!-- /tier2 accordion -->
+
   <!-- TIER 3 -->
   <div class="separator"></div>
-  <div class="tier-marker tier3-label">Tier 3 — Targeted but Important Changes</div>
+  <div class="tier-accordion">
+    <div class="tier-accordion-header tier3-label" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
+      <span>Tier 3 — Targeted but Important Changes</span>
+      <span class="tier-chevron">▼</span>
+    </div>
+    <div class="tier-accordion-body">
 
   <!-- Quick reference table for tier 3 -->
   <table class="quick-table">
@@ -712,9 +749,17 @@
     </tbody>
   </table>
 
+    </div><!-- /tier3 accordion body -->
+  </div><!-- /tier3 accordion -->
+
   <!-- NEW MECHANICS -->
   <div class="separator"></div>
-  <div class="tier-marker new-label">New Mechanics — No 10th Equivalent</div>
+  <div class="tier-accordion">
+    <div class="tier-accordion-header new-label tier-open" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
+      <span>New Mechanics — No 10th Equivalent</span>
+      <span class="tier-chevron">▼</span>
+    </div>
+    <div class="tier-accordion-body tier-open">
 
   <div class="change-card new-mechanic" style="margin-bottom:10px">
     <div class="card-head">
@@ -757,6 +802,9 @@
     <div class="card-body"><p><strong>Solid:</strong> Dense terrain features prevent LoS through any enclosed gap 3" or less from ground level (doors, windows, bullet holes). Models in ground-level ruins are invisible to models outside, regardless of small openings. <br><strong>Shooting Types:</strong> Four formally defined shooting types with explicit eligibility — Normal Shooting, Assault Shooting (advance + [ASSAULT] weapons), Close-Quarters Shooting (available to any unit within Engagement Range of one or more enemy units, using [CLOSE-QUARTERS] weapons — and to Monster/Vehicle units per Big Guns Never Tire), Indirect Shooting. Each has distinct "After Shooting" restrictions on actions.</p></div>
   </div>
 
+    </div><!-- /new mechanics accordion body -->
+  </div><!-- /new mechanics accordion -->
+
   <!-- FORCE DISPOSITIONS -->
   <div class="separator"></div>
   <div class="section-header">
@@ -768,7 +816,12 @@
   </div>
 
   <!-- TAKE AND HOLD -->
-  <div class="tier-marker tier3-label">Disposition I — Take and Hold</div>
+  <div class="disp-accordion" id="disp-th">
+    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--tier3);">
+      <span class="disp-accordion-title">Disposition I — Take and Hold</span>
+      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#b4ffcc;">Durable / Objective</span><span class="disp-chevron">▼</span></div>
+    </div>
+    <div class="disp-accordion-body">
   <div class="change-card tier3">
     <div class="card-head">
       <div class="card-rank gold">TH</div>
@@ -786,8 +839,16 @@
     </div>
   </div>
 
+    </div><!-- /disp-th body -->
+  </div><!-- /disp-th -->
+
   <!-- PURGE THE FOE -->
-  <div class="tier-marker tier1-label">Disposition II — Purge the Foe</div>
+  <div class="disp-accordion" id="disp-pf">
+    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--blood);">
+      <span class="disp-accordion-title">Disposition II — Purge the Foe</span>
+      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffaaaa;">Kill-Focused</span><span class="disp-chevron">▼</span></div>
+    </div>
+    <div class="disp-accordion-body">
   <div class="change-card tier1">
     <div class="card-head">
       <div class="card-rank gold">PF</div>
@@ -806,8 +867,16 @@
     </div>
   </div>
 
+    </div><!-- /disp-pf body -->
+  </div><!-- /disp-pf -->
+
   <!-- PRIORITY ASSETS -->
-  <div class="tier-marker tier2-label">Disposition III — Priority Assets</div>
+  <div class="disp-accordion" id="disp-pa">
+    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid #c47a20;">
+      <span class="disp-accordion-title">Disposition III — Priority Assets</span>
+      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffe5b4;">Action-Heavy</span><span class="disp-chevron">▼</span></div>
+    </div>
+    <div class="disp-accordion-body">
   <div class="change-card tier2">
     <div class="card-head">
       <div class="card-rank gold">PA</div>
@@ -826,8 +895,16 @@
     </div>
   </div>
 
+    </div><!-- /disp-pa body -->
+  </div><!-- /disp-pa -->
+
   <!-- RECONNAISSANCE -->
-  <div class="tier-marker tier3-label">Disposition IV — Reconnaissance</div>
+  <div class="disp-accordion" id="disp-rc">
+    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--tier3);">
+      <span class="disp-accordion-title">Disposition IV — Reconnaissance</span>
+      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#b4ffcc;">Mobile / MSU</span><span class="disp-chevron">▼</span></div>
+    </div>
+    <div class="disp-accordion-body">
   <div class="change-card tier3">
     <div class="card-head">
       <div class="card-rank gold">RC</div>
@@ -846,8 +923,16 @@
     </div>
   </div>
 
+    </div><!-- /disp-rc body -->
+  </div><!-- /disp-rc -->
+
   <!-- DISRUPTION -->
-  <div class="tier-marker tier1-label">Disposition V — Disruption</div>
+  <div class="disp-accordion" id="disp-di">
+    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--blood);">
+      <span class="disp-accordion-title">Disposition V — Disruption</span>
+      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffaaaa;">Aggressive / Reactive</span><span class="disp-chevron">▼</span></div>
+    </div>
+    <div class="disp-accordion-body">
   <div class="change-card tier1">
     <div class="card-head">
       <div class="card-rank gold">DI</div>
@@ -865,6 +950,9 @@
       <p><strong>List building note:</strong> Aggressive, fast, reactive armies built around mid-board presence. Deep strike units, fast vehicles that can toe terrain and shoot, MSU units that can spread pressure across multiple zones simultaneously. This is not the Disposition for armies that want to survive by sitting still.</p>
     </div>
   </div>
+
+    </div><!-- /disp-di body -->
+  </div><!-- /disp-di -->
 
   <!-- DISPOSITION MATCHUP MATRIX -->
   <div class="separator"></div>
@@ -921,13 +1009,13 @@
     .rating-4 { color: #5aaa5a; }
     .rating-45 { color: #4acc6a; }
     .rating-5 { color: #2aee6a; }
-    .matchup-content { flex: 1; }
+    .matchup-content { flex: 1; min-width: 0; }
     .matchup-vs {
       font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
       color: var(--text-bright); letter-spacing: 0.05em; margin-bottom: 3px;
     }
     .matchup-mission { font-size: 11px; color: var(--gold-dim); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; }
-    .matchup-desc { font-size: 13px; color: #b0a898; line-height: 1.65; }
+    .matchup-desc { font-size: 13px; color: #b0a898; line-height: 1.65; word-break: break-word; }
     .matchup-badge-right {
       min-width: 80px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; padding-top: 2px;
     }
@@ -936,6 +1024,11 @@
     .pip.filled { background: var(--gold); }
     .pip.half { background: linear-gradient(90deg, var(--gold) 50%, rgba(255,255,255,0.1) 50%); }
     .rating-label { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+    .scoring-block { margin: 7px 0 5px 0; padding: 8px 12px; background: rgba(201,168,76,0.05); border-left: 2px solid rgba(201,168,76,0.25); border-radius: 2px; }
+    .scoring-block-title { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 5px; }
+    .scoring-line { font-size: 12px; color: #a8a090; line-height: 1.6; margin-bottom: 2px; word-break: break-word; }
+    .scoring-line strong { color: var(--text-bright); font-size: 12px; }
+    .scoring-line em { color: var(--gold-dim); font-style: normal; }
   </style>
 
   <script>
@@ -962,6 +1055,12 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Purge the Foe</div>
           <div class="matchup-mission">TH Mission: Immovable Object · Opp Mission: Unstoppable Force</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Immovable Object</div>
+            <div class="scoring-line"><strong>3VP</strong> — control 1+ central obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T2&ndash;T4 end of command phase</em></div>
+            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T5 end of turn</em></div>
+          </div>
           <div class="matchup-desc">Purge scores for killing your units AND flipping objectives. You need to hold 2 NML objectives simultaneously to max primary — hard while Purge picks off your scoring units. 5-obj maps with one big center hurt badly: center changes hands every turn, scoring 3VP for Purge each time while you lose it. Protect your home — Purge scores 5VP end-of-game for holding it. Your best play: deny them kills on T1 via strat reserves or screen positioning.</div>
         </div>
         <div class="matchup-badge-right">
@@ -975,6 +1074,12 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Reconnaissance</div>
           <div class="matchup-mission">TH Mission: Purge and Secure · Opp Mission: Reconnaissance Sweep</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Purge and Secure</div>
+            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — control 1+ obj not held at turn start, excl. home &middot; <em>any turn, end of turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed by unit within obj range OR enemy on obj destroyed &middot; <em>any turn, end of turn</em></div>
+          </div>
           <div class="matchup-desc">You score 4VP per objective held plus 3VP for killing units near objectives. Recon scores 6VP just for being in 4 table quarters — without touching your objectives. They're scoring passively across the board while you need to push forward to generate VP, which hands them kill targets near objectives. Starve their table quarters by contesting corner units; use OC-heavy chaff to force them to fight for their 3VP expansion hold.</div>
         </div>
         <div class="matchup-badge-right">
@@ -988,6 +1093,11 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Take and Hold (Mirror)</div>
           <div class="matchup-mission">TH Mission: Battlefield Dominance</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Battlefield Dominance</div>
+            <div class="scoring-line"><strong>2VP</strong> — control more objs than opponent &middot; <em>T1&ndash;T2 end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP/obj</strong> — each obj held (+2VP/obj excl. home if you hold home) &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Even. You both score for holding objectives and controlling more than the opponent. Center trades every turn generate the 2VP condition for whoever recaps it — drip-feed scoring units into the center rather than committing big pieces. Infiltrators are strong here to get a T1 edge on the 2VP condition. Plan a T5 objective push — scoring shifts to end-of-turn so you can jump on objectives you haven't held.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1001,6 +1111,12 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Disruption</div>
           <div class="matchup-mission">TH Mission: Determined Acquisition · Opp Mission: Death Trap</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Determined Acquisition</div>
+            <div class="scoring-line"><strong>2VP/obj</strong> — each obj newly controlled this turn, excl. home &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP/obj</strong> — each obj held (+3VP/obj if in enemy territory) &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line">&darr; <em>Central obj is in enemy territory &mdash; worth 6VP/turn if held</em></div>
+          </div>
           <div class="matchup-desc">Close matchup but Disruption has significant agency. They score 12+ VP on T1/T2 by trapping terrain areas (they don't need to control — just touch). Your scoring is solid: 6VP for holding objectives in enemy territory including the center (worth 6VP/turn). Key defense: stay out of trapped terrain areas that aren't objectives. If you have infiltrators, charge their T1 action units — falling back prevents actions and stifles their early scoring.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1014,6 +1130,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Priority Assets</div>
           <div class="matchup-mission">TH Mission: Inescapable Dominion · Opp Mission: Secure Asset</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Inescapable Dominion</div>
+            <div class="scoring-line"><strong>4VP</strong> — control 3+ objs &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — control 2+ objs &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — control more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">6-objective map benefits you. You score 4VP for holding 3+ objectives (trivial), 5VP command phase for holding 2+, and 4VP for holding more than opponent. Passive score peaks at 44VP with conservative play — best TH result in any matchup. PA must rush you to stop Hold More from triggering. Key threat: they score 5VP end-of-game for holding your home. Screen it in T4/5. Dawn of War deployment makes this significantly harder — PA can rush you and the map is much more open.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1022,8 +1145,8 @@
         </div>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /disp-th body -->
+  </div><!-- /disp-th -->
 
   <!-- PURGE THE FOE -->
   <div class="disp-accordion">
@@ -1041,6 +1164,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Priority Assets</div>
           <div class="matchup-mission">PF Mission: Destroyer's Wrath · Opp Mission: Vital Link</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Destroyer's Wrath</div>
+            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home + bonus for holding more than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — kill more units this turn than opponent did last turn &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">PA incrementally scores more VP per turn by stacking Operation Markers on central objectives — a 41VP passive ceiling if untouched. Your counter: move-block them off the center via sacrificial chaff, and use Heroic Intervention (2CP) to stop their action units. You score 3VP for killing units plus command phase objective hold bonuses, but need to kill more than your opponent did last turn for the "Kill More" kicker. 5-objective maps (single center) favor you; Search and Destroy is brutal for PA. Internally rated 2.5 by most Goonhammer authors, though one contributor rated it 2 or worse.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1054,6 +1184,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Purge the Foe (Mirror)</div>
           <div class="matchup-mission">PF Mission: Meatgrinder</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Meatgrinder</div>
+            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — kill more units this turn than opponent did last turn &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Cat and mouse — be the cat. Score for kills, holding your expansion from T2, and killing more units than your opponent did last turn. The third condition is the swing: give up free kills and you lose the mirror. Don't sacrifice units unless it forces your opponent to overcommit. Going second tends to be better — lets you react to their kill count and set your target for Kill More. Durable units are at a premium. All 3 layouts feature split central objectives.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1067,6 +1204,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Reconnaissance</div>
           <div class="matchup-mission">PF Mission: Consecrate · Opp Mission: Triangulation</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Consecrate</div>
+            <div class="scoring-line"><strong>3/6VP</strong> — 1&ndash;2 or 3+ objs Consecrated total &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Kill a unit &rarr; unit becomes Consecration unit &rarr; finish turn within range of unconsecrated obj &rarr; place marker. Does not require control.</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — Consecrate enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Your kill units become Consecration units — move them onto objectives to permanently tag them and score end-of-turn VP. Key: you don't need to control the objective to Consecrate it, just finish within range after getting a kill. Score 3VP/6VP for 1–2 or 3+ Consecrated objectives. Heroic Intervention is your secret weapon — use it to block Recon's once-per-turn Triangulate action. If you breach their DZ and tag their home objective, score a bonus 5VP end-of-game. Speed is king: fast melee units that kill and land on objectives same turn max your efficiency.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1080,6 +1225,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Disruption</div>
           <div class="matchup-mission">PF Mission: Punishment · Opp Mission: Delaying Action</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Punishment</div>
+            <div class="scoring-line"><strong>5VP</strong> — 1+ Condemned units leave battlefield, either player's turn &middot; <em>any turn, end of turn</em></div>
+            <div class="scoring-line">&darr; <em>Your turn start: mark up to 3 enemy units on objs or that killed your units last turn as Condemned. They cannot embark or go to reserves.</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — hold more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>8VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">One of the most aggressive Purge missions in the pack. You Condemn up to 3 enemy units each turn (those on objectives OR that killed your units last turn), and score 5VP any time a condemned unit leaves the battlefield — including in the opponent's turn. You also score for Hold More and 8VP end-of-game for holding their home. Disruption's kill rate to match yours is terrible (3:1 unfavorable exchange). Key: condemned units cannot embark transports or go into reserves — that's free points. One author rated this 4, another 3.5. Disruption's uphill climb is severe here.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1093,6 +1246,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Take and Hold</div>
           <div class="matchup-mission">PF Mission: Unstoppable Force · Opp Mission: Immovable Object</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Unstoppable Force</div>
+            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj not held at turn start, excl. home &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — hold 1+ central obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Best matchup in the Purge toolkit — and arguably the best matchup in the entire Disposition system. All 3 layouts use a single central objective, which is terrible for TH. You score for every kill, for holding objectives from T2, for flipping objectives, and 5VP end-of-game for the central. The flip VP doesn't require flipping an opponent's objective — retaking your own expansion after being shot off counts. Basic loop: kill one, hold one, walk onto one per turn = 40–45VP. Keep TH off the center in their command phase to deny them 7VP at once.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1101,8 +1261,8 @@
         </div>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /disp-pf body -->
+  </div><!-- /disp-pf -->
 
   <!-- PRIORITY ASSETS -->
   <div class="disp-accordion">
@@ -1120,6 +1280,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Purge the Foe</div>
           <div class="matchup-mission">PA Mission: Vital Link · Opp Mission: Destroyer's Wrath</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Vital Link</div>
+            <div class="scoring-line"><strong>2VP + 1VP/marker</strong> — hold 1+ central obj + 1VP per Operation Marker on it &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Once/turn action on central obj; completes if you control it &rarr; place Operation Marker. Stack markers each turn for escalating VP (ideal: 3/4/5/6/7 over 5 turns = 25VP).</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>4VP extra</strong> — if that held obj is a central obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">You can hit 41VP passively by stacking Operation Markers on central objectives each turn — but Purge is paid to kill you and move-block your action units. Your scoring is back-loaded; their kill points are immediate. A single durable tarpit holding a central objective (e.g. Necron Warriors, Wraiths) massively smooths this by starting your action without being guaranteed dead. Watch Search and Destroy — it's brutal here. If built for it: 3. If not: 2 or worse (one contributor rated this much lower).</div>
         </div>
         <div class="matchup-badge-right">
@@ -1133,6 +1301,12 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Priority Assets (Mirror)</div>
           <div class="matchup-mission">PA Mission: Sabotage</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Sabotage (Mirror)</div>
+            <div class="scoring-line"><strong>3VP/obj</strong> — each non-home obj Sabotaged this turn (+2VP/obj if in enemy territory) &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Once/turn action on any non-home obj; completes if you control it at end of turn. Central obj counts as enemy territory.</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ non-home obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Pure action race. You score 3VP for each non-home objective Sabotaged per turn, +2VP if in opponent's territory. You can theoretically hit 45VP in your T4 command phase. Getting a 13VP T1 (via Infiltrators on forward objectives) puts you on a commanding slope. Don't panic if you score 0 T1/T2 — you can still cap primary late if your assets are alive. Block opponents by filling the small central objective with wide-footprint models and using 2" engagement range to deny placement. Cheap chaff quantity wins this mirror.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1146,6 +1320,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Take and Hold</div>
           <div class="matchup-mission">PA Mission: Secure Asset · Opp Mission: Inescapable Dominion</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Secure Asset</div>
+            <div class="scoring-line"><strong>4VP</strong> — perform Secure Asset action on 1 non-home obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Start in shooting phase; completes if you control the obj at end of turn.</em></div>
+            <div class="scoring-line"><strong>2VP</strong> — destroy 1+ enemy within range of a central obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>4VP extra</strong> — hold 3+ objs including home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Knife-edge matchup with high passive scoring for both sides. On Crucible and Hammer maps, TH is forced into a proactive role by the maths — you can sit defensively and score 12VP/turn while they're forced to come at you. Dawn of War is harder — open map means they can rush you. Your priority on all maps: defend your expansion objective in depth. If you can kill one unit pushing onto a central objective per turn, you still reach 44VP. Watch for their late-game home objective play (5VP end-of-game).</div>
         </div>
         <div class="matchup-badge-right">
@@ -1159,6 +1341,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Disruption</div>
           <div class="matchup-mission">PA Mission: Extract Relic · Opp Mission: Locate and Deny</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Extract Relic</div>
+            <div class="scoring-line"><strong>4VP</strong> — perform Sensor Sweep action on 1 central obj (removes 1 Operation Marker from board) &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy that started turn within obj range &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — only 1 marker remains + you hold that terrain area, no enemy present &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — only 1 marker remains, you hold terrain, no enemy &middot; <em>end of battle (9VP total if on T5 going second)</em></div>
+          </div>
           <div class="matchup-desc">You score for performing Sensor Sweep actions on central objectives (removing Disruption's Operation Markers) and for killing units that started within range of objectives. Disruption also sweeps markers — the shared mechanic creates a direct race to be the last army with a marker. Both players score 4VP for killing units on objectives. 10VP end-of-game for controlling a terrain area with the final marker and no enemy present. Goonhammer rated this as relatively balanced — the shared Sensor Sweep mechanic creates a genuinely interactive mission.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1172,6 +1362,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Reconnaissance</div>
           <div class="matchup-mission">PA Mission: vs Recon · Opp scoring: Surveil / Gather Intel type</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — vs Reconnaissance</div>
+            <div class="scoring-line"><strong>4VP</strong> — perform Secure Asset action on 1 non-home obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>2VP</strong> — destroy 1+ enemy within range of a central obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>4VP extra</strong> — hold 3+ objs including home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">PA's action economy outpaces Recon's slower once-per-turn action cadence. You can score aggressively off forward objectives while Recon needs turns to build up Triangulation markers. Your 2VP kill condition near central objectives is easily triggered against Recon's mobile MSU screens — they have to push forward to score, which hands you targets. Priority: move-block their action units off central objectives. Good matchup for PA lists with fast lethal pieces that score actions and kill screens simultaneously.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1180,8 +1377,8 @@
         </div>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /disp-pa body -->
+  </div><!-- /disp-pa -->
 
   <!-- RECONNAISSANCE -->
   <div class="disp-accordion">
@@ -1199,6 +1396,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Purge the Foe</div>
           <div class="matchup-mission">Recon Mission: Triangulation · Opp Mission: Consecrate</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Triangulation</div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ non-home obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3/6/10VP</strong> — 1, 2, or 3+ objs Triangulated total &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Once/turn action on non-home obj without your marker; completes if you control it &rarr; place marker. Never skip a turn &mdash; each missed action permanently caps max score.</em></div>
+            <div class="scoring-line"><strong>10VP</strong> — control 4+ objs total &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Purge is paid to kill your units anywhere, then deliver a Consecration token to any objective — they don't need to control it. Their action-on-kill system is less throttled than your once-per-turn Triangulate. Your engine: score 4VP command phase for holding 1+ non-home, then build Triangulate tokens over multiple turns (3VP → 6VP → 10VP for 1/2/3 objectives). Must-do rule: start Triangulate on T2 — skipping any turn permanently caps your max. Save your T4/5 all-in push for the 10VP end-of-game (control 4+ objectives). Screen your home objective wide — their Consecrate bonus tags it for 5VP.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1212,6 +1416,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Reconnaissance (Mirror)</div>
           <div class="matchup-mission">Recon Mission: Gather Intel</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Gather Intel (Mirror)</div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ NML obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3/6/9VP</strong> — 1, 2, or 3+ Intel tokens placed on NML objs &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Once/turn action on NML obj; completes if you control it &rarr; place Intel token.</em></div>
+            <div class="scoring-line"><strong>10VP</strong> — control 4+ objs total &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Action race to place Intelligence tokens on NML objectives first. Both players score for holding an NML objective in command phase and for each token placed. Going second gives you reaction information but also means your opponent gets a head start on tokens. Cheap high-quantity units are premium — you need activations all game, not just early. The T5 end-of-game scoring for controlling 4+ objectives means you need a unit alive in every corner to max primary.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1225,6 +1436,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Disruption</div>
           <div class="matchup-mission">Recon Mission: Surveil the Foe · Opp Mission: various Disruption</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — vs Disruption (Surveil)</div>
+            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Recon's table quarter scoring is largely independent of Disruption's mid-board pressure — you don't need to contest the same terrain. This gives Recon structural distance from Disruption's threat zones. However, Disruption's early scoring windows (T1/T2 VP dumps from trapping terrain) can bank a lead before Recon's slower once-per-turn actions ramp up. Maintain your quarter presence across all 4 sections and don't get funneled into mid-board fights — that's where Disruption is strongest.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1238,6 +1456,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Take and Hold</div>
           <div class="matchup-mission">Recon Mission: Reconnaissance Sweep · Opp Mission: Purge and Secure</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Reconnaissance Sweep</div>
+            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Your table quarter scoring (6VP for 4 quarters) is entirely independent of holding objectives — you're scoring while TH's opponent fights for center control. Structural advantage: your 6VP is nearly free each turn if you have cheap mobile units in corner pockets. TH's opponent (Purge and Secure) scores 4VP per held objective and 3VP for killing units near objectives — so your expansion unit is a kill target. Keep it in Hidden or just outside objective range to deny their kill-linked 3VP. Don't get pulled into a brawl over the center.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1251,6 +1476,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Priority Assets</div>
           <div class="matchup-mission">Recon Mission: Surveil the Foe · Opp Mission: Secure Asset type</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — vs Priority Assets</div>
+            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">PA needs to push forward and control objectives to complete actions — which hands you kill targets and table quarter access simultaneously. Your once-per-turn action (Triangulate/Surveil) operates independently of PA's action zone, letting you rack up points without contesting the same spaces. Exploit their overextension: when PA action units push forward to score, clip them for Recon kill VP and let your quarter units stay safe. Good matchup for fast skirmish lists — you can score your 6VP quarters while PA's action units chase objectives in no man's land.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1259,8 +1491,8 @@
         </div>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /disp-rc body -->
+  </div><!-- /disp-rc -->
 
   <!-- DISRUPTION -->
   <div class="disp-accordion">
@@ -1278,6 +1510,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Purge the Foe</div>
           <div class="matchup-mission">DI Mission: Delaying Action · Opp Mission: Punishment</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Delaying Action</div>
+            <div class="scoring-line"><strong>2VP/unit</strong> — each enemy unit destroyed this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — hold 1+ central AND 1+ expansion obj &middot; <em>T2+ end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Passive ceiling ~28VP before kills. Need ~9 kills to max primary.</em></div>
+          </div>
           <div class="matchup-desc">Worst matchup in the entire Disposition system. Purge runs the Condemned mechanic — marks 3 of your units per turn (those on objectives or that killed their units), and scores 5VP any time a condemned unit leaves the battlefield. Condemned units cannot embark transports or go to reserves — free points the moment you try to reposition. Your kill-to-VP exchange rate is terrible (you need 3 kills for each condemned kill they get). Purge also scores 8VP end-of-game for holding your home. Your only out is tabling or near-tabling them. Rated 1.5 by most authors; 3.5 by one dissenting author.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1291,6 +1530,13 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Take and Hold</div>
           <div class="matchup-mission">DI Mission: Death Trap · Opp Mission: Determined Acquisition</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Death Trap</div>
+            <div class="scoring-line"><strong>2VP/terrain (+3VP if obj)</strong> — each terrain area trapped this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Unlimited Booby Trap actions &mdash; each unit in a different untrapped terrain area. No control needed. Completes immediately. Traps are permanent.</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed while in a trapped terrain area this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">You score 12+ VP on T1/T2 by Booby Trapping terrain areas (no control needed — just touch) and killing units inside trapped areas. TH scores for holding objectives including the center (worth 6VP/turn in your territory). After T2 you need to fort up on your expansion and keep control of the center. Crucial: 2–3 infiltrating infantry units are required to hit the T1 scoring spike without them you'll struggle to reach 35VP from traps. One author rated this 2 — saying Disruption gets murdered crossing mid-table after the T1/T2 burst and TH simply sits and shoots.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1304,6 +1550,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Disruption (Mirror)</div>
           <div class="matchup-mission">DI Mission: Outmanoeuvre</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Outmanoeuvre (Mirror)</div>
+            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T1 end of your turn</em></div>
+            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T2&ndash;T3 end of command phase</em></div>
+            <div class="scoring-line"><strong>6VP/obj</strong> — each obj held excl. home &middot; <em>T4+ end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>T1 and T4/T5 are big scoring turns. Plan: 12VP T1, quiet T2/T3, big push T4/T5.</em></div>
+          </div>
           <div class="matchup-desc">Pure objective race where your home doesn't score but you absolutely don't want to give it up. Score 10VP for holding opponent's home any turn. T1 and T4/T5 are your big scoring rounds (12VP each from holding 3 NML objectives). T2/T3 are quiet at 5–10VP. Classic strategy: grab 12VP on T1, consolidate T2/T3, big push T4/T5. MSU lists with 2–3 infiltrating units are ideal for spreading across all 3 NML objectives on T1 then defending late. Back-cap attempt ideally on T2 or T3 for the 10VP swing.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1317,6 +1571,12 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Reconnaissance</div>
           <div class="matchup-mission">DI Mission: vs Recon type</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — vs Reconnaissance</div>
+            <div class="scoring-line"><strong>2VP/terrain (+3VP if obj)</strong> — each terrain area trapped this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed in trapped terrain this turn &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+          </div>
           <div class="matchup-desc">Disruption's early scoring windows can bank a significant lead before Recon's slower action economy ramps up. However, Recon's table quarter scoring doesn't require contesting the same zones as your Booby Trap actions — they score passively while you have to push forward and survive. If your army can maintain mid-board threat across multiple zones, Recon has no natural answer to your T1/T2 burst. If your army stalls mid-table after the initial push, Recon's accumulated quarters VP catches up quickly.</div>
         </div>
         <div class="matchup-badge-right">
@@ -1330,6 +1590,14 @@
         <div class="matchup-content">
           <div class="matchup-vs">vs Priority Assets</div>
           <div class="matchup-mission">DI Mission: Locate and Deny · Opp Mission: Extract Relic</div>
+          <div class="scoring-block">
+            <div class="scoring-block-title">Your Scoring — Locate and Deny</div>
+            <div class="scoring-line"><strong>4VP</strong> — destroy 1+ enemy that started turn within obj range &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — only 1 Operation Marker remains + you hold that terrain area, no enemy present &middot; <em>any turn, end of your turn</em></div>
+            <div class="scoring-line">&darr; <em>Both players Sensor Sweep (action on central obj if you control it) to remove 1 marker/turn. Race to last marker.</em></div>
+            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
+            <div class="scoring-line"><strong>5VP</strong> — only 1 marker remains, you hold terrain, no enemy &middot; <em>end of battle</em></div>
+          </div>
           <div class="matchup-desc">Both players share the Sensor Sweep action — removing Operation Markers from the board. You score 4VP for killing units on objectives each turn, 4VP when only one marker remains and you control that terrain area uncontested, and 5VP end-of-game for the same final marker condition (9VP total on T5 if going second). Your goal: aggressively Sensor Sweep to race the marker count down, then station yourself in the final terrain area. PA needs to sweep markers too to score — you're both playing the same game, but your kill scoring gives you additional income they lack. Best Disruption matchup.</div>
         </div>
         <div class="matchup-badge-right">
