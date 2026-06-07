@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gladius Task Force — Scouting Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap');
+
+:root {
+  --bg: #0d0f12;
+  --surface: #141618;
+  --border: #252830;
+  --border2: #2e3240;
+  --text: #d8dce8;
+  --muted: #6b7080;
+  --red: #e05050;
+  --red-bg: #1c1010;
+  --amber: #d4922a;
+  --amber-bg: #1a1208;
+  --blue: #4a8fd4;
+  --blue-bg: #0c1520;
+  --green: #4aad6a;
+  --green-bg: #0c1610;
+  --purple: #8b6ad4;
+  --purple-bg: #130f1e;
+  --teal: #3aada8;
+  --teal-bg: #0a1515;
+  --accent: #c8ab6e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.header-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* GRID LAYOUT */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.span2 { grid-column: span 2; }
+
+/* SECTION */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.section-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 10px;
+  background: #0f1115;
+  border-bottom: 1px solid var(--border);
+}
+.section-body { padding: 8px 10px; }
+
+/* ROWS */
+.row {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+.row:first-child { padding-top: 0; }
+
+.row-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  flex-shrink: 0;
+  min-width: 0;
+}
+.row-body {
+  font-size: 12px;
+  color: #9aa0b4;
+  flex: 1;
+}
+.row-body strong { color: var(--text); font-weight: 500; }
+
+/* TAGS */
+.tag {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-right: 3px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.t-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid #3a1818; }
+.t-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #3a2808; }
+.t-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid #1a2e44; }
+.t-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid #1a3020; }
+.t-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid #251840; }
+.t-teal   { background: var(--teal-bg);   color: var(--teal);   border: 1px solid #152828; }
+.t-gray   { background: #161820;          color: var(--muted);  border: 1px solid var(--border2); }
+
+/* DOCTRINE PILLS */
+.doctrine-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 8px 10px;
+}
+.doctrine {
+  border-radius: 3px;
+  padding: 7px 9px;
+  border: 1px solid;
+}
+.doctrine-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.doctrine-text { font-size: 11px; color: #8a90a4; line-height: 1.4; }
+.d-dev  { background: var(--blue-bg);  border-color: #1a2e44; }
+.d-dev .doctrine-name  { color: var(--blue); }
+.d-tac  { background: var(--amber-bg); border-color: #3a2808; }
+.d-tac .doctrine-name  { color: var(--amber); }
+.d-ass  { background: var(--red-bg);   border-color: #3a1818; }
+.d-ass .doctrine-name  { color: var(--red); }
+
+/* ALERT ROWS */
+.alert {
+  font-size: 12px;
+  color: #9aa0b4;
+  padding: 6px 10px 6px 12px;
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  margin: 0;
+  line-height: 1.45;
+}
+.alert:last-child { border-bottom: none; }
+.alert strong { color: var(--amber); font-weight: 500; }
+
+/* STRAT TABLE */
+.strat-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.strat-row:last-child { border-bottom: none; padding-bottom: 0; }
+.strat-row:first-child { padding-top: 0; }
+.strat-cp {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  line-height: 1.2;
+}
+.strat-cp-label {
+  font-size: 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  text-align: center;
+}
+.strat-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.strat-desc { font-size: 12px; color: #8a90a4; line-height: 1.4; }
+.strat-desc strong { color: var(--text); font-weight: 500; }
+
+/* UNIT HEADER */
+.unit-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  margin-bottom: 3px;
+}
+
+/* spacing util */
+.mb4 { margin-bottom: 4px; }
+.tags { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">Gladius Task Force — Ultramarines</div>
+    <div class="header-sub">Space Marines · Strike Force 2000pts · Scouting Sheet</div>
+  </div>
+  <div style="text-align:right">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Army Rule</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--accent);font-weight:600">Oath of Moment: Re-roll hits · +1 to wound (pure Ultramarines)</div>
+  </div>
+</div>
+
+<!-- ROW 1: Doctrines + CP Engine -->
+<div class="grid" style="margin-bottom:10px">
+
+  <div class="section span2">
+    <div class="section-head">Detachment Rule — Combat Doctrines (one per game each, chosen start of Command phase)</div>
+    <div class="doctrine-grid">
+      <div class="doctrine d-dev">
+        <div class="doctrine-name">Devastator</div>
+        <div class="doctrine-text">Advance + Shoot. Early repositioning without losing firepower. Re-roll Advance rolls for Fire Discipline bearer's unit.</div>
+      </div>
+      <div class="doctrine d-tac">
+        <div class="doctrine-name">⚠ Tactical</div>
+        <div class="doctrine-text">Fall Back + Shoot + Charge. Most dangerous — Victrix/Calgar can disengage and still charge. Squad Tactics reactive move becomes full 6" (not D6").</div>
+      </div>
+      <div class="doctrine d-ass">
+        <div class="doctrine-name">Assault</div>
+        <div class="doctrine-text">Advance + Charge. Extends threat range dramatically. Jump Pack AIs with 12" move + D6 advance + 2D6 charge can threaten 24"+ zones.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 2: Stratagems + Alerts -->
+<div class="grid" style="margin-bottom:10px">
+
+  <div class="section">
+    <div class="section-head">Stratagems</div>
+    <div class="section-body">
+
+      <div class="strat-row">
+        <div><div class="strat-cp">2<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name"><span class="tag t-red">Fight on Death</span> Only in Death Does Duty End</div>
+          <div class="strat-desc">Fight phase, after enemy selects targets. <strong>Full fight on death — NO roll per model.</strong> Every model not yet fought fires back before removal. No 4+. No roll. All of them. Critical threat on Victrix and Calgar. Do not charge unless you can clear the entire unit.</div>
+        </div>
+      </div>
+
+      <div class="strat-row">
+        <div><div class="strat-cp">1<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name"><span class="tag t-amber">Reactive Move</span> Squad Tactics</div>
+          <div class="strat-desc">Opponent's Movement phase after any enemy Normal/Advance/Fall Back move. One Infantry/Mounted within <strong>9"</strong> of that unit makes a Normal move up to <strong>D6"</strong>, or up to <strong>6" if under Tactical Doctrine</strong>. Triggers on YOUR moves — any model you move near a Victrix unit may give them a free reposition or closer surge setup.</div>
+        </div>
+      </div>
+
+      <div class="strat-row">
+        <div><div class="strat-cp">1<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name">Adaptive Strategy</div>
+          <div class="strat-desc">Command phase. Swap one unit into any doctrine independently of the army's active doctrine. Lets them put Victrix in Assault while army is in Tactical, etc.</div>
+        </div>
+      </div>
+
+      <div class="strat-row">
+        <div><div class="strat-cp">1<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name"><span class="tag t-blue">Storm of Fire</span></div>
+          <div class="strat-desc">Shooting phase. Target unit gains <strong>Ignores Cover</strong>. Under Devastator: also <strong>AP-1</strong>. Core combo with Oath re-rolls and +1 wound. Primary strat on Lancers and Ballistus.</div>
+        </div>
+      </div>
+
+      <div class="strat-row">
+        <div><div class="strat-cp">1<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name">Honour the Chapter</div>
+          <div class="strat-desc">Fight phase. Unit gains <strong>Lance</strong> on melee weapons. Under Assault: also <strong>AP-1</strong>. Victrix Master-crafted Power Swords hit AP-3 with this active.</div>
+        </div>
+      </div>
+
+      <div class="strat-row">
+        <div><div class="strat-cp">1<span class="strat-cp-label">CP</span></div></div>
+        <div>
+          <div class="strat-name">Armour of Contempt</div>
+          <div class="strat-desc">Shooting or Fight phase after enemy selects targets. Worsen AP of all incoming attacks by 1. Universal defensive staple in every SM detachment.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+
+    <div class="section">
+      <div class="section-head">CP Engine</div>
+      <div class="section-body">
+        <div class="row">
+          <div style="flex:1">
+            <div class="unit-name">Master Tactician — Marneus Calgar</div>
+            <div class="row-body">+1 CP at start of <em>every</em> Command phase while on the battlefield. Expect 5–8 bonus CP across a game. They can fund Fight on Death + Armour of Contempt + Squad Tactics in the same turn.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">Enhancement In List</div>
+      <div class="section-body">
+        <div class="row">
+          <div style="flex:1">
+            <div class="unit-name">Fire Discipline — Lieutenant (25pts)</div>
+            <div class="row-body"><strong>Sustained Hits 1</strong> on all ranged weapons in the bearer's unit. Under Devastator: re-roll Advance rolls. Likely on Hellblasters — 10 plasma incinerators fishing 6s for extra hits. With Oath re-rolls expect very high output.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">Battleline Army Passive — Auspex Scan</div>
+      <div class="section-body">
+        <div style="font-size:12px;color:#9aa0b4;line-height:1.45">After any Adeptus Astartes Battleline unit (Intercessors) attacks, select one enemy unit it hit — that unit is <strong style="color:var(--text)">Auspex Scanned</strong> until end of turn. All other Adeptus Astartes models <strong style="color:var(--text)">re-roll Hit rolls of 1</strong> against it. Intercessors shoot first → Lancers, Hellblasters, Dreadnoughts all get free hit re-roll buffing on the same target.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ROW 3: Units -->
+<div class="grid" style="margin-bottom:10px">
+
+  <div class="section">
+    <div class="section-head">Marneus Calgar + Victrix Honour Guard (attached)</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-amber">Advance + Charge</span>
+        <span class="tag t-amber">Fall Back + Shoot + Charge</span>
+        <span class="tag t-red">Fight on Death</span>
+        <span class="tag t-purple">OC 2/model</span>
+      </div>
+      <div class="row-body mb4"><strong>Inspiring Leader</strong> (Calgar): the unit can Advance+Charge OR Fall Back+Shoot+Charge — always on, not doctrine-dependent.</div>
+      <div class="row-body mb4"><strong>Ultramarines Honour Guard</strong>: while a Captain or Chapter Master leads this unit, <strong>-1 to Wound</strong> on all attacks targeting it. Calgar satisfies this.</div>
+      <div class="row-body mb4"><strong>Glory of Ultramar (Surge)</strong>: in your Shooting phase, whenever you destroy any model in this unit, the whole unit makes a <strong>D6" move toward nearest enemy — free, no CP, auto-triggers</strong>. Can enter Engagement Range. Do NOT chip a model off to weaken them — you move them closer.</div>
+      <div class="row-body mb4"><strong>Honour Guard of Macragge</strong>: Calgar gains Feel No Pain 4+ while the unit contains any Victrix models.</div>
+      <div class="row-body"><strong>Master Tactician</strong>: +1 CP per turn.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Victrix Honour Guard — Standalone Units (x2)</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-purple">OC 2/model</span>
+        <span class="tag t-red">Surge D6"</span>
+      </div>
+      <div class="row-body mb4"><strong>Unit with Chapter Ancient (Banner of Macragge)</strong>: +1 OC to all models in unit → <strong>OC 3 per model = 18 total OC</strong> on a 6-model unit. Near-impossible to contest.</div>
+      <div class="row-body mb4"><strong>Unit with Chapter Champion (Blades of Honour)</strong>: +1 to Advance and Charge rolls. <strong>Heroic Intervention costs 0 CP</strong> on this unit — free counter-charge in your Fight phase.</div>
+      <div class="row-body mb4"><strong>Glory of Ultramar</strong>: same D6" auto-surge as Calgar's unit — applies to all three Victrix units. Multiple surge triggers possible in one phase.</div>
+      <div class="row-body">No Captain/Chapter Master attached → <strong>no -1 to Wound</strong> on standalone units. More killable through shooting.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Hellblaster Squad (10 models + Lieutenant)</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-red">Shoot on Death 3+</span>
+        <span class="tag t-amber">Hazardous</span>
+        <span class="tag t-blue">Sustained Hits 1</span>
+      </div>
+      <div class="row-body mb4"><strong>For the Chapter! (3+)</strong>: each time a model is destroyed for ANY reason including a failed Hazardous test — roll D6, on <strong>3+</strong> it shoots once more before removal. That final shot's Hazardous test is <strong>automatically passed</strong>. A model that blows itself up on a 1 can shoot twice in the same phase (~67% chance).</div>
+      <div class="row-body mb4"><strong>Hazardous allocation</strong>: 1s must be allocated to Character models first. While the Lieutenant is alive he absorbs overcharge deaths, protecting rank-and-file. Once he dies every 1 risks a free extra shot.</div>
+      <div class="row-body">10 models overcharging with Sustained Hits 1 + Oath re-rolls + potential revenge shots = extremely high output. Prioritise removing the Lieutenant to shut off the Hazardous shield.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Gladiator Lancers (x2)</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-blue">Built-in Re-rolls</span>
+      </div>
+      <div class="row-body mb4"><strong>Aquilon Optics</strong> (datasheet, free): each time this model shoots, re-roll one Hit roll, one Wound roll, and one Damage roll. Both Lancers have this.</div>
+      <div class="row-body mb4">Stacked with Oath of Moment re-roll hits + +1 wound, and Storm of Fire (Ignores Cover, AP-1), these are extremely reliable anti-tank. Very hard to go cold on an important shot.</div>
+      <div class="row-body">Lancer laser destroyer: high S, high AP, multi-damage. Your vehicles and monsters are the primary targets.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Ballistus Dreadnought</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-blue">Built-in Re-rolls</span>
+      </div>
+      <div class="row-body mb4"><strong>Ballistus Strike</strong> (datasheet, free): each time it makes a ranged attack targeting a unit <strong>not Below Half-strength</strong>, re-roll the Hit roll. Applies to lascannon and missile launcher attacks against healthy targets.</div>
+      <div class="row-body">Lascannon + missile launcher covers multiple profiles. With Oath, Storm of Fire, and Ballistus Strike it has very consistent output on priority targets at full health.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Impulsor</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-amber">Assault Vehicle</span>
+        <span class="tag t-gray">5+ Invuln</span>
+      </div>
+      <div class="row-body mb4"><strong>Assault Vehicle</strong>: passengers can disembark after the Impulsor has Advanced. They count as having made a Normal move and <strong>cannot charge</strong> that turn, but can shoot. Allows aggressive repositioning without completely sacrificing the passenger unit's shooting phase.</div>
+      <div class="row-body"><strong>Shield Dome</strong>: 5+ invulnerable save on <em>the Impulsor itself</em> (not passengers). Keeps it alive through light fire to deliver its cargo.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Incursor Squad</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-teal">Infiltrate</span>
+      </div>
+      <div class="row-body mb4"><strong>Infiltrators</strong>: deploy anywhere on the battlefield more than <strong>9" from enemy deployment zone AND all enemy models</strong>. Cannot charge turn 1. Use to block your Infiltrate/Deep Strike corridors from being used against you pre-game.</div>
+      <div class="row-body mb4"><strong>Multi-spectrum Array</strong>: after shooting, pick one enemy unit hit — all other friendly Adeptus Astartes attacks against it get <strong>+1 to Hit</strong> until end of phase. Force multiplier when combo'd with Lancers/Hellblasters on same target.</div>
+      <div class="row-body"><strong>Haywire Mine</strong> (once per battle): 3" range, 2+ → D3 mortal wounds or <strong>2D3 vs Vehicles</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Scout Squad + Assault Intercessors w/ Jump Packs</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-teal">Scout 6"</span>
+        <span class="tag t-amber">Advance + Charge</span>
+        <span class="tag t-green">Fly</span>
+      </div>
+      <div class="row-body mb4"><strong>Scout Squad — Scouts 6"</strong>: pre-game move up to 6" (must end 9"+ from all enemies). Board control and blocking opponent Infiltrate corridors. Scout only — no Infiltrate.</div>
+      <div class="row-body"><strong>Assault Intercessors w/ Jump Packs — Fly</strong>: 12" move. Under Assault Doctrine via Adaptive Strategy: advance D6" then charge 2D6". Total threat range can exceed 24" in a single activation. Hard to screen against reliably.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">Captain + Lieutenant (Power Fists)</div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag t-red">Epic Challenge Threat</span>
+        <span class="tag t-gray">Precision Source</span>
+      </div>
+      <div class="row-body mb4">Captain with Power Fist is a Character with significant melee output — S×2, AP-3, D3+ damage across multiple attacks. <strong>Potential total damage output exceeds 20</strong>, making them an Epic Challenge threat to your Characters (2CP, all attacks gain Precision until end of phase).</div>
+      <div class="row-body">Know which unit each Captain and Lieutenant is leading — they are force multipliers for that unit and personal threats to any of your attached Characters.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 4: Key Alerts -->
+<div class="section" style="margin-bottom:10px">
+  <div class="section-head">⚠ Key Tactical Alerts</div>
+  <div class="alert"><strong>Fight on Death — 2CP, no roll, full unit.</strong> With Calgar generating +1 CP/turn, they can run this every time it matters. Never commit a large melee unit into Victrix or Calgar's brick unless you can kill every last model, or you are prepared to eat the entire unit's attacks back.</div>
+  <div class="alert"><strong>Surge is free and automatic.</strong> Triggers in your Shooting phase each time you kill even one Victrix model. Do not chip damage Victrix to weaken before charging — you move the whole unit D6" closer mid-phase. Either commit to killing the unit entirely when shooting, or don't shoot them at all.</div>
+  <div class="alert"><strong>0 CP Heroic Intervention on the Chapter Champion unit.</strong> That specific Victrix unit (with Blades of Honour) can counter-charge in your Fight phase at zero cost. Budget for this and sequence your fights accordingly.</div>
+  <div class="alert"><strong>Squad Tactics 9" trigger.</strong> Any of your models ending a Normal, Advance, or Fall Back move within 9" of an eligible Victrix/Infantry unit can give them a free D6" (or 6" in Tactical Doctrine) reactive move. They can surge closer or retreat behind cover. Mentally map the 9" bubble around all Victrix units before you move.</div>
+  <div class="alert"><strong>Auspex Scan force multiplier.</strong> If Intercessors shoot your unit first in a phase, every subsequent Adeptus Astartes attack against that unit re-rolls 1s to hit in addition to individual unit re-rolls. Stack Oath of Moment on top. Don't let Intercessors get a free hit-buffer shot on your key units before the Lancers activate.</div>
+  <div class="alert"><strong>Assault Vehicle disembark after Advance.</strong> The Impulsor can advance and still deploy its passengers to shoot (not charge). Track what's inside — a Captain or buffed unit disembarking mid-advance can appear much further up the board than expected.</div>
+  <div class="alert"><strong>Multiple combats likely — watch CP for Counter-Offensive interruption.</strong> With three Victrix bricks plus Calgar potentially engaged simultaneously, both players may want to interrupt fight phase order. Monitor opponent's CP total before committing fight sequence.</div>
+</div>
+
+</body>
+</html>
