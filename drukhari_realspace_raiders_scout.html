@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRUKHARI — Realspace Raiders | Scouting Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #141618;
+    --surface2: #1a1d21;
+    --border: #252830;
+    --text: #d8dce8;
+    --muted: #6b7080;
+    --accent: #c8ab6e;
+    --red: #e05050;
+    --amber: #d4922a;
+    --blue: #4a8fd4;
+    --green: #4aad6a;
+    --purple: #8b6ad4;
+    --teal: #3aada8;
+    --pink: #d45a8a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 24px 20px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  .header-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .faction-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .detachment-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .meta-item span {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    padding: 6px 12px;
+    margin-bottom: 12px;
+  }
+
+  /* DETACHMENT RULE BLOCK */
+  .rule-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .rule-block h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .rule-block p {
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .rule-block p:last-child { margin-bottom: 0; }
+
+  /* TOKEN BOX */
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .token-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .token-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  /* STRAT ROWS */
+  .strat-row {
+    display: flex;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .strat-cp {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--accent);
+    min-width: 36px;
+    text-align: center;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .strat-cp span {
+    display: block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .strat-body {}
+  .strat-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .strat-type {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .strat-desc {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.5;
+  }
+  .strat-desc strong {
+    color: var(--text);
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    line-height: 1.6;
+  }
+  .tag-red    { background: rgba(224,80,80,0.18); color: var(--red); border: 1px solid rgba(224,80,80,0.35); }
+  .tag-amber  { background: rgba(212,146,42,0.18); color: var(--amber); border: 1px solid rgba(212,146,42,0.35); }
+  .tag-blue   { background: rgba(74,143,212,0.18); color: var(--blue); border: 1px solid rgba(74,143,212,0.35); }
+  .tag-green  { background: rgba(74,173,106,0.18); color: var(--green); border: 1px solid rgba(74,173,106,0.35); }
+  .tag-purple { background: rgba(139,106,212,0.18); color: var(--purple); border: 1px solid rgba(139,106,212,0.35); }
+  .tag-teal   { background: rgba(58,173,168,0.18); color: var(--teal); border: 1px solid rgba(58,173,168,0.35); }
+  .tag-gold   { background: rgba(200,171,110,0.15); color: var(--accent); border: 1px solid rgba(200,171,110,0.3); }
+  .tag-muted  { background: rgba(107,112,128,0.18); color: var(--muted); border: 1px solid rgba(107,112,128,0.3); }
+  .tag-pink   { background: rgba(212,90,138,0.18); color: var(--pink); border: 1px solid rgba(212,90,138,0.35); }
+
+  /* UNIT CARDS */
+  .unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .unit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+  }
+  .unit-card.threat {
+    border-left: 3px solid var(--red);
+  }
+  .unit-card.mobility {
+    border-left: 3px solid var(--amber);
+  }
+  .unit-card.special {
+    border-left: 3px solid var(--teal);
+  }
+  .unit-card.support {
+    border-left: 3px solid var(--purple);
+  }
+  .unit-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .unit-stat-line {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .unit-stat-line span {
+    color: #9ba2b4;
+  }
+  .unit-body {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .unit-body strong {
+    color: var(--text);
+  }
+
+  /* ENHANCEMENT */
+  .enhancement-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .enhancement-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+  .enhancement-carrier {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .enhancement-desc {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.5;
+  }
+  .enhancement-desc strong { color: var(--text); }
+
+  /* ALERT BLOCK */
+  .alert-block {
+    border-left: 3px solid var(--amber);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    background: transparent;
+  }
+  .alert-block h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .alert-block ul {
+    list-style: none;
+    padding: 0;
+  }
+  .alert-block ul li {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.55;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .alert-block ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-size: 11px;
+  }
+  .alert-block ul li strong { color: var(--text); }
+  .alert-block ul li .hl-red { color: var(--red); font-weight: 600; }
+  .alert-block ul li .hl-amber { color: var(--amber); font-weight: 600; }
+  .alert-block ul li .hl-teal { color: var(--teal); font-weight: 600; }
+  .alert-block ul li .hl-purple { color: var(--purple); font-weight: 600; }
+  .alert-block ul li .hl-blue { color: var(--blue); font-weight: 600; }
+  .alert-block ul li .hl-green { color: var(--green); font-weight: 600; }
+
+  /* ARMY RULE */
+  .army-rule-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .army-rule-box h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .army-rule-box p {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.55;
+  }
+  .army-rule-box strong { color: var(--text); }
+
+  /* LEADER PAIR */
+  .leader-pair {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .leader-pair-arrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  .leader-pair-text {
+    font-size: 13px;
+    color: #b0b5c4;
+    line-height: 1.5;
+  }
+  .leader-pair-text strong { color: var(--text); }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* CP TRACKER */
+  .cp-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cp-item {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .cp-item strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+
+  @media (max-width: 600px) {
+    .unit-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="faction-name">Drukhari</div>
+    <div class="detachment-name">Realspace Raiders</div>
+  </div>
+  <div class="header-meta">
+    <div class="meta-item">Points: <span>2,000</span></div>
+    <div class="meta-item">Format: <span>Strike Force</span></div>
+    <div class="meta-item">Warlord: <span>Lady Malys</span></div>
+    <div class="meta-item">Transports: <span>3x Raider (Dark Lance)</span></div>
+  </div>
+</div>
+
+
+<!-- ARMY RULE -->
+<div class="section">
+  <div class="section-header">Army Rule — Power from Pain</div>
+  <div class="army-rule-box">
+    <h3>Pain Token Economy</h3>
+    <p>
+      Drukhari gain Pain tokens: <strong>+1 each Command phase</strong>, <strong>+1 each time an enemy unit is destroyed</strong>, <strong>+1 each time an enemy fails a Battle-shock test</strong>. Tokens are spent to <em>Empower</em> a unit, triggering its Pain ability for that phase. Attached units: spending 1 token activates ALL leaders' and bodyguard Pain abilities at once — no extra cost per model.<br><br>
+      <strong>REALSPACE RAIDERS BONUS:</strong> This army starts the game with bonus tokens from the Detachment Rule (see below) — potentially <strong>6–7 tokens before Turn 1 begins</strong>.
+    </p>
+  </div>
+</div>
+
+
+<!-- DETACHMENT RULE -->
+<div class="section">
+  <div class="section-header">Detachment Rule — Alliance of Agony</div>
+  <div class="rule-block">
+    <h3>Starting Pain Token Pool</h3>
+    <p>For each matched pair present in the army, gain <strong>+2 Pain tokens at game start</strong> (before Turn 1):</p>
+    <div class="token-grid">
+      <div class="token-item"><div class="token-label">+2 Tokens</div>Haemonculus + any Wracks unit</div>
+      <div class="token-item"><div class="token-label">+2 Tokens</div>Lady Malys (Archon) + Kabalite Warriors</div>
+      <div class="token-item"><div class="token-label">+2 Tokens</div>Lelith Hesperax + Wyches</div>
+      <div class="token-item"><div class="token-label">+1 Possible</div>Haemonculus Pain Adept: 4+ in Command phase = 1 extra token</div>
+    </div>
+    <p style="margin-top:10px; color:#b0b5c4; font-size:13px;">
+      This list has all three pairs → <strong style="color:var(--accent)">starts with 6 tokens</strong> (or 7 on a 4+). They can Empower multiple units on Turn 1 without waiting to kill anything.
+    </p>
+  </div>
+</div>
+
+
+<!-- ENHANCEMENT -->
+<div class="section">
+  <div class="section-header">Enhancement in List</div>
+  <div class="enhancement-block">
+    <div class="enhancement-name">Crucible of Malediction <span style="color:var(--muted); font-size:12px; font-weight:400; text-transform:none;">(15 pts)</span></div>
+    <div class="enhancement-carrier">Carried by: Haemonculus</div>
+    <div class="enhancement-desc">
+      <strong>Once per battle</strong>, in your Shooting phase: enemy units within 12" must take a Battle-shock test. Each PSYKER that fails suffers mortal wounds. The mortal wound amount scales if the Haemonculus is currently Empowered.
+      <div class="tags" style="margin-top:6px;">
+        <span class="tag tag-amber">Once Per Battle</span>
+        <span class="tag tag-purple">Battle-shock Trigger</span>
+        <span class="tag tag-red">MW on Psykers</span>
+      </div>
+      <p style="margin-top:6px; font-size:12px; color:var(--muted);">⚠ Low impact unless you run Psykers. The Haemonculus is taken primarily for Pain Adept (4+ = +1 token/Command phase). Watch for it on Turn 1 if he gets a Pain token from the detachment rule.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- STRATAGEMS -->
+<div class="section">
+  <div class="section-header">Detachment Stratagems — Realspace Raiders</div>
+
+  <div class="strat-row">
+    <div class="strat-cp">2<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Insensible to Pain</div>
+      <div class="strat-type">Battle Tactic · Opponent's Shooting or Fight Phase</div>
+      <div class="strat-desc">Target: one <strong>HAEMONCULUS COVENS</strong> unit (Wracks, Cronos, or Haemonculus). Until end of phase, <strong>reduce damage of all attacks against that unit by 1</strong> (minimum 1). Primarily used on Wracks or Cronos on an objective.</div>
+      <div class="tags"><span class="tag tag-muted">Damage Reduction</span><span class="tag tag-amber">Covens Only</span></div>
+    </div>
+  </div>
+
+  <div class="strat-row">
+    <div class="strat-cp">1<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Fighting Shadows</div>
+      <div class="strat-type">Battle Tactic · Opponent's Shooting or Fight Phase</div>
+      <div class="strat-desc">Target: one <strong>non-Haemonculus Covens</strong> Drukhari unit selected as attack target. Until end of phase, <strong>–1 to Hit rolls</strong> against that unit.</div>
+      <div class="tags"><span class="tag tag-blue">-1 to Hit</span><span class="tag tag-muted">Defensive Screen</span></div>
+    </div>
+  </div>
+
+  <div class="strat-row">
+    <div class="strat-cp">1<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Instinctive Spite</div>
+      <div class="strat-type">Battle Tactic · Your Fight Phase</div>
+      <div class="strat-desc">Target: up to two <strong>Drukhari Battleline</strong> units, or one other Drukhari unit. Effect: <strong>+1 to Hit</strong> against an enemy unit that is <strong>Below Half Strength</strong>. Spend a Pain token to also grant <strong>+1 to Wound</strong> for that fight.</div>
+      <div class="tags"><span class="tag tag-blue">+1 Hit (Sub-Half)</span><span class="tag tag-red">+1 Wound via Token</span></div>
+    </div>
+  </div>
+
+  <div class="strat-row">
+    <div class="strat-cp">1<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Dark Harvest</div>
+      <div class="strat-type">Strategic Ploy · Your Fight Phase</div>
+      <div class="strat-desc">Target: up to two <strong>Wracks</strong> units, or one other Drukhari unit. Effect: <strong>[LETHAL HITS]</strong> in the Fight phase for those units. Devastating on Incubi or Wyches with high attack volume.</div>
+      <div class="tags"><span class="tag tag-red">Lethal Hits</span><span class="tag tag-muted">Fight Phase</span></div>
+    </div>
+  </div>
+
+  <div class="strat-row">
+    <div class="strat-cp">1<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Eager for the Kill</div>
+      <div class="strat-type">Battle Tactic · Start of Your Movement Phase</div>
+      <div class="strat-desc">Target: up to two <strong>Wyches</strong> units, or one other Drukhari unit. Effect: when those units Advance this turn, <strong>do not roll</strong> — instead add a flat <strong>+6" to Move</strong> (Wyches go 14" Advance + eligible to charge via their Pain ability). Not stackable with Reavers' Matchless Swiftness.</div>
+      <div class="tags"><span class="tag tag-amber">Flat +6" Advance</span><span class="tag tag-amber">Pairs with Wych Advance+Charge Pain</span></div>
+    </div>
+  </div>
+
+  <div class="strat-row">
+    <div class="strat-cp">1<span>CP</span></div>
+    <div class="strat-body">
+      <div class="strat-name">Raid and Fade</div>
+      <div class="strat-type">Strategic Ploy · End of Your Shooting Phase</div>
+      <div class="strat-desc">Target: up to two <strong>Kabalite Warriors</strong> units, or one other Drukhari unit (<strong>excluding Scourges and Aircraft</strong>). Effect: each target makes a <strong>Normal move of up to 6"</strong>. Cannot charge this turn. Can be used to embark back into a Raider. <span style="color:var(--amber)">Shoot-and-scoot for most of the army.</span></div>
+      <div class="tags"><span class="tag tag-amber">Shoot &amp; Scoot 6"</span><span class="tag tag-muted">No Charge After</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LEADER PAIRINGS -->
+<div class="section">
+  <div class="section-header">Leader / Bodyguard Pairings</div>
+  <div class="leader-pair">
+    <div class="leader-pair-arrow">→</div>
+    <div class="leader-pair-text"><strong>Lady Malys → Kabalite Warriors (or Incubi)</strong> — Grants Vect Aura (12") + Precognisant redeploy. She can also lead Incubi or Hand of the Archon per her datasheet. List shows her as Warlord; likely leading Kabalites or held solo.</div>
+  </div>
+  <div class="leader-pair">
+    <div class="leader-pair-arrow">→</div>
+    <div class="leader-pair-text"><strong>Haemonculus → Wracks</strong> — Standard pairing. Haemonculus lacks native FNP aura in 10th; his value is Pain Adept (4+ free token) and Empowered return of D3+1 Wrack models. Crucible of Malediction enhancement is active on this model.</div>
+  </div>
+  <div class="leader-pair">
+    <div class="leader-pair-arrow">→</div>
+    <div class="leader-pair-text"><strong>Lelith Hesperax → Wyches</strong> — Grants the unit Fights First. When Empowered, the whole unit gains +1 S and +1 AP on melee. Lelith herself has Precision on her blades and SUSTAINED HITS 2.</div>
+  </div>
+  <div class="leader-pair">
+    <div class="leader-pair-arrow">→</div>
+    <div class="leader-pair-text"><strong>Drazhar → Incubi (one of the two units)</strong> — Grants 6" Pile-In/Consolidate to the unit. Grants +1 to Wound (Pain) to the unit. Silent Executioner: re-rolls hits against Characters. Incubi take Battle-shock tests at start of fight, force Desperate Escape on fall back.</div>
+  </div>
+</div>
+
+
+<!-- UNIT BREAKDOWNS -->
+<div class="section">
+  <div class="section-header">Unit Breakdowns — Key Threats & Abilities</div>
+  <div class="unit-grid">
+
+    <div class="unit-card threat">
+      <div class="unit-name">Lady Malys <span style="font-size:11px;color:var(--muted)">Warlord</span></div>
+      <div class="unit-stat-line">M7" T3 W5 Sv4+ <span>4++ FNP5+</span></div>
+      <div class="unit-body">
+        <strong>VECT AURA (12"):</strong> Each time your opponent uses a Stratagem targeting a unit within 12" of Malys, that Stratagem costs <strong>+1 CP extra</strong>.<br><br>
+        <strong>Precognisant:</strong> After both players deploy, <strong>redeploy up to 3 Drukhari units</strong> (can place into Strategic Reserves regardless of SR limits).<br><br>
+        <strong>Archon of the Poisoned Tongue (Pain):</strong> Spend 1 Pain token when shooting/fighting — unit gains either <strong>[SUSTAINED HITS 1]</strong> or <strong>[LETHAL HITS]</strong> for that phase.<br><br>
+        <strong>Melee:</strong> Lady's Blade — 6A, WS2+, S5, AP-3, D3, [DEVASTATING WOUNDS] [HAZARDOUS]. Razor Fan — 6A, WS2+, S3, AP0, D1, [EXTRA ATTACKS].
+      </div>
+      <div class="tags">
+        <span class="tag tag-red">Vect Aura +1CP</span>
+        <span class="tag tag-teal">Pre-game Redeploy ×3</span>
+        <span class="tag tag-red">Dev Wounds Melee</span>
+        <span class="tag tag-muted">4++ FNP5+</span>
+      </div>
+    </div>
+
+    <div class="unit-card threat">
+      <div class="unit-name">Drazhar</div>
+      <div class="unit-stat-line">M7" T3 W5 Sv2+ <span>4++ FNP5+</span></div>
+      <div class="unit-body">
+        <strong>Silent Executioner:</strong> Re-rolls Hit rolls against Characters.<br><br>
+        <strong>Master of Blades (Leader):</strong> Attached Incubi gain <strong>6" Pile-In and Consolidate</strong> moves.<br><br>
+        <strong>Lethal Precision (Pain):</strong> Spend 1 Pain token when fighting — unit gets <strong>+1 to Wound</strong> until end of phase.<br><br>
+        <strong>Melee:</strong> Executioner's Demiklaives (dual) — high A, [TWIN-LINKED] re-rolls wounds; single blade — [DEVASTATING WOUNDS]. Strong anti-Character threat.
+      </div>
+      <div class="tags">
+        <span class="tag tag-red">Epic Challenge Threat</span>
+        <span class="tag tag-red">Precision-Adjacent (re-rolls vs Characters)</span>
+        <span class="tag tag-red">Dev Wounds Option</span>
+        <span class="tag tag-muted">2+/4++</span>
+      </div>
+    </div>
+
+    <div class="unit-card threat">
+      <div class="unit-name">Lelith Hesperax</div>
+      <div class="unit-stat-line">M8" T3 W5 Sv6+ <span>4++ FNP5+</span></div>
+      <div class="unit-body">
+        <strong>Fights First (Leader):</strong> Attached Wyches unit gains Fights First.<br><br>
+        <strong>Queen of the Arena (Pain):</strong> Spend 1 Pain token — attached unit gains <strong>+1 S and +1 AP</strong> on melee until end of phase.<br><br>
+        <strong>Blades:</strong> 8 base attacks, <strong>[SUSTAINED HITS 2]</strong>, <strong>[ANTI-INFANTRY 2+]</strong>, AP-3, D1, <strong>[PRECISION]</strong>. Once per game can spike to 12 attacks.<br><br>
+        <strong>⚠ Precision on a character</strong> with up to ~24 hits at sustained 2 = high volume but D1 only. Targets infantry characters not protected by wounds.
+      </div>
+      <div class="tags">
+        <span class="tag tag-red">Fights First (unit)</span>
+        <span class="tag tag-red">Precision</span>
+        <span class="tag tag-red">Sustained Hits 2</span>
+        <span class="tag tag-muted">Anti-Infantry 2+</span>
+      </div>
+    </div>
+
+    <div class="unit-card support">
+      <div class="unit-name">Haemonculus <span style="font-size:11px;color:var(--purple)">(+ Crucible)</span></div>
+      <div class="unit-stat-line">M7" T3 W4 Sv6+ <span>4++ FNP5+</span></div>
+      <div class="unit-body">
+        <strong>Pain Adept:</strong> At the start of your Command phase, roll a D6 — on a 4+, gain <strong>1 Pain token</strong>. (Once per turn regardless of how many Haemonculi.)<br><br>
+        <strong>Fleshcraft (Pain, Leader):</strong> Spend 1 token when leading Wracks — <strong>return D3+1 destroyed Wrack models</strong> to the unit.<br><br>
+        <strong>Crucible of Malediction (once per battle):</strong> In your Shooting phase, enemy units within 12" must Battle-shock. Psykers that fail suffer mortal wounds (more if Empowered).
+      </div>
+      <div class="tags">
+        <span class="tag tag-gold">Pain Token Engine</span>
+        <span class="tag tag-purple">Model Return</span>
+        <span class="tag tag-amber">Once Per Battle MW</span>
+      </div>
+    </div>
+
+    <div class="unit-card mobility">
+      <div class="unit-name">Wyches (10) + Lelith</div>
+      <div class="unit-stat-line">M8" T3 W1 Sv6+ <span>4++ in combat</span></div>
+      <div class="unit-body">
+        <strong>Acrobatic Gladiators (Pain):</strong> Spend 1 token at the start of Charge phase — unit can <strong>Advance AND charge</strong> this turn (Advance+Charge built into Pain ability).<br><br>
+        <strong>No Escape:</strong> When this unit is in combat, enemy models making Desperate Escape tests take them at <strong>–1</strong>.<br><br>
+        With <em>Eager for the Kill</em> (1CP, flat +6" Advance) → Move 8"+6"=14" Advance + Charge = potential 14+2D6" total threat range Turn 1. <strong>Fights First</strong> from Lelith.
+      </div>
+      <div class="tags">
+        <span class="tag tag-amber">Advance + Charge (Pain)</span>
+        <span class="tag tag-red">Fights First</span>
+        <span class="tag tag-muted">4++ in Combat</span>
+        <span class="tag tag-amber">Turn 1 Charge Threat</span>
+      </div>
+    </div>
+
+    <div class="unit-card threat">
+      <div class="unit-name">Incubi ×2 (5 models each)</div>
+      <div class="unit-stat-line">M7" T3 W2 Sv3+ <span>5+ FNP always</span></div>
+      <div class="unit-body">
+        <strong>Tormentors:</strong> At the start of your Fight phase, each enemy unit within Engagement Range must take a <strong>Battle-shock test</strong>.<br><br>
+        <strong>Lethal Strikes (Pain):</strong> When Empowered, melee attacks against <strong>INFANTRY</strong> gain <strong>[DEVASTATING WOUNDS]</strong>.<br><br>
+        <strong>Shrouded Killers:</strong> +1 to Hit against Battle-shocked units.<br><br>
+        One unit led by Drazhar → 6" Pile-In/Consolidate, +1 to Wound (Pain). The other unit is unled and likely held in Reserve or transport.
+      </div>
+      <div class="tags">
+        <span class="tag tag-red">Dev Wounds vs Infantry (Empowered)</span>
+        <span class="tag tag-purple">Force Battle-shock</span>
+        <span class="tag tag-muted">5+ FNP</span>
+        <span class="tag tag-amber">6" Consolidate (Drazhar unit)</span>
+      </div>
+    </div>
+
+    <div class="unit-card mobility">
+      <div class="unit-name">Hellions (10)</div>
+      <div class="unit-stat-line">M12" T4 W2 Sv4+ <span>FLY</span></div>
+      <div class="unit-body">
+        <strong>⚠ REACTIVE MOVE — 6" triggered:</strong> Whenever an enemy unit moves within <strong>9"</strong> of this unit, Hellions can make a move of up to <strong>D6"</strong> (this is a reactive move, not a full Move characteristic).<br><br>
+        <strong>No Fall Back + Charge</strong> (lost in codex). Hellions can Advance normally; melee has <strong>[LANCE]</strong> built in.<br><br>
+        <strong>Lance Blades (Pain):</strong> Empowered = +1 S on Hellglaives. Hellglaive: 3A, WS3+, S5 base, AP-2, D2, [LANCE] (first turn of combat = AP-3). High damage per model.
+      </div>
+      <div class="tags">
+        <span class="tag tag-amber">Reactive Move D6" (trigger: enemy within 9")</span>
+        <span class="tag tag-green">FLY 12"</span>
+        <span class="tag tag-red">Lance Built-In</span>
+      </div>
+    </div>
+
+    <div class="unit-card special">
+      <div class="unit-name">Mandrakes (5)</div>
+      <div class="unit-stat-line">M8" T4 W2 Sv7+ <span>Stealth –1 to Hit</span></div>
+      <div class="unit-body">
+        <strong>Infiltrators — ALSO Deep Strike:</strong> Mandrakes have Infiltrate (deploy within 12" of own DZ, 9"+ from enemy). They also have Deep Strike.<br><br>
+        <strong>Fade Away:</strong> At the end of your <strong>opponent's Movement phase</strong>, can remove from battlefield and place in Strategic Reserves. In next Reinforcements step, re-deploy anywhere >9" from enemies. <strong>Costs 1 Pain token</strong> per use.<br><br>
+        <strong>Untargetable at range:</strong> Cannot be targeted by ranged attacks if the <strong>attacking unit is more than 18" away</strong>.<br><br>
+        <strong>Melee:</strong> Glimmersteel Blade — [DEVASTATING WOUNDS] AP-1. Baleblast: Assault ranged attack.
+      </div>
+      <div class="tags">
+        <span class="tag tag-teal">Infiltrate + Deep Strike</span>
+        <span class="tag tag-teal">Fade Away (SR any turn, costs token)</span>
+        <span class="tag tag-blue">Untargetable &gt;18"</span>
+        <span class="tag tag-red">Dev Wounds Melee</span>
+      </div>
+    </div>
+
+    <div class="unit-card mobility">
+      <div class="unit-name">Reavers ×3 (6+3+6)</div>
+      <div class="unit-stat-line">M16" T4 W2 Sv4+ <span>FLY, OC2</span></div>
+      <div class="unit-body">
+        <strong>Matchless Swiftness (Pain):</strong> Spend 1 token when Advancing — do not roll; instead add <strong>+8" to Move</strong> (total 24" Advance move). Not stackable with Eager for the Kill.<br><br>
+        <strong>Eviscerating Fly-by:</strong> Each time unit ends a Normal or Advance move, select one enemy unit passed over (excluding Monsters/Vehicles) — roll D6 per model, each 4+ = 1 mortal wound.<br><br>
+        <strong>Heat Lances (2 per 6-man squad):</strong> Melta equivalent, S9, AP-4, D3+3 within half range. Close-range anti-vehicle.<br><br>
+        High OC2, mobile objective denial/capture. 6-man squads are genuine scoring threats.
+      </div>
+      <div class="tags">
+        <span class="tag tag-amber">Advance 24" (Pain token)</span>
+        <span class="tag tag-red">Fly-by MWs</span>
+        <span class="tag tag-green">FLY OC2</span>
+        <span class="tag tag-blue">Heat Lance Melta</span>
+      </div>
+    </div>
+
+    <div class="unit-card special">
+      <div class="unit-name">Scourges with Heavy Weapons (5)</div>
+      <div class="unit-stat-line">M12" T3 W2 Sv4+ <span>FLY, Deep Strike</span></div>
+      <div class="unit-body">
+        <strong>Shoot and Scoot (built-in):</strong> At the end of your Shooting phase, Scourges can make a <strong>Normal move</strong> (excluded from Raid and Fade — they have their own).<br><br>
+        <strong>Deadly Descent (Pain):</strong> When Empowered and using Deep Strike, can be placed <strong>within 6"</strong> of enemy units (instead of 9") — <strong>but cannot charge</strong> that turn.<br><br>
+        <strong>4× Dark Lances:</strong> S14, AP-4, D6+2. Devastates vehicles and heavy targets. Combined with shoot-and-scoot mobility makes them very safe to use.
+      </div>
+      <div class="tags">
+        <span class="tag tag-amber">Built-in Shoot &amp; Scoot</span>
+        <span class="tag tag-teal">Deep Strike (6" Empowered, no charge)</span>
+        <span class="tag tag-blue">4× Dark Lance</span>
+      </div>
+    </div>
+
+    <div class="unit-card support">
+      <div class="unit-name">Cronos ×3</div>
+      <div class="unit-stat-line">M7" T5 W5 Sv3+ <span>FNP6+ always</span></div>
+      <div class="unit-body">
+        <strong>Spirit Harvest:</strong> Each time this unit destroys an enemy model in the Fight phase, <strong>gain 1 Pain token</strong>. With 3 Cronos this can generate multiple tokens per fight round, massively accelerating the pain economy mid-to-late game.<br><br>
+        <strong>Spirit Leech (Pain):</strong> Spend 1 token — the unit gains <strong>FNP 4+</strong> for the phase (instead of base 6+).<br><br>
+        Spirit Syphon (ranged): mortal wounds on 5+. Tough objective holders at T5/3+ with FNP access.
+      </div>
+      <div class="tags">
+        <span class="tag tag-gold">Pain Token Per Kill</span>
+        <span class="tag tag-muted">FNP 4+ (Empowered)</span>
+        <span class="tag tag-purple">T5 3+ Save</span>
+      </div>
+    </div>
+
+    <div class="unit-card">
+      <div class="unit-name">Wracks (10) + Haemonculus</div>
+      <div class="unit-stat-line">M7" T4 W2 Sv6+ <span>FNP5+ always</span></div>
+      <div class="unit-body">
+        <strong>Insensate to Agony:</strong> Always have <strong>FNP 5+</strong> on their datasheet, active even without Empowering.<br><br>
+        <strong>Eager Dissectors (Pain):</strong> When Empowered, Wrack melee weapons gain <strong>[LETHAL HITS]</strong>.<br><br>
+        Haemonculus can return D3+1 Wracks via Fleshcraft if Empowered. Solid durable screen/objective unit. Target for Insensible to Pain strat (2CP) to drop damage by 1.
+      </div>
+      <div class="tags">
+        <span class="tag tag-muted">FNP5+ Always</span>
+        <span class="tag tag-red">Lethal Hits (Empowered)</span>
+        <span class="tag tag-purple">Model Return</span>
+      </div>
+    </div>
+
+    <div class="unit-card">
+      <div class="unit-name">Raider ×3</div>
+      <div class="unit-stat-line">M14" T6 W12 Sv4+ <span>FLY, 5++ vs ranged</span></div>
+      <div class="unit-body">
+        <strong>Open-Topped:</strong> Embarked units can shoot out (disembarked is not required for shooting if applicable).<br><br>
+        <strong>Bladevanes:</strong> Mortal wounds on flyover (4+) per model passed over.<br><br>
+        <strong>Dark Lance:</strong> S14, AP-4, D6+2. The Raider is a shooting platform + transport.<br><br>
+        Passengers modify Raider rules: Kabalites give Raider Sticky Objectives; Wracks give +1 Attack to Raider melee profile.
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">FLY 14"</span>
+        <span class="tag tag-blue">Dark Lance S14</span>
+        <span class="tag tag-muted">5++ vs Ranged</span>
+        <span class="tag tag-amber">Passenger Buffs</span>
+      </div>
+    </div>
+
+    <div class="unit-card">
+      <div class="unit-name">Kabalite Warriors (10)</div>
+      <div class="unit-stat-line">M8" T3 W1 Sv4+ <span>OC2</span></div>
+      <div class="unit-body">
+        <strong>Objective Secured equivalent:</strong> Kabalites can make objectives <strong>Sticky</strong> — when they move off an objective they controlled, it remains under their control until an opponent contests it. Also applies to a Raider they are embarked in.<br><br>
+        <strong>Poisoned Weapons (Pain):</strong> Empowered → re-roll Wound rolls of 1 against any target; re-roll ALL wounds if target is on an objective. Splinter rifles: [POISON 4+].
+      </div>
+      <div class="tags">
+        <span class="tag tag-purple">Sticky Objectives</span>
+        <span class="tag tag-purple">OC2</span>
+        <span class="tag tag-blue">Wound Re-rolls (Empowered)</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- KEY TACTICAL ALERTS -->
+<div class="section">
+  <div class="section-header">⚠ Key Tactical Alerts</div>
+
+  <div class="alert-block">
+    <h4>CP Economy & Malys Vect Aura</h4>
+    <ul>
+      <li><strong>VECT AURA (12"):</strong> Lady Malys imposes <span class="hl-red">+1 CP cost</span> on every Stratagem your opponent uses against units within <strong>12" of her</strong>. Keep her near your key units. Counter-Offensive costs 3CP, Heroic Intervention costs 2CP, Fighting Shadows costs 2CP in her bubble. Plan your Strat usage around when she's alive.</li>
+      <li><strong>CP generation:</strong> Standard 1CP/turn Command phase. <em>Labyrinthine Cunning</em> enhancement is NOT in this list — no bonus CP generation beyond base. Their Pain token pool is the primary resource, not CP.</li>
+      <li><strong>Interruption watch:</strong> With Incubi + Wyches frequently in combat simultaneously, watch both players' CP pools — Counter-Offensive (2CP) is live every fight phase. Cronos' Spirit Harvest feeds pain tokens to keep Empowering through the game.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Deployment & Pre-game Movement</h4>
+    <ul>
+      <li><span class="hl-teal">Precognisant (Lady Malys):</span> After armies are deployed, opponent <strong>redeploies up to 3 Drukhari units</strong>, optionally placing them in Strategic Reserves. This happens AFTER you finish deploying — plan your deployment order to minimise wasted effort.</li>
+      <li><span class="hl-teal">Mandrakes BOTH Infiltrate AND Deep Strike:</span> They can forward deploy within 12" of own DZ, 9"+ from enemies via Infiltrate. OR they can start in Reserves and Deep Strike. AND they can use Fade Away mid-game to disappear back to SR and re-appear anywhere next turn (costs 1 Pain token). This gives them total board flexibility.</li>
+      <li><span class="hl-teal">Scourges Deep Strike:</span> They can arrive T1 normally at 9"+, or when Empowered (spending a Pain token) at <strong>6"</strong> — but cannot charge if they do. Rapid Ingress (1CP core) is available if opponent has units coming off the board.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Advance+Charge & Mobility Threats</h4>
+    <ul>
+      <li><span class="hl-amber">Wyches + Lelith — Advance+Charge:</span> Their Pain ability (spend 1 token at start of Charge phase) enables Advance AND Charge. Combine with <em>Eager for the Kill</em> (1CP, flat +6") for a <strong>14" Advance + 2D6" Charge</strong> from up to 16"+ away on Turn 1. Fights First on that unit.</li>
+      <li><span class="hl-amber">Reavers — 24" Advance:</span> When Empowered (Pain token), Reavers advance a flat 8" added to 16" Move = <strong>24" movement</strong>. Can fly over enemies and deal mortal wounds on 4+ per model. 6-man squads have OC2 per model — high objective threat.</li>
+      <li><span class="hl-amber">Hellions — Reactive D6" move (9" trigger):</span> When any enemy unit moves to within 9" of Hellions, Hellions make a reactive move of <strong>D6"</strong>. This is NOT their full Move characteristic — purely D6". Use to dodge charges or slip off objectives. Note: Hellions <strong>lost Fall Back+Charge</strong> in this codex.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Shoot & Scoot / Fall Back Abilities</h4>
+    <ul>
+      <li><span class="hl-amber">Scourges (own built-in):</span> End of your Shooting phase, Scourges make a Normal move. This is their own ability — Raid and Fade <em>cannot</em> target them. They naturally relocate every turn after shooting.</li>
+      <li><span class="hl-amber">Raid and Fade (1CP, Strat):</span> Up to two Kabalite Warriors units (or one other non-Scourge/non-Aircraft) make a Normal move of up to <strong>6"</strong> at the end of your Shooting phase. Cannot charge after. Can embark into a nearby Raider.</li>
+      <li><span class="hl-amber">Drukhari army-wide Fall Back rule:</span> The Archon datasheet (not present here) normally grants a unit Fall Back+Shoot+Charge. Lady Malys as ARCHON keyword: confirm whether she grants Fall Back and Charge to her attached unit — she is classified as ARCHON keyword. Check datasheet specifics; if she grants Feigned Weakness this is a potent threat vector.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Fight Phase Priority Threats</h4>
+    <ul>
+      <li><span class="hl-red">Drazhar:</span> 2+/4++ save, re-rolls hits vs Characters, [TWIN-LINKED] wounds, Devastating Wounds option. Leading Incubi unit = 6" Consolidate. He represents the primary <strong>Epic Challenge threat</strong> in this list — likely potential damage output against characters exceeds 20 if Twin-Linked wounds land. Priority counter-plan needed.</li>
+      <li><span class="hl-red">Lelith Hesperax:</span> [PRECISION] with Sustained Hits 2 + Anti-Infantry 2+. Her bodyguard Wyches get Fights First. D1 damage limits lethality vs multi-wound targets, but she will shred infantry Characters efficiently with precision targeting. Once per game: spikes to 12 attacks.</li>
+      <li><span class="hl-red">Incubi (Drazhar unit):</span> Force Battle-shock on all enemy units in Engagement Range at Fight phase start. If Empowered, melee vs INFANTRY gains [DEVASTATING WOUNDS]. +1 to Hit vs Battle-shocked (synergy). Dark Harvest (1CP) adds Lethal Hits on top.</li>
+      <li><span class="hl-red">Fight on Death:</span> No native fight-on-death ability confirmed in this detachment or these units. Monitor if any future strat/ability enables it, but it is not present in this list at current data.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Pain Token Acceleration — Mid/Late Game</h4>
+    <ul>
+      <li><span class="hl-gold" style="color:var(--accent); font-weight:600;">3× Cronos = token factory:</span> Each Cronos generates 1 Pain token per enemy model destroyed in Fight phase. With 3 Cronos active mid-game, any fight round with multiple kills generates 3+ tokens. Combined with Command phase generation + kill tokens, this army can be <strong>flush with tokens by Turn 3</strong>.</li>
+      <li>Haemonculus Pain Adept: +1 token on 4+ each Command phase. At 5 rounds = expected 2–3 bonus tokens across the game.</li>
+      <li><span class="hl-purple">Insensible to Pain (2CP):</span> Key strat to protect Cronos or Wracks on objectives from burst damage. Reduces all incoming damage by 1. Malys Vect Aura makes the opponent pay 3CP if they use a strat targeting a unit within 12" of her — this effectively taxes finish-off stratagems.</li>
+    </ul>
+  </div>
+
+  <div class="alert-block">
+    <h4>Objective Control Notes</h4>
+    <ul>
+      <li><span class="hl-purple">Kabalite Warriors OC2 + Sticky:</span> 10 Kabalites = 20 OC, and leave objectives sticky. A Raider carrying Kabalites also gains Sticky benefit while they are embarked.</li>
+      <li><span class="hl-purple">Reavers OC2 per model:</span> A 6-man squad = <strong>12 OC total</strong> with 24" advance range. Easily contests or captures far objectives mid-game.</li>
+      <li><span class="hl-purple">Cronos T5/3+:</span> Durable objective campers. With Insensible to Pain and FNP 4+ (Empowered), very hard to shift without dedicated anti-tank or high-volume fire.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div style="margin-top:32px; padding-top:12px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); text-align:center; letter-spacing:0.5px;">
+  SCOUTING SHEET — DRUKHARI REALSPACE RAIDERS 2000pts · Sources: Codex Drukhari 10th Ed (Sept 2025), Wahapedia.ru, Goonhammer Detachment Focus
+</div>
+
+</body>
+</html>
