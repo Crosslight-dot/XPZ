@@ -1,1719 +1,386 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>40K 10th → 11th Edition: Complete Transition Guide</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KeelHaul Gaming vs Xenos Petting Zoo</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Raleway:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap');
-
-  :root {
-    --blood: #8B1A1A;
-    --blood-dark: #5c0f0f;
-    --blood-glow: #c42424;
-    --gold: #C9A84C;
-    --gold-light: #e8c96e;
-    --gold-dim: #7a6430;
-    --parchment: #F5EDD8;
-    --parchment-dark: #e8d9b8;
-    --stone: #2a2a2a;
-    --stone-mid: #1a1a1a;
-    --stone-dark: #111111;
-    --ink: #0e0e0e;
-    --text-main: #e8dcc8;
-    --text-dim: #9a9080;
-    --text-bright: #f5edd8;
-    --tier1: #8B1A1A;
-    --tier2: #7a4f15;
-    --tier3: #1a4a2a;
-    --new: #1a2a4a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--stone-dark);
-    color: var(--text-main);
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    padding-top: 34px;
-  }
-
-  /* HERO */
-  .hero {
-    background: linear-gradient(180deg, #0a0505 0%, #1a0808 40%, #0e0e0e 100%);
-    border-bottom: 2px solid var(--gold-dim);
-    padding: 60px 40px 50px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg, transparent, transparent 40px,
-      rgba(139,26,26,0.03) 40px, rgba(139,26,26,0.03) 41px
-    );
-  }
-  .hero-eyebrow {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(24px, 4vw, 48px);
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    line-height: 1.15;
-    text-shadow: 0 0 40px rgba(201,168,76,0.25);
-    margin-bottom: 12px;
-  }
-  .hero-sub {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-  }
-  .hero-rule {
-    width: 120px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-    margin: 24px auto;
-  }
-
-  /* LAYOUT */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* SECTION HEADERS */
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 48px 0 24px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-  }
-  .section-header h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--gold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .section-num {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--blood);
-    min-width: 32px;
-  }
-
-  /* TIER LABELS */
-  .tier-marker {
-    display: inline-block;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 2px;
-    margin-bottom: 20px;
-  }
-  .tier1-label { background: var(--tier1); color: #ffcccc; }
-  .tier2-label { background: var(--tier2); color: #ffe5b4; }
-  .tier3-label { background: var(--tier3); color: #b4ffcc; }
-  .new-label   { background: var(--new);   color: #b4ccff; }
-
-  /* CHANGE CARDS */
-  .change-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-left: 3px solid var(--blood-dark);
-    border-radius: 4px;
-    margin-bottom: 14px;
-    overflow: hidden;
-  }
-  .change-card.tier1 { border-left-color: var(--blood); }
-  .change-card.tier2 { border-left-color: #c47a20; }
-  .change-card.tier3 { border-left-color: #2a7a4a; }
-  .change-card.new-mechanic { border-left-color: #2a4a8a; }
-
-  .card-head {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 18px;
-    cursor: default;
-  }
-  .card-rank {
-    font-family: 'Cinzel', serif;
-    font-size: 20px;
-    font-weight: 900;
-    min-width: 32px;
-    padding-top: 2px;
-    opacity: 0.6;
-  }
-  .card-title-block { flex: 1; }
-  .card-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-bright);
-    letter-spacing: 0.03em;
-    margin-bottom: 2px;
-  }
-  .card-subtitle {
-    font-size: 12px;
-    color: var(--text-dim);
-    font-family: 'Rajdhani', sans-serif;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .card-body {
-    padding: 0 18px 16px 64px;
-    font-size: 14px;
-    color: #c8bfaa;
-    line-height: 1.75;
-  }
-  .card-body p { margin-bottom: 8px; }
-  .card-body p:last-child { margin-bottom: 0; }
-
-  /* COMPARISON TABLE */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0 4px;
-    font-size: 13px;
-  }
-  .compare-table th {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 7px 12px;
-    text-align: left;
-  }
-  .compare-table th:first-child { color: #888; background: rgba(0,0,0,0.2); }
-  .compare-table th:last-child  { color: var(--gold-dim); background: rgba(201,168,76,0.07); }
-  .compare-table td {
-    padding: 7px 12px;
-    vertical-align: top;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-  .compare-table td:first-child { color: #888; background: rgba(0,0,0,0.12); font-style: italic; }
-  .compare-table td:last-child  { color: var(--text-bright); background: rgba(201,168,76,0.04); }
-
-  /* TRANSITION PLAN */
-  .step-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 14px;
-    margin-bottom: 8px;
-  }
-  .step-card {
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 4px;
-    padding: 18px 20px;
-  }
-  .step-num-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .step-circle {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--gold-dim);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .step-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-bright);
-    letter-spacing: 0.04em;
-  }
-  .step-body {
-    font-size: 13px;
-    color: #b0a898;
-    line-height: 1.7;
-  }
-
-  /* COMMUNITY SECTION */
-  .community-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 4px;
-    padding: 20px 22px;
-    margin-bottom: 12px;
-  }
-  .community-card h3 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--gold-light);
-    letter-spacing: 0.05em;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-  .community-card p {
-    font-size: 13.5px;
-    color: #b8b0a0;
-    line-height: 1.75;
-  }
-
-  /* QUICK REF TABLE */
-  .quick-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-  .quick-table thead tr {
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-  }
-  .quick-table th {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 8px 12px;
-    color: var(--gold-dim);
-    text-align: left;
-  }
-  .quick-table td {
-    padding: 7px 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    vertical-align: top;
-  }
-  .quick-table td:first-child { color: var(--text-bright); font-weight: 500; width: 30%; }
-  .quick-table td:nth-child(2) { color: #888; font-style: italic; }
-  .quick-table td:nth-child(3) { color: #b8ddb8; }
-  .quick-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  /* VERDICT BADGES */
-  .verdict { display: inline-block; font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-left: 8px; vertical-align: middle; }
-  .verdict-melee   { background: rgba(139,26,26,0.4); color: #ffaaaa; }
-  .verdict-shoot   { background: rgba(26,60,139,0.4); color: #aaccff; }
-  .verdict-both    { background: rgba(100,80,20,0.4); color: #ffddaa; }
-  .verdict-build   { background: rgba(30,80,30,0.4); color: #aaffcc; }
-  .verdict-defense { background: rgba(80,30,80,0.4); color: #ddaaff; }
-
-  /* FOOTER */
-  .doc-footer {
-    margin-top: 60px;
-    padding: 30px 0 40px;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    text-align: center;
-  }
-  .doc-footer p {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-  }
-
-  /* UTILITY */
-  .gold { color: var(--gold); }
-  .dim  { color: var(--text-dim); }
-  .rule-ref { font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--gold-dim); font-weight: 600; letter-spacing: 0.1em; }
-  .separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent); margin: 40px 0; }
-  .intro-block { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.12); border-radius: 4px; padding: 20px 24px; margin-bottom: 32px; font-size: 14px; color: #c8bfaa; line-height: 1.8; }
-  strong { color: var(--text-bright); font-weight: 600; }
-  em { color: var(--text-dim); }
+:root {
+  color-scheme: dark;
+  --ink:#f3e7c8;
+  --gold:#d69b43;
+  --panel:#151414;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(121,83,27,.24), transparent 34rem),
+    linear-gradient(rgba(8,7,7,.9),rgba(8,7,7,.94)),
+    repeating-linear-gradient(0deg,#1b1714 0 2px,#120f0e 2px 5px);
+}
+header {
+  text-align:center;
+  padding:28px 16px 16px;
+  border-bottom:1px solid #51391e;
+}
+header h1 {
+  margin:0;
+  font-size:clamp(1.6rem,4vw,3.3rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#fff3d1;
+  text-shadow:0 2px 0 #000,0 0 20px #a1662a;
+}
+header p { margin:.55rem 0 0;color:#c7b89a; }
+.board-wrap { overflow-x:auto; padding:18px 12px 42px; }
+.board {
+  min-width:1160px;
+  max-width:1500px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(8,minmax(125px,1fr));
+  gap:10px;
+  align-items:center;
+}
+.matchup {
+  min-width:0;
+  display:grid;
+  grid-template-rows:210px 98px 210px;
+  gap:8px;
+  position:relative;
+}
+.army-card {
+  appearance:none;
+  border:2px solid color-mix(in srgb,var(--accent) 80%,#f2c66a);
+  border-radius:6px;
+  color:white;
+  padding:0;
+  overflow:hidden;
+  cursor:pointer;
+  text-align:left;
+  position:relative;
+  background:
+    linear-gradient(145deg, color-mix(in srgb,var(--accent) 75%,#111),#080808 74%);
+  box-shadow:0 7px 15px #0009,inset 0 0 24px #0008;
+  transition:transform .16s ease,filter .16s ease,box-shadow .16s ease;
+}
+.army-card::before {
+  content:"";
+  position:absolute;inset:0;
+  background:
+   radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--accent) 75%,white) 0 7%,transparent 8%),
+   repeating-conic-gradient(from 18deg at 50% 35%,transparent 0 12deg,#ffffff0c 12deg 15deg);
+  opacity:.56;
+}
+.army-card::after {
+  content:"VIEW ARMY";
+  position:absolute;left:0;right:0;bottom:0;
+  padding:8px;
+  text-align:center;
+  background:#050505d9;
+  color:#f2d59b;
+  font:700 .72rem/1.1 Arial,sans-serif;
+  letter-spacing:.12em;
+}
+.army-card:hover,.army-card:focus-visible {
+  transform:translateY(-5px) scale(1.025);
+  filter:brightness(1.18);
+  box-shadow:0 12px 24px #000,0 0 0 3px #f5c766;
+  outline:none;
+  z-index:4;
+}
+.army-card strong,.army-card small,.team-tag {
+  position:relative;z-index:1;display:block;
+  text-shadow:0 2px 3px #000;
+}
+.army-card strong {
+  margin:68px 9px 0;
+  font-size:1rem;
+  text-transform:uppercase;
+  line-height:1.05;
+}
+.army-card small { margin:7px 9px;color:#eadbbf;font:700 .8rem Arial,sans-serif; }
+.team-tag {
+  position:absolute;top:7px;left:7px;
+  padding:4px 6px;border-radius:3px;
+  background:#000b;color:#f8dd9e;
+  font:700 .61rem Arial,sans-serif;letter-spacing:.08em;
+}
+.score-panel {
+  display:grid;
+  grid-template-columns:1fr 28px 1fr;
+  align-items:center;
+  gap:4px;
+  padding:7px;
+  border:1px solid #4a3924;
+  background:linear-gradient(#241a12,#100e0d);
+  box-shadow:inset 0 0 18px #000;
+}
+.score-panel label { display:grid;gap:4px;text-align:center;font:700 .63rem Arial,sans-serif;color:#d9bd88; }
+.score-panel input {
+  width:100%;height:54px;border:1px solid #8b6734;border-radius:4px;
+  background:#f6eddc;color:#19130e;text-align:center;
+  font:700 1.65rem Georgia,serif;
+}
+.versus { text-align:center;color:#c88a38;font:900 .75rem Arial,sans-serif; }
+.preview {
+  position:fixed;
+  width:min(340px,calc(100vw - 24px));
+  z-index:50;
+  pointer-events:none;
+  display:none;
+  padding:13px 15px;
+  border:1px solid #d2a85c;
+  border-radius:6px;
+  background:#111e;
+  box-shadow:0 12px 30px #000;
+  font:14px/1.35 Arial,sans-serif;
+}
+.preview strong {color:#ffd788;display:block;font-size:1rem;margin-bottom:5px}
+.preview small {color:#bbb}
+dialog {
+  width:min(830px,94vw);height:min(82vh,900px);
+  border:1px solid #c4934d;border-radius:8px;
+  padding:0;background:#111;color:#eee;
+  box-shadow:0 20px 80px #000;
+}
+dialog::backdrop {background:#000c;backdrop-filter:blur(3px)}
+.modal-head {
+  position:sticky;top:0;z-index:2;
+  display:flex;justify-content:space-between;gap:20px;align-items:start;
+  padding:18px 20px;background:#18130f;border-bottom:1px solid #59401f;
+}
+.modal-head h2 {margin:0;color:#ffdc9c;font-size:1.35rem}
+.modal-head p {margin:.4rem 0 0;color:#baa98c;font:14px Arial,sans-serif}
+.close {
+  min-width:44px;min-height:40px;border:1px solid #7d6238;border-radius:4px;
+  background:#2d2418;color:white;cursor:pointer;font-size:1.3rem;
+}
+.army-text {
+  margin:0;padding:22px;
+  white-space:pre-wrap;
+  font:15px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:#f3eadb;
+}
+footer {text-align:center;padding:0 16px 30px;color:#8f806b;font:13px Arial,sans-serif}
+@media(max-width:700px) {
+  header p {font-size:.86rem}
+  .board-wrap {padding-left:8px;padding-right:8px}
+}
 </style>
 </head>
 <body>
+<header>
+  <h1>KeelHaul Gaming vs Xenos Petting Zoo</h1>
+  <p>Hover over a card for a preview. Click a card to open its army list. Scores are saved automatically in this browser.</p>
+</header>
 
-<div style="position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,5,5,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--gold-dim); padding:7px 24px; display:flex; align-items:center; justify-content:space-between;">
-  <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim);">WH40K 10→11 Transition Guide</span>
-  <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim);">v1.3 — Core Rules Only · Matched Play &amp; Points Update Pending</span>
-  <span style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--blood-glow);">LIVE DOC</span>
-</div>
-
-<div class="hero">
-  <div class="hero-eyebrow">Verified Against Both Core Rules PDFs</div>
-  <h1>Warhammer 40,000<br>10th → 11th Edition</h1>
-  <div class="hero-sub">Complete Transition Guide · All Deltas Ranked by Impact</div>
-  <div class="hero-rule"></div>
-  <div style="font-size:13px; color: var(--text-dim); font-family: 'Rajdhani', sans-serif; letter-spacing:0.1em;">
-    Sources: 10th Ed Core Rules PDF · New40K Core Rules PDF (Jun 2026) · Goonhammer Deep Dives · Spikey Bits · Bell of Lost Souls · HiveCity
+<main class="board-wrap">
+  <div class="board">
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#8f1d24" data-index="0">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Adepta Sororitas</strong>
+        <small>Recon</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 1" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 1" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#ba3a92" data-index="8">
+        <span class="team-tag">XPZ</span>
+        <strong>Emperor’s Children</strong>
+        <small>Kyle N.</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#6b2d8f" data-index="1">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Tyranids</strong>
+        <small>Swarm</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 2" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 2" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#265fa2" data-index="9">
+        <span class="team-tag">XPZ</span>
+        <strong>Thousand Sons</strong>
+        <small>Matt Green</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#9c3428" data-index="2">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>T’au Empire</strong>
+        <small>R’Auxbury</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 3" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 3" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#9c3428" data-index="10">
+        <span class="team-tag">XPZ</span>
+        <strong>T’au Empire</strong>
+        <small>Logan Heath</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#9b2525" data-index="3">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Adeptus Mechanicus</strong>
+        <small>Granny Fanny</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 4" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 4" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#b08a2c" data-index="11">
+        <span class="team-tag">XPZ</span>
+        <strong>Adeptus Custodes</strong>
+        <small>Isaac T</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#5f7d24" data-index="4">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Orks</strong>
+        <small>Jake</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 5" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 5" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#72252a" data-index="12">
+        <span class="team-tag">XPZ</span>
+        <strong>Chaos Daemons</strong>
+        <small>Jason McKenzie</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#b96a16" data-index="5">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Leagues of Votann</strong>
+        <small>Rock & Stone</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 6" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 6" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#173b66" data-index="13">
+        <span class="team-tag">XPZ</span>
+        <strong>Space Marines</strong>
+        <small>Rainey</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#2b2c30" data-index="6">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Necrons</strong>
+        <small>Technosorcerer</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 7" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 7" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#5f7d24" data-index="14">
+        <span class="team-tag">XPZ</span>
+        <strong>Orks</strong>
+        <small>Tony</small>
+      </button>
+    </section>
+    
+    <section class="matchup">
+      <button class="army-card top-card" style="--accent:#173b66" data-index="7">
+        <span class="team-tag">KEELHAUL</span>
+        <strong>Space Marines</strong>
+        <small>Salamanders</small>
+      </button>
+      <div class="score-panel">
+        <label><span>KH</span><input aria-label="KeelHaul score matchup 8" type="number" min="0" inputmode="numeric"></label>
+        <div class="versus">VS</div>
+        <label><span>XPZ</span><input aria-label="XPZ score matchup 8" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <button class="army-card bottom-card" style="--accent:#6b2d8f" data-index="15">
+        <span class="team-tag">XPZ</span>
+        <strong>Tyranids</strong>
+        <small>Dillon</small>
+      </button>
+    </section>
+    
   </div>
-  <div style="font-size:12px; color: var(--gold-dim); font-family: 'Rajdhani', sans-serif; letter-spacing:0.12em; margin-top:8px;">
-    Designed, Prompted, and Edited by Kennith! for XPZ
+</main>
+
+<div class="preview" id="preview"></div>
+
+<dialog id="armyDialog">
+  <div class="modal-head">
+    <div><h2 id="modalTitle"></h2><p id="modalMeta"></p></div>
+    <button class="close" id="closeDialog" aria-label="Close">×</button>
   </div>
-</div>
-
-<div class="container">
-
-  <!-- EDITION CONTEXT -->
-  <div class="section-header">
-    <div class="section-num">00</div>
-    <h2>What Kind of Edition Shift Is This</h2>
-  </div>
-  <div class="intro-block">
-    <strong>Not a hard reset.</strong> 10th edition codexes remain valid at launch. GW is issuing faction packs (lightweight errata documents) that bridge any codex rules incompatible with the new core. New 11th edition codexes will roll out over time, starting with Space Marines and Orks. Think of this as a precision surgery on 10th's skeleton: the same five-phase turn structure, the same keywords framework, the same attack sequence flow — but with every major subsystem either tuned or replaced. <strong>The core rules went from loosely structured prose to a numbered reference system</strong> (e.g. rule 05.03 for save rolls), which alone makes adjudication at the table significantly cleaner. The edition was formally announced at Adepticon 2026 and launches in the Armageddon box on <strong>June 20, 2026</strong>.
-  </div>
-
-  <!-- ALL DELTAS RANKED -->
-  <div class="section-header">
-    <div class="section-num">01</div>
-    <h2>All Deltas — Ranked by Fundamental Impact</h2>
-  </div>
-
-  <style>
-    .tier-accordion { margin-bottom: 0; }
-    .tier-accordion-header {
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; user-select: none; padding: 10px 16px;
-      border-radius: 3px; margin-bottom: 10px;
-      transition: opacity 0.15s;
-    }
-    .tier-accordion-header:hover { opacity: 0.85; }
-    .tier-accordion-header .tier-marker { margin-bottom: 0; }
-    .tier-chevron { font-size: 13px; opacity: 0.7; transition: transform 0.2s; flex-shrink: 0; margin-left: 12px; }
-    .tier-accordion-header.tier-open .tier-chevron { transform: rotate(180deg); }
-    .tier-accordion-body { display: none; }
-    .tier-accordion-body.tier-open { display: block; }
-  </style>
-
-  <!-- TIER 1 -->
-  <div class="tier-accordion">
-    <div class="tier-accordion-header tier1-label tier-open" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
-      <span>Tier 1 — Game-Defining Shifts</span>
-      <span class="tier-chevron">▼</span>
-    </div>
-    <div class="tier-accordion-body tier-open">
-
-  <!-- 1 -->
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">1</div>
-      <div class="card-title-block">
-        <div class="card-title">Detachment Points — Multi-Detachment Army Building <span class="verdict verdict-build">Army Building</span></div>
-        <div class="card-subtitle">New System · No 10th Equivalent · Rule: Muster Armies</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>One detachment per army. Army identity locked to that single detachment's rule, stratagems, and enhancements.</td><td>Detachment Points pool: 2 DP at 1,000 pts, 3 DP at 2,000 pts. Each detachment costs 1–3 DP. Multiple detachments can be combined. 70+ new and updated detachments at launch. Stratagem access is now detachment-specific — most armies finish with only 6–9 stratagems total at 2,000 pts.</td></tr>
-      </table>
-      <p>The single biggest structural shift in list building since 9th edition. A 2 DP core identity detachment can now be paired with a 1 DP specialist detachment, enabling cross-theme combinations previously impossible. The stratagem pool shrinking is equally significant — bloated stratagem libraries are gone, replaced by a tighter, more legible tactical toolkit per list.</p>
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">2</div>
-      <div class="card-title-block">
-        <div class="card-title">Save Roll Overhaul — Allocation Groups + Lowest-Roll-First + Mandatory Invulns <span class="verdict verdict-defense">Defense</span></div>
-        <div class="card-subtitle">Rule 05.03 · PDF-Verified Against 10th p.22</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Wound → allocate to one model (wounded models first, then any) → that model makes one save roll → damage. Invulnerable save is <em>optional</em> — player chooses armour or invuln. Can deliberately fail invuln to force damage routing.</td><td>Defender creates allocation groups (each Character isolated; other models grouped by matching W/Sv/InSv). Declares allocation order (Characters last; wounded models' groups first). All save rolls made simultaneously. Resolved lowest-to-highest against groups in order. Invuln saves are now <strong>mandatory</strong> — checked before armour save. No longer optional.</td></tr>
-      </table>
-      <p>The optional invuln exploit — deliberately failing an invuln to route damage away from a priority model — is explicitly eliminated. Characters behind bodyguards are also significantly safer: lower save rolls get spent on bodyguard groups before they reach a Character group, meaning a Leader with a 4+ invuln benefits much more from their bodyguard's presence than in 10th.</p>
-    </div>
-  </div>
-
-  <!-- 3 -->
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">3</div>
-      <div class="card-title-block">
-        <div class="card-title">Terrain-as-Objectives — Terrain Areas Replace 40mm Tokens <span class="verdict verdict-both">Both</span></div>
-        <div class="card-subtitle">Rule 14.01 · PDF-Verified · Major Positioning Shift</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Objective markers: 40mm circular tokens. Within range = within 3" horizontally and 5" vertically of the token centre. Objectives separate from terrain.</td><td>Objectives are terrain areas. A model is within range of a terrain objective while it is within that terrain area. Physical footprint of the terrain feature defines the objective zone. No tokens for standard play.</td></tr>
-      </table>
-      <p>A ruin that previously sat <em>next to</em> an objective now <em>is</em> the objective. The interior of a large ruin is entirely "within range." Vertical positioning matters — being on the second floor of a terrain area with a 15-model unit is now directly relevant to objective control. Controlling terrain is no longer just tactical cover management; it is the primary scoring engine.</p>
-    </div>
-  </div>
-
-  <!-- 4 -->
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">4</div>
-      <div class="card-title-block">
-        <div class="card-title">Engagement Range — 2" Horizontally <span class="verdict verdict-melee">Melee</span></div>
-        <div class="card-subtitle">Rule 03.04 · PDF-Verified Against 10th p.7 · Under-Covered Change</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>"Within 1" horizontally and 5" vertically." The 1.1" ruin wall gap exploit: positioning a unit just inside a ruin wall kept it effectively safe from all but large-based charging models.</td><td>"Within 2" horizontally and 5" vertically." Units can move through engagement ranges during a move (but still cannot end within them). The ruin wall gap exploit is eliminated for nearly all base sizes.</td></tr>
-      </table>
-      <p>Goonhammer called this "an incredibly impactful change" — the doubled engagement range has cascading effects throughout every phase. Melee range is effectively longer. Charge completions are more achievable. Pile-in and consolidation reach is greater. The 1.1" hiding trick is dead. Models positioned just inside ruin walls are no longer trivially safe from engagement.</p>
-    </div>
-  </div>
-
-    </div><!-- /tier1 accordion body -->
-  </div><!-- /tier1 accordion -->
-
-  <!-- TIER 2 -->
-  <div class="separator"></div>
-  <div class="tier-accordion">
-    <div class="tier-accordion-header tier2-label" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
-      <span>Tier 2 — Significant Ruleset Changes</span>
-      <span class="tier-chevron">▼</span>
-    </div>
-    <div class="tier-accordion-body">
-
-  <!-- 5 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">5</div>
-      <div class="card-title-block">
-        <div class="card-title">Benefit of Cover — −1 Attacker BS <span class="verdict verdict-defense">Defense</span></div>
-        <div class="card-subtitle">Rule 13.08 · PDF-Verified Against 10th p.44</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>"Add 1 to the saving throw." Models with Sv 3+ or better cannot benefit from cover against AP 0 attacks. Invulnerable saves excluded. Each terrain type had bespoke cover conditions.</td><td>"Worsen the BS characteristic of that attack by 1." No Sv exemption. Applies when every model in the unit is within a terrain area (Infantry/Beasts/Swarms) or not fully visible due to terrain. Three unified terrain categories replace per-feature cover rules.</td></tr>
-      </table>
-      <p>Cover now affects the hit roll rather than the save, which means it cannot be bypassed by high-AP weapons — a weapon with AP -3 still faces the -1 BS when shooting into cover. This makes <strong>AP-1 and mid-AP weapons with Sustained Hits significantly stronger</strong> (the cover penalty now matters against them, too). Elite units that previously ignored cover via invuln saves are now affected. The Sv 3+ vs AP 0 exception is gone entirely.</p>
-    </div>
-  </div>
-
-  <!-- 6 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">6</div>
-      <div class="card-title-block">
-        <div class="card-title">Hidden — New Stealth Mechanic for Infantry/Beasts/Swarms <span class="verdict verdict-defense">New in 11th</span></div>
-        <div class="card-subtitle">Rule 13.09 · No 10th Equivalent · Major Infantry Buff</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p>Entirely new. Infantry, Beasts, and Swarms within a terrain area containing dense terrain features can become Hidden — meaning they cannot be targeted by enemies beyond 15" detection range, provided they haven't fired ranged attacks this turn or the previous turn. A "Gone to Ground" sub-rule (app-only) extends this by an additional -3" detection range when every model is obscured by terrain.</p>
-      <p>This creates a genuine <strong>shoot-or-hide decision each turn</strong> for infantry. Using Overwatch breaks Hidden status. A unit holding a central ruin objective that hasn't shot becomes nearly invisible to mid-range shooting armies. Hidden fundamentally changes how shooting armies must approach infantry holding cover.</p>
-    </div>
-  </div>
-
-  <!-- 7 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">7</div>
-      <div class="card-title-block">
-        <div class="card-title">Battle-Shock — Persistent, Earlier Trigger, OC → "−" <span class="verdict verdict-both">Both</span></div>
-        <div class="card-subtitle">Rules 01.07 + 08.03 · PDF-Verified Against 10th p.11</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Test only when <em>below</em> half-strength. OC drops to <em>0</em> (can tie for objective). Clears automatically at start of your next Command phase.</td><td>Test when <em>at or below</em> half-strength, AND when already battle-shocked. OC drops to <em>"−"</em> (completely nullified, cannot contest objectives at all). Does NOT auto-clear — must pass a test in Command phase to recover. Cannot start or complete actions.</td></tr>
-      </table>
-      <p>The "0" vs "−" distinction matters in tied objective contests: a 10th-shocked unit could tie the objective; an 11th-shocked unit contributes nothing. The earlier trigger (at half, not below) means testing with 5 of 10 models remaining — one more model than before. Combined with persistent shock, morale-pressure armies (Tyranids, Night Lords, Chaos Daemons) gain a substantial indirect buff.</p>
-    </div>
-  </div>
-
-  <!-- 8 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">8</div>
-      <div class="card-title-block">
-        <div class="card-title">Fight Phase — All Pile-Ins First, All Consolidations Last <span class="verdict verdict-melee">Melee</span></div>
-        <div class="card-subtitle">Rules 12.02–12.07 · PDF-Verified Against 10th p.33–35</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Per-unit: each unit selected to fight does Pile In → Attacks → Consolidate as a single integrated sequence, interleaved with other unit selections. Consolidation mid-fight toward objectives was a key tactical tool.</td><td>Three discrete global steps: all pile-in moves (both players, active first) → all fights → all consolidation moves. Consolidation has three mandatory modes: Ongoing (stay engaged), Engaging (move to nearby enemy), Objective (move toward nearby objective — only if not engaged and no nearby enemies).</td></tr>
-      </table>
-      <p>The ability to tactically use a mid-fight consolidation to scoot onto an objective before other units fought is gone. Overrun fights (for unengaged units that were engaged at fight step start) are now a formally defined fight type. Consolidation onto objectives is now the third-priority option rather than a first-choice move.</p>
-    </div>
-  </div>
-
-  <!-- 9 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">9</div>
-      <div class="card-title-block">
-        <div class="card-title">Charge Sequence — Roll First, Then Declare Targets <span class="verdict verdict-melee">Melee</span></div>
-        <div class="card-subtitle">Rule 11.02 · PDF-Verified Against 10th p.29</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Select targets → roll 2D6 → make charge move. Committing to targets on a bad roll stranded units and wasted the turn.</td><td>Declare charge → roll 2D6 → select targets within range and within the rolled distance → make charge move. Targets must be within the maximum distance rolled.</td></tr>
-      </table>
-      <p>Risk profile of charging is fundamentally improved. You can't declare a distant target and hope for a high roll — targets must be reachable by the rolled result — but you no longer strand a unit on a bad roll against an unchargeable target. Aggressive melee lists benefit significantly from reduced variance.</p>
-    </div>
-  </div>
-
-  <!-- 10 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">10</div>
-      <div class="card-title-block">
-        <div class="card-title">Unit Coherency — Hard 9" Global Cap Added <span class="verdict verdict-both">Both</span></div>
-        <div class="card-subtitle">Rule 03.03 · PDF-Verified Against 10th p.6</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Within 2" of at least one model (2–6 models); within 2" of at least two models (7+ models). No maximum span. Conga lines extending 30"+ were legal and frequently exploited for screening.</td><td>Within 2" of at least one model AND within 9" of every other model in the unit. 9" is the hard maximum span. Conga lines impossible for any unit size.</td></tr>
-      </table>
-      <p>One of the most tactically impactful QoL changes. Large horde units can no longer create 30"+ screening lines. Deployment and movement of 20+ model units must be rethought entirely. The maximum distance between any two models is now ~9" — the global cap is the binding constraint, not something you add the 2" adjacency on top of. A 20-model line at 2" steps would reach ~8–9" total spread before triggering forced removals, making unit footprints dramatically tighter than 10th's uncapped chains.</p>
-    </div>
-  </div>
-
-  <!-- 11 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">11</div>
-      <div class="card-title-block">
-        <div class="card-title">Heroic Intervention — Counter-Charge With Roll, Expanded Range <span class="verdict verdict-melee">Melee</span></div>
-        <div class="card-subtitle">Rule 15.11 · PDF-Verified Against 10th p.42</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>1CP. Trigger at end of opponent's Charge phase just after an enemy unit ends a Charge move. Your unit must be within 6" of that enemy unit and eligible to declare a charge against it. Declare charge targeting only that enemy unit. No charge roll — move directly into engagement. No Fights First bonus.</td><td>1CP base. Full charge roll made. Target range expanded to 12". Mode 1 — Leap to Defend (1CP): can only target units that charged this phase, within the rolled distance. Mode 2 — Into the Fray (+1CP): caps roll at 6" but can target any enemy units within 6" of your unit.</td></tr>
-      </table>
-      <p>Now functions as a genuine counter-charge with tactical flexibility — a full charge roll replaces the old no-roll move, the target range expands from 6" to 12", and two named modes give the intervening player a meaningful decision. This is the primary reactive tool in the Charge phase now that Overwatch was removed from that phase. Makes move-blocking and objective-stealing via movement significantly more risky for your opponent.</p>
-    </div>
-  </div>
-
-  <!-- 12 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">12</div>
-      <div class="card-title-block">
-        <div class="card-title">Fire Overwatch — Charge Phase Trigger Removed <span class="verdict verdict-shoot">Shooting</span></div>
-        <div class="card-subtitle">Rule 15.08 · PDF-Verified Against 10th p.42</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>Triggered in opponent's Movement or Charge phase — at the start of a Normal, Advance, or Fall Back move, or when a charge was declared. Snap shots could fire in reaction to an incoming charge before it resolved.</td><td>Triggered at end of opponent's Movement phase only. No Charge phase trigger. Using Overwatch also breaks Hidden status for the firing unit.</td></tr>
-      </table>
-      <p>Reactive shooting during the Charge phase is completely removed. Heroic Intervention is now the sole reactive tool in that phase. This is a direct melee buff — charging units no longer risk eating snap-shot fire before they arrive. The asymmetry between Overwatch (movement phase) and HI (charge phase) creates a cleaner decision structure than 10th's overlapping reactive options.</p>
-    </div>
-  </div>
-
-  <!-- 13 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">13</div>
-      <div class="card-title-block">
-        <div class="card-title">Leader Abilities Persist After Bodyguard Destroyed + Support Slot Added <span class="verdict verdict-build">Army Building</span></div>
-        <div class="card-subtitle">Rule 19.04 · PDF-Verified Against 10th p.39</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>One Leader per bodyguard unit. Leader buffs end implicitly when bodyguard is destroyed (no explicit persistence). Rules triggered when a unit is destroyed fired when either component died.</td><td>One Leader + one Support per bodyguard unit. Leader abilities explicitly persist until that Leader model itself is destroyed. Destroyed-unit rules only trigger when the last model of the entire attached unit is destroyed.</td></tr>
-      </table>
-      <p>Character investment is more resilient. A Leader that buffs its attached unit continues providing value as a solo piece after the bodyguard is wiped — which previously represented a complete waste of that part of the character's points cost. The Support slot is entirely new, enabling two attached heroes per squad.</p>
-    </div>
-  </div>
-
-  <!-- 14 -->
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank">14</div>
-      <div class="card-title-block">
-        <div class="card-title">Rules Sequencing — Opposing Player Gets Last Say <span class="verdict verdict-both">Both</span></div>
-        <div class="card-subtitle">App-Extended · PDF-Verified Direction · 10th p.9</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th>10th</th><th>11th</th></tr>
-        <tr><td>"If this occurs during the battle, the player whose turn it is chooses the order." Active player controlled all simultaneous trigger ordering.</td><td>The opposing player generally gets the last say on trigger sequencing. Turns and phases now have formally defined Start and End steps with a scoring sub-step.</td></tr>
-      </table>
-      <p>Closes a class of exploits where the active player neutralised powerful opponent combos by declaring resolution order. This levels the playing field for reactive abilities and interaction-based play. The numbered rule system (each rule has a reference code) also significantly simplifies dispute resolution at the table.</p>
-    </div>
-  </div>
-
-    </div><!-- /tier2 accordion body -->
-  </div><!-- /tier2 accordion -->
-
-  <!-- TIER 3 -->
-  <div class="separator"></div>
-  <div class="tier-accordion">
-    <div class="tier-accordion-header tier3-label" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
-      <span>Tier 3 — Targeted but Important Changes</span>
-      <span class="tier-chevron">▼</span>
-    </div>
-    <div class="tier-accordion-body">
-
-  <!-- Quick reference table for tier 3 -->
-  <table class="quick-table">
-    <thead>
-      <tr><th>Change</th><th>10th</th><th>11th</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Flying</strong> <span class="verdict verdict-melee" style="font-size:9px">Movement</span></td>
-        <td>FLY models measure distance "through the air" when starting/ending on terrain. No movement penalty.</td>
-        <td>Declaring "take to the skies" subtracts 2" from max move distance. Full terrain/model bypass retained. HOVER units (some vehicles) exempt from penalty.</td>
-      </tr>
-      <tr>
-        <td><strong>Disembark Modes</strong> <span class="verdict verdict-both" style="font-size:9px">Transports</span></td>
-        <td>Three informal states based on transport's prior action. Complex rules for when disembarkers could act.</td>
-        <td>Three explicit named modes: Tactical (stationary transport → full normal/advance move after), Rapid (transport moved → can't charge), Combat (forced/emergency → Hazard rolls + battle-shocked).</td>
-      </tr>
-      <tr>
-        <td><strong>Strategic Reserves Limit</strong> <span class="verdict verdict-build" style="font-size:9px">Army Building</span></td>
-        <td>25% of total points max in Strategic Reserves.</td>
-        <td>50% of total points max. Significantly more flexibility to hold forces back.</td>
-      </tr>
-      <tr>
-        <td><strong>Deep Strike Distance</strong> <span class="verdict verdict-shoot" style="font-size:9px">Deployment</span></td>
-        <td>More than 9" horizontally from all enemy models.</td>
-        <td>More than 8" horizontally from all enemy units. Rule 24.09.</td>
-      </tr>
-      <tr>
-        <td><strong>Scouts Distance</strong> <span class="verdict verdict-shoot" style="font-size:9px">Deployment</span></td>
-        <td>Must end more than 9" from all enemy models.</td>
-        <td>Must end more than 8" from all enemy units. Rule 24.32.</td>
-      </tr>
-      <tr>
-        <td><strong>[PISTOL] Deprecated</strong> <span class="verdict verdict-shoot" style="font-size:9px">Weapons</span></td>
-        <td>[PISTOL] — unique mechanic: fire in melee but cannot combine with other ranged weapons.</td>
-        <td>[CLOSE-QUARTERS] replaces [PISTOL] semantically. [PISTOL] remains valid for now and is explicitly identical to [CLOSE-QUARTERS] for all rules purposes. Rule 24.27.</td>
-      </tr>
-      <tr>
-        <td><strong>Aircraft Cycle</strong> <span class="verdict verdict-shoot" style="font-size:9px">Aircraft</span></td>
-        <td>Aircraft make minimum 20" moves each turn, looping round or entering Strategic Reserves if they leave the table. Return next turn.</td>
-        <td>Aircraft can only make Ingress moves. At end of opponent's turn, all your aircraft on the battlefield must return to Strategic Reserves automatically. Cycle in each turn actively.</td>
-      </tr>
-      <tr>
-        <td><strong>Plunging Fire</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
-        <td>Ruins-specific: 6"+ height, every model in target unit at ground level → improve AP by 1.</td>
-        <td>Universal rule (22.05): 3"+ height → +1 BS to attacker. Also applies to TOWERING models within 12". A double change: height threshold halved (6"→3") and the stat improved changed (AP→BS) — improving hit rolls rather than armour penetration has different tactical implications for how height advantage functions.</td>
-      </tr>
-      <tr>
-        <td><strong>Indirect Fire Restriction</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
-        <td>Subtract 1 from hit roll AND unmodified hit roll of 1-3 always fails when target is not visible. Cover always applies to indirect attacks.</td>
-        <td>Hit roll of 1-5 fails (unmodified) unless stationary AND target visible to a friendly unit (then 1-3 fails). Cover always applies. Cannot re-roll hit rolls. Rule 10.07.</td>
-      </tr>
-      <tr>
-        <td><strong>[HEAVY] Weapons</strong> <span class="verdict verdict-shoot" style="font-size:9px">Shooting</span></td>
-        <td>Unit must Remain Stationary this turn to gain +1 to hit rolls with [HEAVY] weapons. Any movement forfeits the bonus entirely.</td>
-        <td>Unit can move up to 3" this turn and still gain +1 to hit rolls, provided it is unengaged and was not set up on the battlefield this turn. Rule 24.16.</td>
-      </tr>
-      <tr>
-        <td><strong>MOBILE Keyword</strong> <span class="verdict verdict-melee" style="font-size:9px">New</span></td>
-        <td>No equivalent.</td>
-        <td>Super-Heavy Walker ability can grant MOBILE keyword during a move, enabling horizontal movement through dense terrain sections up to 4" high. Rule 24.35.</td>
-      </tr>
-    </tbody>
-  </table>
-
-    </div><!-- /tier3 accordion body -->
-  </div><!-- /tier3 accordion -->
-
-  <!-- NEW MECHANICS -->
-  <div class="separator"></div>
-  <div class="tier-accordion">
-    <div class="tier-accordion-header new-label tier-open" onclick="this.classList.toggle('tier-open'); this.nextElementSibling.classList.toggle('tier-open');">
-      <span>New Mechanics — No 10th Equivalent</span>
-      <span class="tier-chevron">▼</span>
-    </div>
-    <div class="tier-accordion-body tier-open">
-
-  <div class="change-card new-mechanic" style="margin-bottom:10px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">Obscuring Terrain Areas (Rule 13.10)</div>
-      </div>
-    </div>
-    <div class="card-body"><p>Terrain areas containing light or dense features are obscuring. If every line of sight between two models crosses one or more obscuring areas (not including areas one or both models are within), those models are not visible to each other. This is a mutual invisibility rule — cleaner and more decisive than 10th's per-terrain-type visibility rules.</p></div>
-  </div>
-  <div class="change-card new-mechanic" style="margin-bottom:10px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">Overrun Fight Type (Rule 12.06)</div>
-      </div>
-    </div>
-    <div class="card-body"><p>A formally defined fight type for units that are unengaged (or were engaged at the start of the Fight step but became unengaged). They can make one additional pile-in move and then fight. Explicitly covers scenarios where a unit destroys its charge target and wants to fight on. Codifies previously ambiguous edge cases from 10th.</p></div>
-  </div>
-  <div class="change-card new-mechanic" style="margin-bottom:10px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">[CLEAVE X] Weapon Ability (Rule 24.06)</div>
-      </div>
-    </div>
-    <div class="card-body"><p>For each 5 models in the target unit (rounding down), add X additional attack dice — but only if you targeted a single unit with all attacks. Rewards committing a cleave weapon to one big target. Anti-horde melee complement to [BLAST] for ranged weapons.</p></div>
-  </div>
-  <div class="change-card new-mechanic" style="margin-bottom:10px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">Hazard Roll as Unified Mechanic (Rule 06.03)</div>
-      </div>
-    </div>
-    <div class="card-body"><p>A single D6 roll: on 1-2, that unit suffers 1 mortal wound (or 3 if every model is MONSTER/VEHICLE). Unifies the self-damage triggers from 10th under one consistent mechanic — fall-back Desperate Escape mode, destroyed transport casualties, and combat disembark all now resolve against the same table. "Desperate Escape" itself survives in 11th as the name of the battle-shocked fall-back mode (rule 09.07); what changed is the underlying dice mechanic, not the mode name.</p></div>
-  </div>
-  <div class="change-card new-mechanic" style="margin-bottom:14px">
-    <div class="card-head">
-      <div class="card-title-block">
-        <div class="card-title">Solid Terrain Rule (Rule 13.11) + Shooting Types Formalised (Rules 10.04–10.07)</div>
-      </div>
-    </div>
-    <div class="card-body"><p><strong>Solid:</strong> Dense terrain features prevent LoS through any enclosed gap 3" or less from ground level (doors, windows, bullet holes). Models in ground-level ruins are invisible to models outside, regardless of small openings. <br><strong>Shooting Types:</strong> Four formally defined shooting types with explicit eligibility — Normal Shooting, Assault Shooting (advance + [ASSAULT] weapons), Close-Quarters Shooting (available to any unit within Engagement Range of one or more enemy units, using [CLOSE-QUARTERS] weapons — and to Monster/Vehicle units per Big Guns Never Tire), Indirect Shooting. Each has distinct "After Shooting" restrictions on actions.</p></div>
-  </div>
-
-    </div><!-- /new mechanics accordion body -->
-  </div><!-- /new mechanics accordion -->
-
-  <!-- FORCE DISPOSITIONS -->
-  <div class="separator"></div>
-  <div class="section-header">
-    <div class="section-num">01B</div>
-    <h2>Force Dispositions — The 5 Army Archetypes</h2>
-  </div>
-  <div class="intro-block">
-    In 11th edition, every army declares a <strong>Force Disposition</strong> before the game. This determines which primary mission your army plays — and critically, your opponent plays a <em>different</em> mission based on their own Disposition. Both players can be scoring against entirely different objectives on the same table. Primary VP is capped at <strong>45 VP</strong>, with a max of <strong>15 VP per turn</strong>. Understanding what your opponent is trying to score — not just yourself — is now a core competitive skill.
-  </div>
-
-  <!-- TAKE AND HOLD -->
-  <div class="disp-accordion" id="disp-th">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--tier3);">
-      <span class="disp-accordion-title">Disposition I — Take and Hold</span>
-      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#b4ffcc;">Durable / Objective</span><span class="disp-chevron">▼</span></div>
-    </div>
-    <div class="disp-accordion-body">
-  <div class="change-card tier3">
-    <div class="card-head">
-      <div class="card-rank gold">TH</div>
-      <div class="card-title-block">
-        <div class="card-title">Take and Hold <span class="verdict verdict-defense">Durable / Objective</span></div>
-        <div class="card-subtitle">Straightforward · Rewards Tough Units · No Actions Required</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>What it is:</strong> The most accessible Disposition. Score by holding objectives — typically outside your deployment zone — and controlling more than your opponent at end of turn. No action economy required. If your army is durable or numerous, this rewards you with consistent primary VP without complex mechanics.</p>
-      <p><strong>Core scoring loop:</strong> Hold your expansion objective, contest the center, and score end-of-command-phase VP for each objective you control excluding home. A clean 10VP/turn from turn 2 onward is achievable playing defensively on most maps.</p>
-      <p><strong>Key matchup insight:</strong> 5-objective maps feature one big central terrain objective — contested trade every turn is normal and actually benefits TH players because flipping it back scores the turn objective condition. 6-objective maps split the center into two smaller triangular pieces, giving TH more breathing room to hold multiple safely.</p>
-      <p><strong>Weakness:</strong> Opponents running aggressive Dispositions (Purge, Disruption) score for killing your units and flipping objectives — meaning your scoring units are their primary targets. You <em>must</em> protect your expansion objective above all else. If a Purge opponent grabs your home objective late game, they earn a bonus 5VP end-of-game swing.</p>
-      <p><strong>List building note:</strong> Armies that can weather attrition and hold ground — Knights, durable Marines, horde infantry — benefit most. You don't need fast action units; you need things that survive sitting on objectives under fire.</p>
-    </div>
-  </div>
-
-    </div><!-- /disp-th body -->
-  </div><!-- /disp-th -->
-
-  <!-- PURGE THE FOE -->
-  <div class="disp-accordion" id="disp-pf">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--blood);">
-      <span class="disp-accordion-title">Disposition II — Purge the Foe</span>
-      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffaaaa;">Kill-Focused</span><span class="disp-chevron">▼</span></div>
-    </div>
-    <div class="disp-accordion-body">
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">PF</div>
-      <div class="card-title-block">
-        <div class="card-title">Purge the Foe <span class="verdict verdict-shoot">Kill-Focused</span></div>
-        <div class="card-subtitle">Kill Units · Hold One Objective · Flip Center · Strong vs Most Opponents</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>What it is:</strong> Tied with Take and Hold as the most straightforward Disposition, but oriented around killing. Score VP every turn you destroy one or more enemy units, score for holding objectives outside your deployment zone from turn 2 onward, and score for flipping an objective you didn't control at the start of your turn. Late game bonus for holding the central objective.</p>
-      <p><strong>Core scoring loop:</strong> Kill one unit, hold your expansion objective, and walk onto a new objective each turn. That basic loop generates roughly 10VP/turn from turn 2, hitting 40–45VP cleanly if maintained. Every time you get shot off your expansion and walk back onto it — that's still 3VP for flipping it.</p>
-      <p><strong>5-objective maps are your friend:</strong> One big central objective in the middle means it changes hands every turn — you score the flip VP every time you retake it, and you deny your opponent their center-dependent scoring. This is a significant structural advantage vs Take and Hold opponents.</p>
-      <p><strong>Key rule:</strong> You don't have to flip an objective your <em>opponent</em> controls — just one you didn't control at the start of your turn. Getting shot off your own objective and reclaiming it counts.</p>
-      <p><strong>What to watch in your opponent's scoring:</strong> If facing a Take and Hold opponent, keep them off the center at all costs — it denies up to 7VP per turn from their perspective. They also score an end-of-game condition (5VP) for holding <em>your</em> home objective, so screen it in late game.</p>
-      <p><strong>List building note:</strong> All-in damage lists thrive here. You're costed to kill things and hold ground — Purge rewards exactly that without asking for dedicated action units. The most natural Disposition for aggressive or elite armies.</p>
-    </div>
-  </div>
-
-    </div><!-- /disp-pf body -->
-  </div><!-- /disp-pf -->
-
-  <!-- PRIORITY ASSETS -->
-  <div class="disp-accordion" id="disp-pa">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid #c47a20;">
-      <span class="disp-accordion-title">Disposition III — Priority Assets</span>
-      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffe5b4;">Action-Heavy</span><span class="disp-chevron">▼</span></div>
-    </div>
-    <div class="disp-accordion-body">
-  <div class="change-card tier2">
-    <div class="card-head">
-      <div class="card-rank gold">PA</div>
-      <div class="card-title-block">
-        <div class="card-title">Priority Assets <span class="verdict verdict-build">Action-Heavy</span></div>
-        <div class="card-subtitle">Fast Action Units Required · Objective-Linked · High Ceiling</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>What it is:</strong> An action-intensive Disposition where you score by performing the <em>Secure Asset</em> action on objectives (primarily central and opponent-territory objectives), holding your expansion objective, and picking off one enemy unit per turn near central objectives. High ceiling but demands dedicated fast action units in your list.</p>
-      <p><strong>Core scoring loop:</strong> Start the Secure Asset action on a non-home objective → control it by end of turn → score 4VP. Additionally score 4VP command phase for holding objectives (scaling to 8VP if you hold 3+, including home). Add 2VP per turn for destroying a unit within range of a central objective. A clean high-scoring turn looks like 10–12VP if all conditions fire.</p>
-      <p><strong>Map dependency:</strong> Dawn of War maps make PA significantly harder — central objectives are evenly spread and opponents can rush you. Hammer and Crucible maps give you a more defensible posture, and the math actually forces your opponent into a beatdown role. Know your deployment before you commit your action units.</p>
-      <p><strong>Critical defense tip:</strong> Your expansion objective is the lynchpin. If you can't hold it, your whole scoring engine breaks down. Prioritize defense-in-depth around that objective while your action units sweep forward.</p>
-      <p><strong>What your opponent scores against you:</strong> If facing a Take and Hold player, they're scoring end-of-turn for holding 3+ objectives (trivially easy for them on most maps) plus a command phase condition and a late-game home objective bonus. You need to stop them banking the easy 4VP/objective VP or you'll be outpaced on primary despite scoring your actions efficiently.</p>
-      <p><strong>List building note:</strong> Fast lethal armies (Drukhari, Tyranids with mobile units) excel here. You need units that can sweep forward, lock in action points, and are expendable enough not to cripple your army when they die doing so. Avoid overcommitting to secondaries that also demand actions — your action budget has a ceiling.</p>
-    </div>
-  </div>
-
-    </div><!-- /disp-pa body -->
-  </div><!-- /disp-pa -->
-
-  <!-- RECONNAISSANCE -->
-  <div class="disp-accordion" id="disp-rc">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--tier3);">
-      <span class="disp-accordion-title">Disposition IV — Reconnaissance</span>
-      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#b4ffcc;">Mobile / MSU</span><span class="disp-chevron">▼</span></div>
-    </div>
-    <div class="disp-accordion-body">
-  <div class="change-card tier3">
-    <div class="card-head">
-      <div class="card-rank gold">RC</div>
-      <div class="card-title-block">
-        <div class="card-title">Reconnaissance <span class="verdict verdict-both">Mobile / MSU</span></div>
-        <div class="card-subtitle">Table Quarter Control · Kill Cheap Units · Avoid Brawling</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>What it is:</strong> A movement and action-focused Disposition that rewards you for fanning out across the table rather than fighting over a central objective. Score by occupying table quarters (not within 6" of center), destroying enemy units each turn, and holding at least one non-home objective. Explicitly removes mid-board brawling as your primary concern.</p>
-      <p><strong>Core scoring loop:</strong> Get 4+ units into 4 different table quarters outside the 6" center bubble → score 6VP. Destroy 2–3 cheap enemy units that turn → 2–3VP. Hold one expansion objective → 3VP. A clean turn looks like 11–12VP without ever needing to crack their heavy hitters.</p>
-      <p><strong>Key insight:</strong> You don't need to kill Fateweaver. Kill their scouts, their screening units, their Spore Mines. Every destroyed unit scores regardless of cost. MSU lists with cheap fast units that can reach corner pockets of the board are the ideal tool — they lock down 6VP from table quarters while the kill condition fills itself from screening units.</p>
-      <p><strong>What your opponent scores against you (Purge and Secure matchup):</strong> They score 4VP per objective they control (excluding home) from turn 2 — a potential 12VP/turn if unchecked. They also score 3VP for flipping objectives and 3VP for destroying units near objectives. This means your own scoring units on objectives are their kill targets. Don't over-commit scoring pieces to contested objectives early — they become VP generators for your opponent.</p>
-      <p><strong>Tactical priority:</strong> Keep your scoring units dispersed so they can't be efficiently targeted. Pick off isolated enemy screens for kill VP. Commit one reliable unit to hold an expansion objective for the anchor 3VP. The mission rewards you for making your opponent react to multiple threats simultaneously — not for winning a single engagement.</p>
-      <p><strong>List building note:</strong> Fast, hyper-mobile MSU lists thrive here. If you can re-position and nip at exposed screening pieces, you rack up primary while leaving their heavy hitters fighting over objectives you don't need to contest. Don't burn your scoring units on screens early — you need those activations all game.</p>
-    </div>
-  </div>
-
-    </div><!-- /disp-rc body -->
-  </div><!-- /disp-rc -->
-
-  <!-- DISRUPTION -->
-  <div class="disp-accordion" id="disp-di">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)" style="border-left:3px solid var(--blood);">
-      <span class="disp-accordion-title">Disposition V — Disruption</span>
-      <div class="disp-accordion-meta"><span class="disp-avg-badge" style="color:#ffaaaa;">Aggressive / Reactive</span><span class="disp-chevron">▼</span></div>
-    </div>
-    <div class="disp-accordion-body">
-  <div class="change-card tier1">
-    <div class="card-head">
-      <div class="card-rank gold">DI</div>
-      <div class="card-title-block">
-        <div class="card-title">Disruption <span class="verdict verdict-melee">Aggressive / Reactive</span></div>
-        <div class="card-subtitle">Early Scoring · No Home Objective · Mid-Board Dominance</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>What it is:</strong> The most aggressive and pressure-oriented Disposition. Designed for reactive, sneaky play with heavy early scoring windows and total mid-board focus. Crucially: <strong>zero opportunities to score your home objective</strong>. Everything lives and dies in no man's land and the opponent's half of the table.</p>
-      <p><strong>Core identity:</strong> Disruption missions front-load scoring — there are more early-round VP opportunities than any other Disposition. This rewards armies that can establish board presence fast and apply pressure before the opponent has staged correctly. If you can dominate turns 1–2, you bank a lead your opponent has to spend the rest of the game catching up to.</p>
-      <p><strong>What the scoring demands:</strong> Mid-board control is mandatory. Because home objective scoring is completely removed, you cannot afford to sit back. Your units must push out and contest no man's land every turn. This makes Disruption extremely punishing for slow or castle-oriented armies running it — but devastating when run by fast armies that can maintain pressure across multiple table sections.</p>
-      <p><strong>Terrain matters more here than anywhere:</strong> Because you're always pushing forward, terrain toeing and LoS control (as discussed in the 11th edition terrain changes) directly affect whether your units survive the advance. Units that can drive and shoot, or deep strike into the mid-board, are natural fits for Disruption's demands.</p>
-      <p><strong>Matchup awareness:</strong> The 1–5 rating system Goonhammer uses reflects how your Disposition's scoring ease compares to your opponent's. Disruption tends to rate well against static opponents (Take and Hold, durable armies) and struggles more against Reconnaissance lists that don't need to commit to your threat zones to score.</p>
-      <p><strong>List building note:</strong> Aggressive, fast, reactive armies built around mid-board presence. Deep strike units, fast vehicles that can toe terrain and shoot, MSU units that can spread pressure across multiple zones simultaneously. This is not the Disposition for armies that want to survive by sitting still.</p>
-    </div>
-  </div>
-
-    </div><!-- /disp-di body -->
-  </div><!-- /disp-di -->
-
-  <!-- DISPOSITION MATCHUP MATRIX -->
-  <div class="separator"></div>
-  <div class="section-header">
-    <div class="section-num">01C</div>
-    <h2>Disposition Matchup Reference — All 25 Matchups</h2>
-  </div>
-  <div class="intro-block">
-    Each game pairs two different primary missions. Ratings are <strong>from the perspective of that Disposition's player</strong> on a 1–5 scale: 1 = Terrible, 2 = Disadvantaged, 3 = Even, 4 = Advantaged, 5 = Great. Click any header to expand. Matchups are listed worst-to-best within each Disposition. Ratings sourced from Goonhammer's Force Disposition Review series.
-  </div>
-
-  <style>
-    .disp-accordion { margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
-    .disp-accordion-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px; cursor: pointer;
-      background: rgba(255,255,255,0.03);
-      border-left: 3px solid var(--gold-dim);
-      transition: background 0.15s;
-      user-select: none;
-    }
-    .disp-accordion-header:hover { background: rgba(255,255,255,0.06); }
-    .disp-accordion-header.open { background: rgba(201,168,76,0.07); border-left-color: var(--gold); }
-    .disp-accordion-title {
-      font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700;
-      color: var(--text-bright); letter-spacing: 0.04em; text-transform: uppercase;
-    }
-    .disp-accordion-meta { display: flex; align-items: center; gap: 12px; }
-    .disp-avg-badge {
-      font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px;
-      border-radius: 2px; background: rgba(201,168,76,0.12); color: var(--gold);
-    }
-    .disp-chevron { color: var(--gold-dim); font-size: 14px; transition: transform 0.2s; }
-    .disp-accordion-header.open .disp-chevron { transform: rotate(180deg); }
-    .disp-accordion-body { display: none; padding: 0 0 4px 0; }
-    .disp-accordion-body.open { display: block; }
-    .matchup-row {
-      display: flex; align-items: flex-start; gap: 0;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 12px 20px;
-    }
-    .matchup-row:hover { background: rgba(255,255,255,0.02); }
-    .matchup-rating {
-      min-width: 48px; font-family: 'Cinzel', serif; font-size: 18px; font-weight: 900;
-      padding-top: 1px; flex-shrink: 0;
-    }
-    .rating-1 { color: #c44; }
-    .rating-15 { color: #c44; }
-    .rating-2 { color: #c87030; }
-    .rating-25 { color: #c87030; }
-    .rating-3 { color: #8a8a60; }
-    .rating-35 { color: #7aaa7a; }
-    .rating-4 { color: #5aaa5a; }
-    .rating-45 { color: #4acc6a; }
-    .rating-5 { color: #2aee6a; }
-    .matchup-content { flex: 1; min-width: 0; }
-    .matchup-vs {
-      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
-      color: var(--text-bright); letter-spacing: 0.05em; margin-bottom: 3px;
-    }
-    .matchup-mission { font-size: 11px; color: var(--gold-dim); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; }
-    .matchup-desc { font-size: 13px; color: #b0a898; line-height: 1.65; word-break: break-word; }
-    .matchup-badge-right {
-      min-width: 80px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; padding-top: 2px;
-    }
-    .pip-row { display: flex; gap: 3px; }
-    .pip { width: 10px; height: 10px; border-radius: 2px; background: rgba(255,255,255,0.1); }
-    .pip.filled { background: var(--gold); }
-    .pip.half { background: linear-gradient(90deg, var(--gold) 50%, rgba(255,255,255,0.1) 50%); }
-    .rating-label { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
-    .scoring-block { margin: 7px 0 5px 0; padding: 8px 12px; background: rgba(201,168,76,0.05); border-left: 2px solid rgba(201,168,76,0.25); border-radius: 2px; }
-    .scoring-block-title { font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 5px; }
-    .scoring-line { font-size: 12px; color: #a8a090; line-height: 1.6; margin-bottom: 2px; word-break: break-word; }
-    .scoring-line strong { color: var(--text-bright); font-size: 12px; }
-    .scoring-line em { color: var(--gold-dim); font-style: normal; }
-  </style>
-
-  <script>
-    function toggleAccordion(el) {
-      const body = el.nextElementSibling;
-      el.classList.toggle('open');
-      body.classList.toggle('open');
-    }
-  </script>
-
-  <!-- TAKE AND HOLD -->
-  <div class="disp-accordion">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)">
-      <span class="disp-accordion-title">Take and Hold — All 5 Matchups</span>
-      <div class="disp-accordion-meta">
-        <span class="disp-avg-badge">Avg: 2.9</span>
-        <span class="disp-chevron">▼</span>
-      </div>
-    </div>
-    <div class="disp-accordion-body">
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-15">1.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Purge the Foe</div>
-          <div class="matchup-mission">TH Mission: Immovable Object · Opp Mission: Unstoppable Force</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Immovable Object</div>
-            <div class="scoring-line"><strong>3VP</strong> — control 1+ central obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T2&ndash;T4 end of command phase</em></div>
-            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T5 end of turn</em></div>
-          </div>
-          <div class="matchup-desc">Purge scores for killing your units AND flipping objectives. You need to hold 2 NML objectives simultaneously to max primary — hard while Purge picks off your scoring units. 5-obj maps with one big center hurt badly: center changes hands every turn, scoring 3VP for Purge each time while you lose it. Protect your home — Purge scores 5VP end-of-game for holding it. Your best play: deny them kills on T1 via strat reserves or screen positioning.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Terrible</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-2">2</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Reconnaissance</div>
-          <div class="matchup-mission">TH Mission: Purge and Secure · Opp Mission: Reconnaissance Sweep</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Purge and Secure</div>
-            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — control 1+ obj not held at turn start, excl. home &middot; <em>any turn, end of turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed by unit within obj range OR enemy on obj destroyed &middot; <em>any turn, end of turn</em></div>
-          </div>
-          <div class="matchup-desc">You score 4VP per objective held plus 3VP for killing units near objectives. Recon scores 6VP just for being in 4 table quarters — without touching your objectives. They're scoring passively across the board while you need to push forward to generate VP, which hands them kill targets near objectives. Starve their table quarters by contesting corner units; use OC-heavy chaff to force them to fight for their 3VP expansion hold.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Disadvantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Take and Hold (Mirror)</div>
-          <div class="matchup-mission">TH Mission: Battlefield Dominance</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Battlefield Dominance</div>
-            <div class="scoring-line"><strong>2VP</strong> — control more objs than opponent &middot; <em>T1&ndash;T2 end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP/obj</strong> — each obj held (+2VP/obj excl. home if you hold home) &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Even. You both score for holding objectives and controlling more than the opponent. Center trades every turn generate the 2VP condition for whoever recaps it — drip-feed scoring units into the center rather than committing big pieces. Infiltrators are strong here to get a T1 edge on the 2VP condition. Plan a T5 objective push — scoring shifts to end-of-turn so you can jump on objectives you haven't held.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Disruption</div>
-          <div class="matchup-mission">TH Mission: Determined Acquisition · Opp Mission: Death Trap</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Determined Acquisition</div>
-            <div class="scoring-line"><strong>2VP/obj</strong> — each obj newly controlled this turn, excl. home &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP/obj</strong> — each obj held (+3VP/obj if in enemy territory) &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line">&darr; <em>Central obj is in enemy territory &mdash; worth 6VP/turn if held</em></div>
-          </div>
-          <div class="matchup-desc">Close matchup but Disruption has significant agency. They score 12+ VP on T1/T2 by trapping terrain areas (they don't need to control — just touch). Your scoring is solid: 6VP for holding objectives in enemy territory including the center (worth 6VP/turn). Key defense: stay out of trapped terrain areas that aren't objectives. If you have infiltrators, charge their T1 action units — falling back prevents actions and stifles their early scoring.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Priority Assets</div>
-          <div class="matchup-mission">TH Mission: Inescapable Dominion · Opp Mission: Secure Asset</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Inescapable Dominion</div>
-            <div class="scoring-line"><strong>4VP</strong> — control 3+ objs &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — control 2+ objs &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — control more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">6-objective map benefits you. You score 4VP for holding 3+ objectives (trivial), 5VP command phase for holding 2+, and 4VP for holding more than opponent. Passive score peaks at 44VP with conservative play — best TH result in any matchup. PA must rush you to stop Hold More from triggering. Key threat: they score 5VP end-of-game for holding your home. Screen it in T4/5. Dawn of War deployment makes this significantly harder — PA can rush you and the map is much more open.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-    </div><!-- /disp-th body -->
-  </div><!-- /disp-th -->
-
-  <!-- PURGE THE FOE -->
-  <div class="disp-accordion">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)">
-      <span class="disp-accordion-title">Purge the Foe — All 5 Matchups</span>
-      <div class="disp-accordion-meta">
-        <span class="disp-avg-badge">Avg: 3.5</span>
-        <span class="disp-chevron">▼</span>
-      </div>
-    </div>
-    <div class="disp-accordion-body">
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-25">2.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Priority Assets</div>
-          <div class="matchup-mission">PF Mission: Destroyer's Wrath · Opp Mission: Vital Link</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Destroyer's Wrath</div>
-            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home + bonus for holding more than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — kill more units this turn than opponent did last turn &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">PA incrementally scores more VP per turn by stacking Operation Markers on central objectives — a 41VP passive ceiling if untouched. Your counter: move-block them off the center via sacrificial chaff, and use Heroic Intervention (2CP) to stop their action units. You score 3VP for killing units plus command phase objective hold bonuses, but need to kill more than your opponent did last turn for the "Kill More" kicker. 5-objective maps (single center) favor you; Search and Destroy is brutal for PA. Internally rated 2.5 by most Goonhammer authors, though one contributor rated it 2 or worse.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Disadvantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Purge the Foe (Mirror)</div>
-          <div class="matchup-mission">PF Mission: Meatgrinder</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Meatgrinder</div>
-            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — kill more units this turn than opponent did last turn &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Cat and mouse — be the cat. Score for kills, holding your expansion from T2, and killing more units than your opponent did last turn. The third condition is the swing: give up free kills and you lose the mirror. Don't sacrifice units unless it forces your opponent to overcommit. Going second tends to be better — lets you react to their kill count and set your target for Kill More. Durable units are at a premium. All 3 layouts feature split central objectives.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Reconnaissance</div>
-          <div class="matchup-mission">PF Mission: Consecrate · Opp Mission: Triangulation</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Consecrate</div>
-            <div class="scoring-line"><strong>3/6VP</strong> — 1&ndash;2 or 3+ objs Consecrated total &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Kill a unit &rarr; unit becomes Consecration unit &rarr; finish turn within range of unconsecrated obj &rarr; place marker. Does not require control.</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — Consecrate enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Your kill units become Consecration units — move them onto objectives to permanently tag them and score end-of-turn VP. Key: you don't need to control the objective to Consecrate it, just finish within range after getting a kill. Score 3VP/6VP for 1–2 or 3+ Consecrated objectives. Heroic Intervention is your secret weapon — use it to block Recon's once-per-turn Triangulate action. If you breach their DZ and tag their home objective, score a bonus 5VP end-of-game. Speed is king: fast melee units that kill and land on objectives same turn max your efficiency.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Disruption</div>
-          <div class="matchup-mission">PF Mission: Punishment · Opp Mission: Delaying Action</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Punishment</div>
-            <div class="scoring-line"><strong>5VP</strong> — 1+ Condemned units leave battlefield, either player's turn &middot; <em>any turn, end of turn</em></div>
-            <div class="scoring-line">&darr; <em>Your turn start: mark up to 3 enemy units on objs or that killed your units last turn as Condemned. They cannot embark or go to reserves.</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — hold more objs than opponent &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>8VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">One of the most aggressive Purge missions in the pack. You Condemn up to 3 enemy units each turn (those on objectives OR that killed your units last turn), and score 5VP any time a condemned unit leaves the battlefield — including in the opponent's turn. You also score for Hold More and 8VP end-of-game for holding their home. Disruption's kill rate to match yours is terrible (3:1 unfavorable exchange). Key: condemned units cannot embark transports or go into reserves — that's free points. One author rated this 4, another 3.5. Disruption's uphill climb is severe here.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-5">5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Take and Hold</div>
-          <div class="matchup-mission">PF Mission: Unstoppable Force · Opp Mission: Immovable Object</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Unstoppable Force</div>
-            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy units this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj not held at turn start, excl. home &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — hold 1+ central obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Best matchup in the Purge toolkit — and arguably the best matchup in the entire Disposition system. All 3 layouts use a single central objective, which is terrible for TH. You score for every kill, for holding objectives from T2, for flipping objectives, and 5VP end-of-game for the central. The flip VP doesn't require flipping an opponent's objective — retaking your own expansion after being shot off counts. Basic loop: kill one, hold one, walk onto one per turn = 40–45VP. Keep TH off the center in their command phase to deny them 7VP at once.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div></div>
-          <div class="rating-label">Great</div>
-        </div>
-      </div>
-
-    </div><!-- /disp-pf body -->
-  </div><!-- /disp-pf -->
-
-  <!-- PRIORITY ASSETS -->
-  <div class="disp-accordion">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)">
-      <span class="disp-accordion-title">Priority Assets — All 5 Matchups</span>
-      <div class="disp-accordion-meta">
-        <span class="disp-avg-badge">Avg: 3.2</span>
-        <span class="disp-chevron">▼</span>
-      </div>
-    </div>
-    <div class="disp-accordion-body">
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Purge the Foe</div>
-          <div class="matchup-mission">PA Mission: Vital Link · Opp Mission: Destroyer's Wrath</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Vital Link</div>
-            <div class="scoring-line"><strong>2VP + 1VP/marker</strong> — hold 1+ central obj + 1VP per Operation Marker on it &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Once/turn action on central obj; completes if you control it &rarr; place Operation Marker. Stack markers each turn for escalating VP (ideal: 3/4/5/6/7 over 5 turns = 25VP).</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>4VP extra</strong> — if that held obj is a central obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">You can hit 41VP passively by stacking Operation Markers on central objectives each turn — but Purge is paid to kill you and move-block your action units. Your scoring is back-loaded; their kill points are immediate. A single durable tarpit holding a central objective (e.g. Necron Warriors, Wraiths) massively smooths this by starting your action without being guaranteed dead. Watch Search and Destroy — it's brutal here. If built for it: 3. If not: 2 or worse (one contributor rated this much lower).</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Priority Assets (Mirror)</div>
-          <div class="matchup-mission">PA Mission: Sabotage</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Sabotage (Mirror)</div>
-            <div class="scoring-line"><strong>3VP/obj</strong> — each non-home obj Sabotaged this turn (+2VP/obj if in enemy territory) &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Once/turn action on any non-home obj; completes if you control it at end of turn. Central obj counts as enemy territory.</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ non-home obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Pure action race. You score 3VP for each non-home objective Sabotaged per turn, +2VP if in opponent's territory. You can theoretically hit 45VP in your T4 command phase. Getting a 13VP T1 (via Infiltrators on forward objectives) puts you on a commanding slope. Don't panic if you score 0 T1/T2 — you can still cap primary late if your assets are alive. Block opponents by filling the small central objective with wide-footprint models and using 2" engagement range to deny placement. Cheap chaff quantity wins this mirror.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Take and Hold</div>
-          <div class="matchup-mission">PA Mission: Secure Asset · Opp Mission: Inescapable Dominion</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Secure Asset</div>
-            <div class="scoring-line"><strong>4VP</strong> — perform Secure Asset action on 1 non-home obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Start in shooting phase; completes if you control the obj at end of turn.</em></div>
-            <div class="scoring-line"><strong>2VP</strong> — destroy 1+ enemy within range of a central obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>4VP extra</strong> — hold 3+ objs including home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Knife-edge matchup with high passive scoring for both sides. On Crucible and Hammer maps, TH is forced into a proactive role by the maths — you can sit defensively and score 12VP/turn while they're forced to come at you. Dawn of War is harder — open map means they can rush you. Your priority on all maps: defend your expansion objective in depth. If you can kill one unit pushing onto a central objective per turn, you still reach 44VP. Watch for their late-game home objective play (5VP end-of-game).</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Disruption</div>
-          <div class="matchup-mission">PA Mission: Extract Relic · Opp Mission: Locate and Deny</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Extract Relic</div>
-            <div class="scoring-line"><strong>4VP</strong> — perform Sensor Sweep action on 1 central obj (removes 1 Operation Marker from board) &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — destroy 1+ enemy that started turn within obj range &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — only 1 marker remains + you hold that terrain area, no enemy present &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — only 1 marker remains, you hold terrain, no enemy &middot; <em>end of battle (9VP total if on T5 going second)</em></div>
-          </div>
-          <div class="matchup-desc">You score for performing Sensor Sweep actions on central objectives (removing Disruption's Operation Markers) and for killing units that started within range of objectives. Disruption also sweeps markers — the shared mechanic creates a direct race to be the last army with a marker. Both players score 4VP for killing units on objectives. 10VP end-of-game for controlling a terrain area with the final marker and no enemy present. Goonhammer rated this as relatively balanced — the shared Sensor Sweep mechanic creates a genuinely interactive mission.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-4">4</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Reconnaissance</div>
-          <div class="matchup-mission">PA Mission: vs Recon · Opp scoring: Surveil / Gather Intel type</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — vs Reconnaissance</div>
-            <div class="scoring-line"><strong>4VP</strong> — perform Secure Asset action on 1 non-home obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>2VP</strong> — destroy 1+ enemy within range of a central obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>4VP extra</strong> — hold 3+ objs including home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">PA's action economy outpaces Recon's slower once-per-turn action cadence. You can score aggressively off forward objectives while Recon needs turns to build up Triangulation markers. Your 2VP kill condition near central objectives is easily triggered against Recon's mobile MSU screens — they have to push forward to score, which hands you targets. Priority: move-block their action units off central objectives. Good matchup for PA lists with fast lethal pieces that score actions and kill screens simultaneously.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-    </div><!-- /disp-pa body -->
-  </div><!-- /disp-pa -->
-
-  <!-- RECONNAISSANCE -->
-  <div class="disp-accordion">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)">
-      <span class="disp-accordion-title">Reconnaissance — All 5 Matchups</span>
-      <div class="disp-accordion-meta">
-        <span class="disp-avg-badge">Avg: 3.1</span>
-        <span class="disp-chevron">▼</span>
-      </div>
-    </div>
-    <div class="disp-accordion-body">
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-25">2.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Purge the Foe</div>
-          <div class="matchup-mission">Recon Mission: Triangulation · Opp Mission: Consecrate</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Triangulation</div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ non-home obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3/6/10VP</strong> — 1, 2, or 3+ objs Triangulated total &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Once/turn action on non-home obj without your marker; completes if you control it &rarr; place marker. Never skip a turn &mdash; each missed action permanently caps max score.</em></div>
-            <div class="scoring-line"><strong>10VP</strong> — control 4+ objs total &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Purge is paid to kill your units anywhere, then deliver a Consecration token to any objective — they don't need to control it. Their action-on-kill system is less throttled than your once-per-turn Triangulate. Your engine: score 4VP command phase for holding 1+ non-home, then build Triangulate tokens over multiple turns (3VP → 6VP → 10VP for 1/2/3 objectives). Must-do rule: start Triangulate on T2 — skipping any turn permanently caps your max. Save your T4/5 all-in push for the 10VP end-of-game (control 4+ objectives). Screen your home objective wide — their Consecrate bonus tags it for 5VP.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Disadvantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Reconnaissance (Mirror)</div>
-          <div class="matchup-mission">Recon Mission: Gather Intel</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Gather Intel (Mirror)</div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ NML obj &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3/6/9VP</strong> — 1, 2, or 3+ Intel tokens placed on NML objs &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Once/turn action on NML obj; completes if you control it &rarr; place Intel token.</em></div>
-            <div class="scoring-line"><strong>10VP</strong> — control 4+ objs total &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Action race to place Intelligence tokens on NML objectives first. Both players score for holding an NML objective in command phase and for each token placed. Going second gives you reaction information but also means your opponent gets a head start on tokens. Cheap high-quantity units are premium — you need activations all game, not just early. The T5 end-of-game scoring for controlling 4+ objectives means you need a unit alive in every corner to max primary.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Disruption</div>
-          <div class="matchup-mission">Recon Mission: Surveil the Foe · Opp Mission: various Disruption</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — vs Disruption (Surveil)</div>
-            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Recon's table quarter scoring is largely independent of Disruption's mid-board pressure — you don't need to contest the same terrain. This gives Recon structural distance from Disruption's threat zones. However, Disruption's early scoring windows (T1/T2 VP dumps from trapping terrain) can bank a lead before Recon's slower once-per-turn actions ramp up. Maintain your quarter presence across all 4 sections and don't get funneled into mid-board fights — that's where Disruption is strongest.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Take and Hold</div>
-          <div class="matchup-mission">Recon Mission: Reconnaissance Sweep · Opp Mission: Purge and Secure</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Reconnaissance Sweep</div>
-            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Your table quarter scoring (6VP for 4 quarters) is entirely independent of holding objectives — you're scoring while TH's opponent fights for center control. Structural advantage: your 6VP is nearly free each turn if you have cheap mobile units in corner pockets. TH's opponent (Purge and Secure) scores 4VP per held objective and 3VP for killing units near objectives — so your expansion unit is a kill target. Keep it in Hidden or just outside objective range to deny their kill-linked 3VP. Don't get pulled into a brawl over the center.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-4">4</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Priority Assets</div>
-          <div class="matchup-mission">Recon Mission: Surveil the Foe · Opp Mission: Secure Asset type</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — vs Priority Assets</div>
-            <div class="scoring-line"><strong>6VP</strong> — 4+ units wholly in 4 different table quarters, outside 6" center bubble &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 3+ units wholly in 3 different quarters &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>1VP/unit</strong> — each enemy unit destroyed during your turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">PA needs to push forward and control objectives to complete actions — which hands you kill targets and table quarter access simultaneously. Your once-per-turn action (Triangulate/Surveil) operates independently of PA's action zone, letting you rack up points without contesting the same spaces. Exploit their overextension: when PA action units push forward to score, clip them for Recon kill VP and let your quarter units stay safe. Good matchup for fast skirmish lists — you can score your 6VP quarters while PA's action units chase objectives in no man's land.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-    </div><!-- /disp-rc body -->
-  </div><!-- /disp-rc -->
-
-  <!-- DISRUPTION -->
-  <div class="disp-accordion">
-    <div class="disp-accordion-header" onclick="toggleAccordion(this)">
-      <span class="disp-accordion-title">Disruption — All 5 Matchups</span>
-      <div class="disp-accordion-meta">
-        <span class="disp-avg-badge">Avg: 2.6</span>
-        <span class="disp-chevron">▼</span>
-      </div>
-    </div>
-    <div class="disp-accordion-body">
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-15">1.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Purge the Foe</div>
-          <div class="matchup-mission">DI Mission: Delaying Action · Opp Mission: Punishment</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Delaying Action</div>
-            <div class="scoring-line"><strong>2VP/unit</strong> — each enemy unit destroyed this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — hold 1+ central AND 1+ expansion obj &middot; <em>T2+ end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Passive ceiling ~28VP before kills. Need ~9 kills to max primary.</em></div>
-          </div>
-          <div class="matchup-desc">Worst matchup in the entire Disposition system. Purge runs the Condemned mechanic — marks 3 of your units per turn (those on objectives or that killed their units), and scores 5VP any time a condemned unit leaves the battlefield. Condemned units cannot embark transports or go to reserves — free points the moment you try to reposition. Your kill-to-VP exchange rate is terrible (you need 3 kills for each condemned kill they get). Purge also scores 8VP end-of-game for holding your home. Your only out is tabling or near-tabling them. Rated 1.5 by most authors; 3.5 by one dissenting author.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Terrible</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-25">2.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Take and Hold</div>
-          <div class="matchup-mission">DI Mission: Death Trap · Opp Mission: Determined Acquisition</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Death Trap</div>
-            <div class="scoring-line"><strong>2VP/terrain (+3VP if obj)</strong> — each terrain area trapped this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Unlimited Booby Trap actions &mdash; each unit in a different untrapped terrain area. No control needed. Completes immediately. Traps are permanent.</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed while in a trapped terrain area this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">You score 12+ VP on T1/T2 by Booby Trapping terrain areas (no control needed — just touch) and killing units inside trapped areas. TH scores for holding objectives including the center (worth 6VP/turn in your territory). After T2 you need to fort up on your expansion and keep control of the center. Crucial: 2–3 infiltrating infantry units are required to hit the T1 scoring spike without them you'll struggle to reach 35VP from traps. One author rated this 2 — saying Disruption gets murdered crossing mid-table after the T1/T2 burst and TH simply sits and shoots.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Disadvantaged</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Disruption (Mirror)</div>
-          <div class="matchup-mission">DI Mission: Outmanoeuvre</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Outmanoeuvre (Mirror)</div>
-            <div class="scoring-line"><strong>10VP</strong> — hold enemy home obj &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP/obj</strong> — each obj held excl. home &middot; <em>T1 end of your turn</em></div>
-            <div class="scoring-line"><strong>5VP/obj</strong> — each obj held excl. home &middot; <em>T2&ndash;T3 end of command phase</em></div>
-            <div class="scoring-line"><strong>6VP/obj</strong> — each obj held excl. home &middot; <em>T4+ end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>T1 and T4/T5 are big scoring turns. Plan: 12VP T1, quiet T2/T3, big push T4/T5.</em></div>
-          </div>
-          <div class="matchup-desc">Pure objective race where your home doesn't score but you absolutely don't want to give it up. Score 10VP for holding opponent's home any turn. T1 and T4/T5 are your big scoring rounds (12VP each from holding 3 NML objectives). T2/T3 are quiet at 5–10VP. Classic strategy: grab 12VP on T1, consolidate T2/T3, big push T4/T5. MSU lists with 2–3 infiltrating units are ideal for spreading across all 3 NML objectives on T1 then defending late. Back-cap attempt ideally on T2 or T3 for the 10VP swing.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-3">3</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Reconnaissance</div>
-          <div class="matchup-mission">DI Mission: vs Recon type</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — vs Reconnaissance</div>
-            <div class="scoring-line"><strong>2VP/terrain (+3VP if obj)</strong> — each terrain area trapped this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>3VP</strong> — 1+ enemy destroyed in trapped terrain this turn &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-          </div>
-          <div class="matchup-desc">Disruption's early scoring windows can bank a significant lead before Recon's slower action economy ramps up. However, Recon's table quarter scoring doesn't require contesting the same zones as your Booby Trap actions — they score passively while you have to push forward and survive. If your army can maintain mid-board threat across multiple zones, Recon has no natural answer to your T1/T2 burst. If your army stalls mid-table after the initial push, Recon's accumulated quarters VP catches up quickly.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
-          <div class="rating-label">Even</div>
-        </div>
-      </div>
-
-      <div class="matchup-row">
-        <div class="matchup-rating rating-35">3.5</div>
-        <div class="matchup-content">
-          <div class="matchup-vs">vs Priority Assets</div>
-          <div class="matchup-mission">DI Mission: Locate and Deny · Opp Mission: Extract Relic</div>
-          <div class="scoring-block">
-            <div class="scoring-block-title">Your Scoring — Locate and Deny</div>
-            <div class="scoring-line"><strong>4VP</strong> — destroy 1+ enemy that started turn within obj range &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — only 1 Operation Marker remains + you hold that terrain area, no enemy present &middot; <em>any turn, end of your turn</em></div>
-            <div class="scoring-line">&darr; <em>Both players Sensor Sweep (action on central obj if you control it) to remove 1 marker/turn. Race to last marker.</em></div>
-            <div class="scoring-line"><strong>4VP</strong> — hold 1+ obj excl. home &middot; <em>T2+ end of command phase (T5: end of turn)</em></div>
-            <div class="scoring-line"><strong>5VP</strong> — only 1 marker remains, you hold terrain, no enemy &middot; <em>end of battle</em></div>
-          </div>
-          <div class="matchup-desc">Both players share the Sensor Sweep action — removing Operation Markers from the board. You score 4VP for killing units on objectives each turn, 4VP when only one marker remains and you control that terrain area uncontested, and 5VP end-of-game for the same final marker condition (9VP total on T5 if going second). Your goal: aggressively Sensor Sweep to race the marker count down, then station yourself in the final terrain area. PA needs to sweep markers too to score — you're both playing the same game, but your kill scoring gives you additional income they lack. Best Disruption matchup.</div>
-        </div>
-        <div class="matchup-badge-right">
-          <div class="pip-row"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip half"></div><div class="pip"></div></div>
-          <div class="rating-label">Advantaged</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TRANSITION PLAN -->
-  <div class="separator"></div>
-  <div class="section-header">
-    <div class="section-num">02</div>
-    <h2>Transition Plan — 10th to 11th</h2>
-  </div>
-  <div class="intro-block" style="margin-bottom:20px;">
-    Your 10th edition codex works at launch with the faction pack errata applied. New 11th edition codexes roll out progressively. Below is a structured path from your current game to fluency in the new system.
-  </div>
-  <div class="step-grid">
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">1</div><div class="step-title">Download & Reference Both PDFs</div></div>
-      <div class="step-body">The 11th edition core rules (New40K PDF) are free. Keep both the 10th and 11th PDFs handy for your first 3–4 games. The numbered rule system in 11th (e.g. "rule 05.03") means disputes are faster to resolve — every rule has a unique address. Also download your faction's GW faction pack errata before playing.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">2</div><div class="step-title">Internalize Save Rolls Before Game 1</div></div>
-      <div class="step-body">The save roll overhaul (Change #2) will cause mid-game confusion more than any other single rule. Walk through it manually before sitting across the table: defender groups models → declares allocation order → all saves rolled simultaneously → resolved lowest-to-highest against groups in order. Run two or three test scenarios on paper first.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">3</div><div class="step-title">Relearn Engagement Range Muscle Memory</div></div>
-      <div class="step-body">Engagement range is now 2" not 1". Everything built around the 1.1" gap trick is dead. Measure your charge targets with 2" in mind during movement planning. Pile-in and consolidation also benefit from the larger range — models that couldn't reach enemy in 10th often can now.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">4</div><div class="step-title">Rethink Terrain as Objective + Cover</div></div>
-      <div class="step-body">Map out your terrain pieces and identify which are terrain areas (objectives). Understand that cover now imposes -1 BS on the attacker, not +1 Sv on you. Identify which of your Infantry/Beasts/Swarms can go Hidden — flag these at the start of each turn so both players know their status. Using any ranged attack breaks Hidden, including Overwatch.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">5</div><div class="step-title">Rebuild Lists Around Detachment Points</div></div>
-      <div class="step-body">Don't immediately try to stack two detachments — run your first two or three games with a single detachment to understand how your army plays in 11th. Then assess whether a 1 DP specialist add-on strengthens your core strategy. Points values are maintained in the 40K app and matched play documents — check both are current before committing to a tournament list.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">6</div><div class="step-title">Adjust Unit Deployment for 9" Coherency Cap</div></div>
-      <div class="step-body">Large horde units (10+, 20+) need new deployment habits. Sketch your unit footprints before placing: maximum span between any two models is now ~9" — the global cap is the hard limit, not something you add the 2" adjacency on top of. Screen lines must be denser and shorter. Units that relied on conga-line screening — especially Guardsmen, Termagants, Tactical Squads — need repositioning strategies.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">7</div><div class="step-title">Update Charge Phase Mental Model</div></div>
-      <div class="step-body">Roll first, then declare targets. Heroic Intervention is now your reactive tool in the Charge phase — not Overwatch. Fire Overwatch remains valid in the Movement phase. Plan for the enemy using HI against your charges. If you play a melee army, practice the Overrun Fight type — it covers the previously-ambiguous "I killed my target, what now?" scenario.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">8</div><div class="step-title">Update Fight Phase Sequence</div></div>
-      <div class="step-body">All pile-ins happen before any fights. All consolidations happen after all fights. You can no longer tactically use a mid-fight consolidation to grab an objective. Plan consolidation mode selection in advance: Ongoing, Engaging, or Objective — and know which order they're checked (Ongoing first, then Engaging, then Objective).</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">9</div><div class="step-title">Battle-Shock Awareness Every Command Phase</div></div>
-      <div class="step-body">Battle-shock now requires active management. It doesn't clear automatically. At the start of your Command phase, know which units need to test (at or below half-strength, or currently shocked). Track it visually — a token or marker helps. A shocked unit's OC drops to '−' (not merely 0 — it cannot contest objectives at all), cannot use stratagems, and cannot start or complete actions.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num-row"><div class="step-circle">10</div><div class="step-title">Download the 40K App</div></div>
-      <div class="step-body">A meaningful portion of the extended rules — including the full Hidden rule, Gone to Ground, the sequencing rules, FAQ entries, and further definitions — live in the app rather than the PDF. The app also contains your faction's updated rules, army builder, and errata. It is not optional for staying current with 11th.</div>
-    </div>
-  </div>
-
-  <!-- COMMUNITY CONVERSATIONS -->
-  <div class="separator"></div>
-  <div class="section-header">
-    <div class="section-num">03</div>
-    <h2>Community Conversations — Broader Context</h2>
-  </div>
-  <div class="intro-block">
-    As of June 1, 2026 — the day the core rules PDF dropped — the community response is broadly positive with specific contested areas. Here are the major conversations happening across Goonhammer, Spikey Bits, Bell of Lost Souls, and community forums.
-  </div>
-
-  <div class="community-card">
-    <h3>1 — Melee's Edition? The Shooting Nerf Conversation</h3>
-    <p>The combination of the 2" engagement range, cover shifting to -1 BS (bypassing AP), Hidden for infantry, Overwatch removed from the Charge phase, and charge targets declared after rolling has prompted significant discussion about whether 11th tilts the game toward melee armies. Goonhammer is cautiously optimistic, noting that shooting armies gain from persistent battle-shock and stronger Plunging Fire. The community consensus is directionally: <strong>melee got buffed, but the question is whether the magnitude breaks competitive balance or simply corrects 10th's shooting dominance.</strong> Points values for fast melee units are expected to rise accordingly.</p>
-  </div>
-
-  <div class="community-card">
-    <h3>2 — Detachment Points: Creative Freedom vs. Balance Nightmare</h3>
-    <p>The Detachment Points system is simultaneously the most praised and most feared change. Praise: it enables genuine cross-theme list building, reduces list homogeneity, and makes the meta more varied from week one. Fear: <strong>70+ detachments at launch creates a combinatorial balance problem GW has never had to manage before.</strong> Spikey Bits notes "every competitive player with a spreadsheet is about to become completely insufferable for a month." The deeper concern from Goonhammer's analysis is that 1 DP detachments that buff single characters could be systematically underpriced, enabling low-cost additions that punch well above their DP weight.</p>
-  </div>
-
-  <div class="community-card">
-    <h3>3 — The App Dependency Problem</h3>
-    <p>A genuine fracture point. Multiple community voices — including Goonhammer — have flagged that placing core rules content (sequencing rules, Hidden rule updates, FAQ entries) exclusively in the app rather than the free PDF creates a two-tier player base: those who are app-connected and those who are not. Goonhammer's review explicitly noted "having rules just not be complete feels a bit off." GW's counter-position (implied by their design) is that app-only content gives them freedom to iterate and update rules without reprinting. <strong>This is likely to remain a tension point throughout the edition.</strong></p>
-  </div>
-
-  <div class="community-card">
-    <h3>4 — The Hidden Rule's Competitive Ceiling</h3>
-    <p>Hidden is broadly loved at the casual level — giving infantry a reason to hold terrain and a genuine shoot-or-hide decision adds meaningful gameplay depth. The competitive concern is that a 15" detection range combined with the Gone to Ground -3" extension creates scenarios where very fast armies can completely avoid shooting windows against well-positioned infantry objectives. <strong>The rule's balance depends heavily on terrain density norms at events</strong>, which are still being established. Goonhammer noted the app-version of Hidden has some differences from the printed PDF version, meaning the "live" rule is slightly different from what's in the free download.</p>
-  </div>
-
-  <div class="community-card">
-    <h3>5 — Save Roll Overhaul: Skill Floor Raised</h3>
-    <p>The new save roll system (allocation groups + lowest-roll-first resolution) is receiving strong praise from experienced players for closing exploits and making Character protection more intuitive. The concern is that it significantly raises the <strong>skill floor at the casual level</strong> — the number of simultaneous judgments required during a save roll (group composition, allocation order declaration, simultaneous rolling, resolution order) is substantially higher than 10th's sequential flow. Tournament play will adapt; pickup games may see more friction during the learning period.</p>
-  </div>
-
-  <div class="community-card">
-    <h3>6 — Codex Compatibility Window Anxiety</h3>
-    <p>GW's promise that 10th codexes carry over with faction packs has been received positively, but the community is watching carefully for how long that window lasts. In 10th, the index-to-codex transition period lasted ~18 months for some factions. If the same pace applies to 11th edition codexes, players could be running hybrid 10th/11th rulesets for an extended period. <strong>The first faction codexes (Space Marines, Orks) will be closely watched to see whether the faction packs are truly lightweight errata or effectively full rebuilds.</strong> The answer will determine how smoothly the rest of the transition proceeds.</p>
-  </div>
-
-  <div class="community-card">
-    <h3>7 — Mission System: The Biggest Change Nobody's Talking About</h3>
-    <p>Several commentators — including Yahoo/Wargamer coverage — flagged that the mission system overhaul may be the highest-impact change that isn't receiving proportionate attention. Force Dispositions (five army archetypes: Take and Hold, Purge the Foe, Disruption, Reconnaissance, Priority Assets) now shape primary mission generation, meaning <strong>both players may be scoring against different primary objectives based on their army type</strong>. This is a conceptual shift from the symmetric VP races of 10th toward asymmetric, thematic play — even in matched play. The competitive implications of Force Disposition matching/mismatching are still being worked out.</p>
-  </div>
-
-  <div class="doc-footer">
-    <div style="margin-bottom: 12px;">
-      <span style="color: var(--gold-dim); font-size:13px; font-family:'Cinzel',serif; font-weight:600;">FOR THE EMPEROR</span>
-    </div>
-    <p>Compiled June 1, 2026 · Sources: 10th Ed Core Rules PDF, New40K Core Rules PDF, Goonhammer, Spikey Bits, Bell of Lost Souls, HiveCity, Wargamer</p>
-    <p style="margin-top:6px;">All rules references verified against source PDFs. App-extended rules noted where applicable.</p>
-  </div>
-
-</div><!-- /container -->
+  <pre class="army-text" id="modalList"></pre>
+</dialog>
+
+<footer>Static HTML — compatible with GitHub Pages. No server or database required.</footer>
+
+<script>
+const armies = [{"team": "KeelHaul Gaming", "player": "Recon", "faction": "Adepta Sororitas", "title": "Recon — 2,000 pts", "meta": "Army of Faith + Chorus of Condemnation • Reconnaissance", "list": "ATTACHED UNITS\nMorvenn Vahl (200) + Paragon Warsuits (210)\nSaint Celestine (150) + Zephyrim Squad (75)\nCanoness with Jump Pack (90, Blade of Saint Ellynor) + Zephyrim Squad (75)\n\nCHARACTERS\nDaemonifuge (85)\n\nBATTLELINE\nBattle Sisters Squad (100)\n\nDEDICATED TRANSPORTS\nImmolator (100) — Immolation flamers\nImmolator (100) — Immolation flamers\nImmolator (115) — Twin multi-melta\n\nOTHER DATASHEETS\nCastigator (165) — Battle cannon\nCastigator (165) — Battle cannon\nDominion Squad (110) — 4 meltaguns\nDominion Squad (110) — 4 meltaguns\nSeraphim Squad (75) — Inferno pistols\nSeraphim Squad (75) — Hand flamers"}, {"team": "KeelHaul Gaming", "player": "Swarm", "faction": "Tyranids", "title": "She assimilation on my swarm till my biophagic flows — 2,000 pts", "meta": "Assimilation Swarm + Talons of the Norn Queen • Take and Hold", "list": "CHARACTERS\nTyranid Prime with Lash Whip (75) — Warlord\n\nOTHER DATASHEETS\nBiovores (60)\nExocrine (140)\nMaleceptor (190)\nMaleceptor (190)\nNorn Assimilator (275) — Synaptoprescience\nNorn Assimilator (270)\nNorn Emissary (250)\nPsychophage (110)\nPsychophage (110)\nRipper Swarms (30)\nTyrannofex (190) — Acid spray\nVon Ryan’s Leapers (55)\nVon Ryan’s Leapers (55)"}, {"team": "KeelHaul Gaming", "player": "R’Auxbury", "faction": "T’au Empire", "title": "A NIGHT AT THE R'AUXBURY — 2,000 pts", "meta": "Retaliation Cadre • Purge the Foe", "list": "ATTACHED UNITS\nCommander Farsight (70) + Crisis Sunforge Battlesuits (125)\nEnforcer Commander (100, Starflare Ignition System) + Crisis Fireknife Battlesuits (130)\nColdstar Commander (110, Prototype Weapon System) + Crisis Starscythe Battlesuits (90)\nColdstar Commander (95) + Crisis Sunforge Battlesuits (125)\n\nCHARACTERS\nThe Twin Lance (220)\n\nOTHER DATASHEETS\nGhostkeel Battlesuit (150)\nKroot Carnivores (65)\nPathfinder Team (90)\nRiptide Battlesuit (215)\nRiptide Battlesuit (215)\nStealth Battlesuits (100)\nStealth Battlesuits (100)"}, {"team": "KeelHaul Gaming", "player": "Granny Fanny", "faction": "Adeptus Mechanicus", "title": "Granny Fanny’s Fighting Force — 1,995 pts", "meta": "Eradication Cohort • Purge the Foe", "list": "ATTACHED UNITS\nSkitarii Marshal (35) + Hastarii Exterminators (105)\nSkitarii Marshal (35) + Hastarii Fusiliers (115)\nTech-Priest Dominus (80, Martial Signatum Amplificator) + Kataphron Breachers (310)\n\nCHARACTERS\nSydonian Skatros (50)\nThulia Ghuld (180) — Warlord\n\nBATTLELINE\nSkitarii Rangers (85)\nSkitarii Rangers (85)\nSkitarii Vanguard (85)\nSkitarii Vanguard (85)\n\nOTHER DATASHEETS\nOnager Dunecrawler (155)\nSicarian Infiltrators (75)\nSicarian Infiltrators (75)\nSicarian Ruststalkers (75)\nSicarian Ruststalkers (75)\nSkorpius Disintegrator (170)\nSydonian Dragoon with Taser Lance (60)\nSydonian Dragoon with Taser Lance (60)"}, {"team": "KeelHaul Gaming", "player": "Jake", "faction": "Orks", "title": "Jake Made Me Touch You — 2,000 pts", "meta": "Green Tide • Take and Hold", "list": "ATTACHED UNITS\nGhazghkull Thraka (235) + Painboy (105, Bloodthirsty Belligerence) + 20 Boyz (160)\nBigboss (55) + Painboy (90) + 20 Boyz (160)\nBigboss (75, Raucous Warcaller) + Painboy (90) + 20 Boyz (160)\nWeirdboy (65) + 20 Boyz (170)\nBigboss (65, Ferocious Show Off) + 20 Boyz (170)\nZodgrod Wortsnagga (80) + 20 Gretchin / 2 Runtherds (90)\n\nOTHER DATASHEETS\nGretchin (45)\nKommandos (120)\nStormboyz (65)"}, {"team": "KeelHaul Gaming", "player": "Rock & Stone", "faction": "Leagues of Votann", "title": "Rock and Stone Cold Steve Austin — 1,995 pts", "meta": "Armoured Trailblazers + Needgaârd Oathband • Disruption", "list": "ATTACHED UNITS\nBrôkhyr Iron-master (100, Oathbound Speculator) + 6 Brôkhyr Thunderkyn (160)\nKâhl (65) + 10 Einhyr Hearthguard (270)\n\nCHARACTERS\nÛthar the Destined (90) — Warlord\n\nBATTLELINE\nHearthkyn Warriors (100)\nHearthkyn Warriors (100)\n\nDEDICATED TRANSPORTS\nKapricus Carrier (70)\nKapricus Carrier (70)\nSagitaur (100, Saturation Rounds)\nSagitaur (85)\n\nOTHER DATASHEETS\nBrôkhyr Thunderkyn (160)\nBrôkhyr Thunderkyn (90)\nEinhyr Hearthguard (130)\nHernkyn Pioneers (80)\nHernkyn Pioneers (80)\nHernkyn Yaegirs (90)\nHernkyn Yaegirs (90)\nKapricus Defenders (65)"}, {"team": "KeelHaul Gaming", "player": "Technosorcerer", "faction": "Necrons", "title": "Cryptek Conclave / Skyshroud Spearhead — 2,000 pts", "meta": "Priority Assets • 16 units", "list": "CHARACTERS\nC’tan Shard of the Void Dragon (345)\nChronomancer (85) — Gravitic Bolas\nIlluminor Szeras (175)\nOverlord with Translocation Shroud (105) — Quantum Abacus\nPlasmancer (65) — Atomic Disintegrators\nTechnomancer (80)\n\nUNITS\nImmortals x10 (140) — Tesla carbines\nImmortals x10 (140) — Gauss blasters\nCanoptek Reanimator (75)\nCanoptek Tomb Crawlers x2 (50)\nCanoptek Tomb Crawlers x2 (50)\nCanoptek Wraiths x6 (220)\nOphydian Destroyers x3 (80)\nTomb Blades x6 (140)\nTomb Blades x6 (140)\nTriarch Stalker (110)"}, {"team": "KeelHaul Gaming", "player": "Salamanders", "faction": "Space Marines", "title": "Red Hot Green Chili Peppers — 2,000 pts", "meta": "Salamanders • Forgefather’s Seekers + Librarius Conclave • Priority Assets", "list": "ATTACHED UNITS\nAdrax Agatone (80) + Lieutenant (45) + Bladeguard Veterans x6 (160)\nLibrarian (105, Fusillade) + Hellblasters x10 (220)\nLibrarian (80, Immolator) + Infernus Marines x10 (180)\nLibrarian (95, Temporal Corridor) + Infernus Marines x10 (180)\n\nCHARACTERS\nVulkan He’stan (85) — Warlord\n\nOTHER DATASHEETS\nIncursor Squad (85)\nLand Raider Redeemer (250)\nScout Squad (65)\nVindicator (185)\nVindicator (185)"}, {"team": "XPZ", "player": "Kyle N.", "faction": "Emperor’s Children", "title": "Carnival Disruption Teams — 1,995 pts", "meta": "Carnival of Excess + Elegant Brutes • Disruption • Discord: DysposableHero", "list": "CHARACTERS\nFulgrim (340) — Warlord\nKeeper of Secrets (255)\nLord Exultant (80)\nLord Exultant (80)\n\nBATTLELINE\nDaemonettes (90)\nDaemonettes (90)\nDaemonettes (90)\nInfractors (85)\nInfractors (85)\nTormentors (80)\n\nDEDICATED TRANSPORTS\nChaos Rhino (70)\n\nOTHER DATASHEETS\nChaos Terminators (160) — Frenzied Ferocity\nChaos Terminators (160) — Frenzied Ferocity\nDefiler (330)"}, {"team": "XPZ", "player": "Matt Green", "faction": "Thousand Sons", "title": "Coven — 1,995 pts", "meta": "Grand Coven • Priority Assets • Discord: Headstrong", "list": "CHARACTERS\nDaemon Prince of Tzeentch with Wings (205) — Eldritch Vortex of E’Taph\nMagnus the Red (455) — Warlord\nSorcerer (85)\nSorcerer (105) — Umbralefic Crystal\nSorcerer (95)\nTzaangor Shaman (65)\nTzaangor Shaman (65)\n\nBATTLELINE\nRubric Marines (100)\nRubric Marines (100)\nRubric Marines (100)\nRubric Marines (110)\n\nDEDICATED TRANSPORTS\nChaos Rhino (80)\n\nOTHER DATASHEETS\nChaos Predator Annihilator (140)\nChaos Predator Annihilator (140)\nChaos Predator Annihilator (150)"}, {"team": "XPZ", "player": "Logan Heath", "faction": "T’au Empire", "title": "Tau — 2,000 pts", "meta": "Retaliation Cadre • Purge the Foe • Discord: homelesspope", "list": "ATTACHED UNITS\nEnforcer Commander (100, Starflare Ignition System) + Crisis Fireknife Battlesuits (130)\nColdstar Commander (95) + Crisis Fireknife Battlesuits (130)\n\nCHARACTERS\nCommander Shadowsun (100) — Warlord\nEthereal (50)\nThe Twin Lance (220)\n\nOTHER DATASHEETS\nBroadside Battlesuits x2 (150)\nBroadside Battlesuits x2 (150)\nCrisis Starscythe Battlesuits (90)\nCrisis Starscythe Battlesuits (90)\nGhostkeel Battlesuit (165)\nRiptide Battlesuit (215)\nRiptide Battlesuit (215)\nStealth Battlesuits (100)"}, {"team": "XPZ", "player": "Isaac T", "faction": "Adeptus Custodes", "title": "Lions of the Emperor / Silent Hunters — 2,000 pts", "meta": "Reconnaissance • Discord: ComanderChaCha", "list": "ATTACHED UNITS\nInquisitor Draxus (110) + Custodian Guard x4 (170)\nShield-Captain on Dawneagle Jetbike (155, Fierce Conqueror) + Vertus Praetors x2 (145)\nShield-Captain on Dawneagle Jetbike (170, Admonimortis) + Vertus Praetors x3 (215)\n\nCHARACTERS\nShield-Captain on Dawneagle Jetbike (165, Praesidius) — Warlord\n\nOTHER DATASHEETS\nAllarus Custodians x3 (165)\nAllarus Custodians x5 (275)\nVenatari Custodians x3 (165)\nVenatari Custodians x3 (165)\nWitchseekers x4 (50)\nWitchseekers x4 (50)"}, {"team": "XPZ", "player": "Jason McKenzie", "faction": "Chaos Daemons", "title": "Shadow Stepping Like It’s DDR Night at Round 1 — 1,995 pts", "meta": "Cavalcade of Chaos + Shadow Legion • Purge the Foe • Discord: kindredfaeit", "list": "ATTACHED UNITS\nFlamers x6 (130)\nFateskimmer (125, Fade to Darkness) + Screamers x6 (160)\n\nCHARACTERS\nBe’lakor (390) — Warlord\nExalted Flamer (65)\nLord of Change (345) — Malice Made Manifest\n\nBATTLELINE\nPlaguebearers (115)\n\nOTHER DATASHEETS\nBeast of Nurgle (75)\nBeast of Nurgle (75)\nBurning Chariot (125) — Apocalyptic Steeds\nBurning Chariot (125) — Apocalyptic Steeds\nFlamers x6 (130)\nSoul Grinder (180) — Tzeentch\n\nALLIED UNITS\nChaos Lord in Terminator Armour (85)"}, {"team": "XPZ", "player": "Rainey", "faction": "Space Marines", "title": "Luna Wolves 2.1 — 1,995 pts", "meta": "Ultramarines • Ceramite Sentinels • Take and Hold • Discord: @azenkrom", "list": "ATTACHED UNITS\nTerminator Captain (85) + Assault Terminators x10 (360)\nCaptain Titus (100) + Wardens of Ultramar (120) + Bladeguard Veterans x6 (160)\nTerminator Chaplain (90, Spy-skull Data Link) + Terminators x10 (320)\n\nBATTLELINE\nIntercessor Squad (80)\n\nOTHER DATASHEETS\nJump Pack Assault Intercessors (85)\nGladiator Lancer (160)\nGladiator Lancer (160)\nLand Speeder (105)\nLand Speeder (105)\nScout Squad (65)"}, {"team": "XPZ", "player": "Tony", "faction": "Orks", "title": "Equal Booty for All — 1,995 pts", "meta": "Equatorial Hordes + Freebooter Krew • Take and Hold • Discord: TonyB", "list": "ATTACHED UNITS\nGhazghkull Thraka (235) + Painboy (105, Bionik Workshop) + Boyz x20 (160)\nBeastboss (80) + Beast Snagga Boyz x10 (90)\nBeastboss (80) + Beast Snagga Boyz x10 (90)\nWarboss (110, Kunnin’ Hunta) + Boyz x20 (160)\nZodgrod Wortsnagga (80) + Gretchin x20 / Runtherds x2 (90)\nBig Mek with Shokk Attack Gun (80) + Lootas x10 (100)\nBig Mek with Shokk Attack Gun (90, Git-Spotter Squig) + Tankbustas (125)\n\nCHARACTERS\nWazdakka Gutsmek (175)\n\nDEDICATED TRANSPORTS\nTrukk (55)\n\nOTHER DATASHEETS\nGretchin (45)\nGretchin (45)"}, {"team": "XPZ", "player": "Dillon", "faction": "Tyranids", "title": "Ambush Predators / Vanguard Onslaught — 2,000 pts", "meta": "Reconnaissance • Enhancements: Encircling Horrors x2, Cryptophotaic Camouflage x2", "list": "UNITS\nDeathleaper (80)\nBroodlord (80) + Genestealers x10 (140)\nBroodlord (80) + Genestealers x10 (140)\nBroodlord (80) + Genestealers x10 (150)\nHyperadapted Raveners x5 (165) + Raveners x5 (125)\nHyperadapted Raveners x5 (165) + Raveners x5 (125)\nNeurotyrant (115)\nGargoyles x10 (80)\nBiovores (60)\nLictor (60)\nNeurolictor (100) — Encircling Horrors\nNeurolictor (100) — Encircling Horrors\nVon Ryan’s Leapers x3 (70) — Cryptophotaic Camouflage\nVon Ryan’s Leapers x3 (70) — Cryptophotaic Camouflage"}];
+const cards = document.querySelectorAll('.army-card');
+const preview = document.getElementById('preview');
+const dialog = document.getElementById('armyDialog');
+const modalTitle = document.getElementById('modalTitle');
+const modalMeta = document.getElementById('modalMeta');
+const modalList = document.getElementById('modalList');
+
+cards.forEach(card => {
+  const army = armies[Number(card.dataset.index)];
+  card.addEventListener('click', () => {
+    modalTitle.textContent = army.title;
+    modalMeta.textContent = `${army.team} • ${army.faction} • ${army.meta}`;
+    modalList.textContent = army.list;
+    dialog.showModal();
+  });
+  card.addEventListener('pointerenter', () => {
+    preview.innerHTML = `<strong>${army.title}</strong><div>${army.faction}</div><small>${army.meta}</small>`;
+    preview.style.display = 'block';
+  });
+  card.addEventListener('pointermove', e => {
+    const pad = 16;
+    const w = preview.offsetWidth, h = preview.offsetHeight;
+    preview.style.left = Math.min(e.clientX + pad, innerWidth - w - pad) + 'px';
+    preview.style.top = Math.min(e.clientY + pad, innerHeight - h - pad) + 'px';
+  });
+  card.addEventListener('pointerleave', () => preview.style.display = 'none');
+});
+document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', e => {
+  const r = dialog.getBoundingClientRect();
+  if(e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close();
+});
+
+document.querySelectorAll('.score-panel input').forEach((input,i) => {
+  const key = 'match-score-' + i;
+  input.value = localStorage.getItem(key) || '';
+  input.addEventListener('input', () => localStorage.setItem(key,input.value));
+});
+</script>
 </body>
 </html>
